@@ -1,38 +1,44 @@
-const multiple_dropdown = function(config) {
-    const multi_dropdown_function = {
+const sentence_completion_type = function(config) {
+    const dropdownChoice = {
         name: config.name,
         title: babeUtils.view.setter.title(config.title, ""),
         render: function(CT, babe) {
             let startingTime;
-            const QUD = babeUtils.view.setter.QUD(config.QUD);
-            const sentence_chunk_1 = config.data[CT].sentence_chunk_1;
-            const sentence_chunk_2 = config.data[CT].sentence_chunk_2;
-            const sentence_chunk_3 = config.data[CT].sentence_chunk_3;
-            const answer_option_1_1 = config.data[CT].choice_options_1[0];
-            const answer_option_1_2 = config.data[CT].choice_options_1[1];
-            const answer_option_2_1 = config.data[CT].choice_options_2[0];
-            const answer_option_2_2 = config.data[CT].choice_options_2[1];
-            const answer_option_2_3 = config.data[CT].choice_options_2[2];
+            console.log("huhu");
+            const QUD = babeUtils.view.setter.QUD(config.data[CT].QUD);
+            const sentence_fragment = config.data[CT].sentence_fragment;
+            const completions_shuffle_index = _.shuffle([0,1,2,3,4,5]);
+            const option1 = config.data[CT].completions[completions_shuffle_index[0]];
+            const option2 = config.data[CT].completions[completions_shuffle_index[1]];
+            const option3 = config.data[CT].completions[completions_shuffle_index[2]];
+            const option4 = config.data[CT].completions[completions_shuffle_index[3]];
+            const option5 = config.data[CT].completions[completions_shuffle_index[4]];
+            const option6 = config.data[CT].completions[completions_shuffle_index[5]];
+            const answer_category1 = config.data[CT].answer_category[completions_shuffle_index[0]];
+            const answer_category2 = config.data[CT].answer_category[completions_shuffle_index[1]];
+            const answer_category3 = config.data[CT].answer_category[completions_shuffle_index[2]];
+            const answer_category4 = config.data[CT].answer_category[completions_shuffle_index[3]];
+            const answer_category5 = config.data[CT].answer_category[completions_shuffle_index[4]];
+            const answer_category6 = config.data[CT].answer_category[completions_shuffle_index[5]];
             const viewTemplate = `<div class='babe-view'>
                 <h1 class='babe-view-title'>${this.title}</h1>
                 <p class='babe-view-question babe-view-qud'>${QUD}</p>
-                </div>`;
+                <div class='babe-view-stimulus-container'>
+                    <div class='babe-view-stimulus babe-nodisplay'></div>
+                </div>
+            </div>`;
 
             const answerContainerElem = `<div class='babe-view-answer-container babe-response-dropdown'>
-                ${sentence_chunk_1}
-                <select id='response1' name='answer_1'>
+                ${sentence_fragment}
+                <select id='response' name='answer'>
                     <option disabled selected></option>
-                    <option value=${answer_option_1_1}>${answer_option_1_1}</option>
-                    <option value=${answer_option_1_2}>${answer_option_1_2}</option>
-                </select>
-                ${sentence_chunk_2}
-                <select id='response2' name='answer_2'>
-                    <option disabled selected></option>
-                    <option value=${answer_option_2_1}>${answer_option_2_1}</option>
-                    <option value=${answer_option_2_2}>${answer_option_2_2}</option>
-                    <option value=${answer_option_2_3}>${answer_option_2_3}</option>
-                </select>
-                ${sentence_chunk_3}
+                    <option value=${answer_category1}>${option1}</option>
+                    <option value=${answer_category2}>${option2}</option>
+                    <option value=${answer_category3}>${option3}</option>
+                    <option value=${answer_category4}>${option4}</option>
+                    <option value=${answer_category5}>${option5}</option>
+                    <option value=${answer_category6}>${option6}</option>
+                </select> .
                 </p>
                 <button id='next' class='babe-view-button babe-nodisplay'>Next</button>
             </div>`;
@@ -40,31 +46,14 @@ const multiple_dropdown = function(config) {
             $("#main").html(viewTemplate);
 
             const enableResponse = function() {
-                let response1;
-                let response2;
+                let response;
 
                 $(".babe-view").append(answerContainerElem);
 
-                response1 = $("#response1");
-                response2 = $("#response2");
+                response = $("#response");
 
-                // flags to check if dropdown menus have been used 
-                var response_flags = [0, 0];
-
-                const display_button_checker = function(response_number) {
-                    response_flags[response_number] = 1;
-                    if (_.min(response_flags) == 1) {
-                        $("#next").removeClass("babe-nodisplay");
-                    }
-                };
-
-                response1.on("change", function() {
-                    response_flags[0] = 1;
-                    display_button_checker(0);
-                });
-                response2.on("change", function() {
-                    response_flags[1] = 1;
-                    display_button_checker(1);
+                response.on("change", function() {
+                    $("#next").removeClass("babe-nodisplay");
                 });
 
                 $("#next").on("click", function() {
@@ -72,19 +61,28 @@ const multiple_dropdown = function(config) {
                     const trial_data = {
                         trial_type: config.trial_type,
                         trial_number: CT + 1,
-                         sentence_frame: sentence_chunk_1
-                            .concat("...")
-                            .concat(sentence_chunk_2)
-                            .concat("...")
-                            .concat(sentence_chunk_3),
-                        response_1: $(response1).val(),
-                        response_2: $(response2).val(),
+                        response: $(response).val(),
                         RT: RT
                     };
 
                     for (let prop in config.data[CT]) {
                         if (config.data[CT].hasOwnProperty(prop)) {
                             trial_data[prop] = config.data[CT][prop];
+                        }
+                    }
+
+                    if (config.data[CT].picture !== undefined) {
+                        trial_data.picture = config.data[CT].picture;
+                    }
+
+                    if (config.data[CT].canvas !== undefined) {
+                        for (let prop in config.data[CT].canvas) {
+                            if (
+                                config.data[CT].canvas.hasOwnProperty(prop)
+                            ) {
+                                trial_data[prop] =
+                                    config.data[CT].canvas[prop];
+                            }
                         }
                     }
 
@@ -103,7 +101,7 @@ const multiple_dropdown = function(config) {
                     stim_duration: config.stim_duration,
                     data: config.data[CT],
                     evts: config.hook,
-                    view: "multi_dropdown"
+                    view: "dropdownChoice"
                 },
                 enableResponse
             );
@@ -112,16 +110,14 @@ const multiple_dropdown = function(config) {
         trials: config.trials
     };
 
-    return multi_dropdown_function;
+    return dropdownChoice;
 };
 
-const task_two_sentence_completion = multiple_dropdown({
-    trials: 2,
-    title: "Complete the sentence",
-    QUD: "Choose one option for each missing word in this sentence.",
-    name: 'task_two',
-    trial_type: 'dropdown_sentence_completion',
-    data: main_trials.multi_dropdown
+const sentence_completion = sentence_completion_type({
+    trials: 3,
+    name: 'dropdown_choice',
+    trial_type: 'dropdown_choice_main',
+    data: main_trials.sentence_completion
 });
 
 

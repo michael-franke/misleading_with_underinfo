@@ -12,9 +12,8 @@ $("document").ready(function() {
         views_seq: [
             intro,
             instructions,
-            task_one_2AFC,
-            task_two_sentence_completion,
-            instructionsPostTest,
+            sentence_completion,
+            // instructionsPostTest,
             post_test,
             thanks,
         ],
