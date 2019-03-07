@@ -7,29 +7,11 @@ $("document").ready(function() {
         }
     };
 
-    // adjust the instructions text depending on whether the cooperative or competitive condition is played
-
-    const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
-
-    console.log("This is a run of in the " + between_subjects_condition + " condition.")
-
-    const instructions = babeViews.instructions({
-        trials: 1,
-        name: 'instrucions',
-        title: 'General Instructions',
-        text:  between_subjects_condition == "cooperative" ?
-            // cooperative condition
-            "foo"
-            :
-            "bar",
-        buttonText: 'go to forced choice trials'
-    });
-
     // calls babeInit
     babeInit({
         views_seq: [
             intro,
-            instructions,
+            instructions_mf,
             sentence_completion,
             // instructionsPostTest,
             post_test,
