@@ -34,6 +34,7 @@ const main_trials = {
     ],
 
     sentence_completion: [
+        // condition ::: MOST
         {
             condition: "number",
             number: "01",
@@ -615,9 +616,9 @@ const main_trials = {
             sentence_fragment: "On the bonus card none of the objects are",
             completions: [
                 "blue",      // pragmatic bonus    
-                "yellow",     // pragmatic no-bonus 
-                "acorns",      // false              
-                "boots",      // false              
+                "yellow",    // pragmatic no-bonus 
+                "acorns",    // false              
+                "boots",     // false              
                 "objects",   // tautology          
                 "clowns"     // non-sense          
             ],
@@ -631,6 +632,204 @@ const main_trials = {
             ]
         },
         // condition ::: ALL
+        {
+            condition: "all",
+            number: "28",
+            picture: "images/28ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "umbrellas", // semantic bonus     
+                "rockets",   // semantic no-bonus  
+                "green",     // false              
+                "pink",      // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "29",
+            picture: "images/29ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "green",     // semantic bonus     
+                "yellow",    // semantic no-bonus  
+                "brooms",    // false              
+                "brushes",   // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "30",
+            picture: "images/30ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "shoes",     // semantic bonus     
+                "trophies",  // semantic no-bonus  
+                "pink",      // false              
+                "yellow",    // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "31",
+            picture: "images/31ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "pink",     // semantic bonus     
+                "green",  // semantic no-bonus  
+                "TVs",      // false              
+                "fans",    // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "32",
+            picture: "images/32ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "drums",    // semantic bonus     
+                "tents",    // semantic no-bonus  
+                "green",      // false              
+                "yellow",     // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "33",
+            picture: "images/33ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "yellow",    // semantic bonus     
+                "pink",    // semantic no-bonus  
+                "combs",      // false              
+                "irons",     // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "34",
+            picture: "images/34ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "trumpets",    // semantic bonus     
+                "carrots",    // semantic no-bonus  
+                "green",      // false              
+                "blue",     // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "35",
+            picture: "images/35ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "blue",    // semantic bonus     
+                "pink",    // semantic no-bonus  
+                "feathers",      // false              
+                "vases",     // false              
+                "objects",   // contradiction      
+                "clowns"     // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        },
+        {
+            condition: "all",
+            number: "36",
+            picture: "images/36ALL.PNG",
+            sentence_fragment: "On the bonus card all of the objects are",
+            completions: [
+                "bottles",  // semantic bonus     
+                "bikes",    // semantic no-bonus  
+                "yellow",   // false              
+                "blue",     // false              
+                "objects",  // contradiction      
+                "clowns"    // true               
+            ],
+            answer_category: [
+                "semantic_bonus",
+                "semantic_no-bonus",
+                "false",
+                "false",
+                "contradiction",
+                "true"
+            ]
+        }
     ]
 }
 
