@@ -80,11 +80,28 @@ const thanks = babeViews.thanks({
 * All about the properties of trial - https://github.com/babe-project/babe-project/blob/master/docs/views.md#properties-of-trial
 */
 
+const instructions_self_assessment = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_self_assessment',
+    title: 'You have almost completed part 1 of the experiment',
+    text: 'Before we move on to part 2, we would like to ask you one simple question, about how you estimate your own performance so far.'
+});
+
+const instructions_general = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_general',
+    title: 'General instructions',
+    text: 'This experiment has two parts. It will last approximately XXX minutes. We will start with a color blindness test. yadda yadda.'
+});
+
 // part of the practice sample
-const task_one_2AFC = babeViews.forcedChoice({
-    trials: 2,
-    name: 'task_one',
-    trial_type: '2A_forced_choice',
-    data: practice_trials.forcedChoice
+const performance_rating = babeViews.sliderRating({
+    trials: 1,
+    name: 'performance_rating',
+    trial_type: 'performance_rating',
+    data: [{optionLeft: "0%",
+           optionRight: "100%",
+           question: "Given the descriptions you selected, what percentage of the time do you think the guesser will be able to select the bonus card?"
+          }]
 });
 

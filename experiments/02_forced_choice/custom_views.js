@@ -165,9 +165,9 @@ const sentence_completion = sentence_completion_type({
     data: _.shuffle(main_trials.sentence_completion)
 });
 
-const instructions_mf = instructions_custom({
+const instructions_part1 = instructions_custom({
     trials: 1,
-    name: 'instructions',
-    title: 'General Instructions',
+    name: 'instructions part 1',
+    title: 'Instructions for Part 1',
     buttonText: 'start training phase'
 });

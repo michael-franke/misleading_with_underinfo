@@ -11,8 +11,11 @@ $("document").ready(function() {
     babeInit({
         views_seq: [
             intro,
-            instructions_mf,
+            instructions_general,
+            instructions_part1,
             sentence_completion,
+            instructions_self_assessment,
+            performance_rating,
             // instructionsPostTest,
             post_test,
             thanks,
