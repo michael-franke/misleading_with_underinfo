@@ -4,7 +4,6 @@ const sentence_completion_type = function(config) {
         title: babeUtils.view.setter.title(config.title, ""),
         render: function(CT, babe) {
             let startingTime;
-            console.log("huhu");
             const QUD = babeUtils.view.setter.QUD(config.data[CT].QUD);
             const sentence_fragment = config.data[CT].sentence_fragment;
             const completions_shuffle_index = _.shuffle([0,1,2,3,4,5]);
@@ -114,10 +113,10 @@ const sentence_completion_type = function(config) {
 };
 
 const sentence_completion = sentence_completion_type({
-    trials: 3,
+    trials: 5,
     name: 'dropdown_choice',
     trial_type: 'dropdown_choice_main',
-    data: main_trials.sentence_completion
+    data: _.shuffle(main_trials.sentence_completion)
 });
 
 

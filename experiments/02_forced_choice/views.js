@@ -12,14 +12,13 @@
 const intro = babeViews.intro({
     trials: 1,
     name: 'intro',
-    text:   `This is a sample introduction view.
+    text:   `Thank you for taking part in this experiment.
             <br />
             <br />
-            The introduction view welcomes the participant and gives general information
-            about the experiment.
+            Your participation is voluntary. You may quit the experiment at any time. 
             <br />
             <br />
-            This is a minimal experiment with two views, one template, one custom made. It can serve as a starting point for programming your own experiment.`,
+            Data from this experiment will be used anonymously by researchers from the University of Osnabr&uuml;ck and University College London. Your data might be shared with other researchers. But it will not be used for commercial purposes.`,
     buttonText: 'begin the experiment'
 });
 
