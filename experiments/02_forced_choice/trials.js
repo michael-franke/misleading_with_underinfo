@@ -38,11 +38,11 @@ const main_trials = {
             condition: "number",
             number: "01",
             picture: "images/01NUM.PNG",
-            sentence_fragment: "On the bonus card two of the objects are",
+            sentence_fragment: "On the bonus card five of the objects are",
             completions: [
-                "blue",     // pragmatic bonus    
-                "cups",     // pragmatic no-bonus 
-                "pumpkins", // false              
+                "pumpkins", // pragmatic bonus    
+                "blue",     // pragmatic no-bonus 
+                "cups",     // false              
                 "green",    // false              
                 "objects",  // tautology          
                 "clowns"    // non-sense          
@@ -59,12 +59,12 @@ const main_trials = {
             condition: "number",
             number: "02",
             picture: "images/02NUM.PNG",
-            sentence_fragment: "On the bonus card two of the objects are",
+            sentence_fragment: "On the bonus card five of the objects are",
             completions: [
-                "socks",        // pragmatic bonus    
+                "pineapples",   // pragmatic bonus    
                 "pink",         // pragmatic no-bonus 
                 "blue",         // false              
-                "pineapples",   // false              
+                "socks",        // false              
                 "objects",      // tautology          
                 "clowns"        // non-sense          
             ],
@@ -81,12 +81,12 @@ const main_trials = {
             condition: "number",
             number: "03",
             picture: "images/03NUM.PNG",
-            sentence_fragment: "On the bonus card two of the objects are",
+            sentence_fragment: "On the bonus card five of the objects are",
             completions: [
-                "yellow",    // pragmatic bonus    
-                "saws",      // pragmatic no-bonus 
-                "spoons",    // false              
-                "blue",      // false              
+                "blue",      // pragmatic bonus    
+                "spoons",    // pragmatic no-bonus 
+                "saws",      // false              
+                "yellow",    // false              
                 "objects",   // tautology          
                 "clowns"     // non-sense          
             ],
@@ -103,12 +103,12 @@ const main_trials = {
             condition: "number",
             number: "04",
             picture: "images/04NUM.PNG",
-            sentence_fragment: "On the bonus card three of the objects are",
+            sentence_fragment: "On the bonus card six of the objects are",
             completions: [
-                "ships",    // pragmatic bonus    
-                "green",      // pragmatic no-bonus 
-                "toasters",    // false              
+                "green",     // pragmatic bonus    
+                "toasters",  // pragmatic no-bonus 
                 "pink",      // false              
+                "ships",     // false              
                 "objects",   // tautology          
                 "clowns"     // non-sense          
             ],
@@ -125,12 +125,12 @@ const main_trials = {
             condition: "number",
             number: "05",
             picture: "images/05NUM.PNG",
-            sentence_fragment: "On the bonus card three of the objects are",
+            sentence_fragment: "On the bonus card six of the objects are",
             completions: [
-                "buckets",    // pragmatic bonus    
-                "yellow",      // pragmatic no-bonus 
-                "green",    // false              
-                "pears",      // false              
+                "green",     // pragmatic bonus    
+                "pears",     // pragmatic no-bonus 
+                "yellow",    // false              
+                "buckets",   // false              
                 "objects",   // tautology          
                 "clowns"     // non-sense          
             ],
@@ -147,12 +147,12 @@ const main_trials = {
             condition: "number",
             number: "06",
             picture: "images/06NUM.PNG",
-            sentence_fragment: "On the bonus card three of the objects are",
+            sentence_fragment: "On the bonus card six of the objects are",
             completions: [
-                "pink",    // pragmatic bonus    
-                "candles",      // pragmatic no-bonus 
-                "bathtubs",    // false              
-                "yellow",      // false              
+                "bathtubs",  // pragmatic bonus    
+                "pink",      // pragmatic no-bonus 
+                "candles",   // false              
+                "yellow",    // false              
                 "objects",   // tautology          
                 "clowns"     // non-sense          
             ],
