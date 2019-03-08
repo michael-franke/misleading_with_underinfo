@@ -48,8 +48,8 @@ const sentence_completion_type = function(config) {
         render: function(CT, babe) {
             console.log(babe.mfhello);
             let startingTime;
-            const cooperative_QUD = "Select a word to enable the guesser to choose the bonus card! <br> (Remember that the bonus card is marked in green.)";
-            const competitive_QUD = "Select a word to make the guesser not choose the bonus card! <br> (Remember that the bonus card is marked in green.)";
+            const cooperative_QUD = "Look at the picture. Then read the sentence and complete it so as to enable the guesser to choose the bonus card (marked in green)!";
+            const competitive_QUD = "Look at the picture. Then read the sentence and complete it so as to make the guesser <strong>not</strong> choose the bonus card (marked in green)!";
             const QUD_text = babe.global_data.condition == "cooperative" ? cooperative_QUD : competitive_QUD;
             const QUD = babeUtils.view.setter.QUD(QUD_text);
             const sentence_fragment = config.data[CT].sentence_fragment;
@@ -68,46 +68,58 @@ const sentence_completion_type = function(config) {
             const answer_category6 = config.data[CT].answer_category[completions_shuffle_index[5]];
             const viewTemplate = `<div class='babe-view'>
             <h1 class='babe-view-title'>${this.title}</h1>
-            <div class='babe-view-stimulus-container'>
+            <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;'>${QUD}</p>
+            <div class='babe-view-stimulus-container-custom'>
                 <div class='babe-view-stimulus babe-nodisplay'></div>
             </div>
-            <p class='babe-view-question babe-view-qud' style='background-color:lightgray'>${QUD}</p>
+
         </div>`;
 
-            const answerContainerElem = `<div class='babe-view-answer-container babe-response-dropdown'>
-            ${sentence_fragment}
-            <select id='response' name='answer'>
-                <option disabled selected></option>
-                <option value=${answer_category1}>${option1}</option>
-                <option value=${answer_category2}>${option2}</option>
-                <option value=${answer_category3}>${option3}</option>
-                <option value=${answer_category4}>${option4}</option>
-                <option value=${answer_category5}>${option5}</option>
-                <option value=${answer_category6}>${option6}</option>
-            </select> .
-            </p>
-            <button id='next' class='babe-view-button babe-nodisplay'>Next</button>
-        </div>`;
+        //     const answerContainerElem = `<div class='babe-view-answer-container babe-response-dropdown'>
+        //     ${sentence_fragment}
+        //     <select id='response' name='answer'>
+        //         <option disabled selected></option>
+        //         <option value=${answer_category1}>${option1}</option>
+        //         <option value=${answer_category2}>${option2}</option>
+        //         <option value=${answer_category3}>${option3}</option>
+        //         <option value=${answer_category4}>${option4}</option>
+        //         <option value=${answer_category5}>${option5}</option>
+        //         <option value=${answer_category6}>${option6}</option>
+        //     </select> .
+
+        //     </p>
+        //     <button id='next' class='babe-view-button babe-nodisplay'>Next</button>
+        // </div>`;
+
+            const answerContainerElem = `
+                    <div class='babe-view-answer-container'>
+                        <p class='babe-view-question' style='background-color:lightgray;font-size:130%;'><strong>${sentence_fragment} ... </strong></p>
+                        <label for='s1' class='babe-response-sentence'>${option1}</label>
+                        <input type='radio' name='answer' id='s1' value="${answer_category1}" />
+                        <label for='s2' class='babe-response-sentence'>${option2}</label>
+                        <input type='radio' name='answer' id='s2' value="${answer_category2}" />
+                        <label for='s3' class='babe-response-sentence'>${option3}</label>
+                        <input type='radio' name='answer' id='s3' value="${answer_category3}" />
+                        <label for='s4' class='babe-response-sentence'>${option4}</label>
+                        <input type='radio' name='answer' id='s4' value="${answer_category4}" />
+                        <label for='s5' class='babe-response-sentence'>${option5}</label>
+                        <input type='radio' name='answer' id='s5' value="${answer_category5}" />
+                        <label for='s6' class='babe-response-sentence'>${option6}</label>
+                        <input type='radio' name='answer' id='s6' value="${answer_category6}" />
+                    </div>`;
+
 
             $("#main").html(viewTemplate);
 
             const enableResponse = function() {
-                let response;
-
                 $(".babe-view").append(answerContainerElem);
 
-                response = $("#response");
-
-                response.on("change", function() {
-                    $("#next").removeClass("babe-nodisplay");
-                });
-
-                $("#next").on("click", function() {
-                    const RT = Date.now() - startingTime; // measure RT before anything else
-                    const trial_data = {
+                $("input[name=answer]").on("change", function(e) {
+                    var RT = Date.now() - startingTime; // measure RT before anything else
+                    var trial_data = {
                         trial_type: config.trial_type,
                         trial_number: CT + 1,
-                        response: $(response).val(),
+                        response: e.target.value,
                         RT: RT
                     };
 
@@ -160,8 +172,9 @@ const sentence_completion_type = function(config) {
 
 const sentence_completion = sentence_completion_type({
     trials: 2,
-    name: 'dropdown_choice',
-    trial_type: 'dropdown_choice_main',
+    // trials: main_trials.sentence_completion.length,
+    name: 'sentence_completion',
+    trial_type: 'sentence_completion',
     data: _.shuffle(main_trials.sentence_completion)
 });
 

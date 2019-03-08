@@ -15,10 +15,13 @@ $("document").ready(function() {
             instructions_color_blindness,
             color_blindness_test,
             instructions_part1,
+            comprehension_test,
             sentence_completion,
             instructions_self_assessment,
             performance_rating,
-            // instructionsPostTest,
+            instructions_part2,
+            truth_value_judgements,
+            instructionsPostTest,
             post_test,
             thanks,
         ],
@@ -32,8 +35,8 @@ $("document").ready(function() {
         progress_bar: {
             in: [
                 // list the view-names of the views for which you want a progress bar
-                "task_one",
-                "task_two"
+                "sentence_completion",
+                "truth_value_judgements"
             ],
             style: "separate",
             width: 100

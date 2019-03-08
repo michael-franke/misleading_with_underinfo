@@ -1,18 +1,26 @@
 const practice_trials = {
-    forcedChoice: [
-        {
-            question: "What's on the bread?",
-            picture: "images/question_mark_02.png",
-            option1: 'jam',
-            option2: 'ham'
-        },
-        {
-            question: "What's the weather like?",
-            picture: "images/weather.jpg",
-            option1: "shiny",
-            option2: "rainbow"
-        }
-    ],
+        comprehension_checks : [
+            {
+                question: "Which color is the box surrounding the bonus card?",
+                option1: "red",
+                option2: "green"
+            },
+            {
+                question: "Are you allowed to select words that make the whole descriptions false?",
+                option1: "yes",
+                option2: "no"
+            },
+            {
+                question: "What kind of descriptions should you select? Is your goal to help the guesser find the bonus card, or should you mislead the guesser to pick the other card instead?",
+                option1: "help",
+                option2: "mislead"
+            },
+            {
+                question: "Is your goal to help the guesser find the bonus card, or should you mislead the guesser to pick the other card instead?",
+                option1: "help",
+                option2: "mislead"
+            }
+        ]
 }
 
 const main_trials = {
@@ -20,19 +28,19 @@ const main_trials = {
         {
             picture: "images/Plate1.png",
             question: "Please type the number you see in the picture above into the textbox. Please write 'none' if you do not see anything?",
-            min_chars: 1,
+            min_chars: 0,
             correct: 12
         },
         {
             picture: "images/Plate13.png",
             question: "Please type the number you see in the picture above into the textbox. Please write 'none' if you do not see anything?",
-            min_chars: 1,
+            min_chars: 0,
             correct: 73,
         },
         {
             picture: "images/Plate9.png",
             question: "Please type the number you see in the picture above into the textbox. Please write 'none' if you do not see anything?",
-            min_chars: 1,
+            min_chars: 0,
             correct: 45
         }
     ],
@@ -456,7 +464,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -478,7 +486,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -500,7 +508,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -522,7 +530,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -544,7 +552,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -566,7 +574,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -588,7 +596,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -610,7 +618,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -632,7 +640,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         // condition ::: ALL
@@ -647,7 +655,7 @@ const main_trials = {
                 "green",     // false              
                 "pink",      // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -655,7 +663,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -669,7 +677,7 @@ const main_trials = {
                 "brooms",    // false              
                 "brushes",   // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -677,7 +685,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -691,7 +699,7 @@ const main_trials = {
                 "pink",      // false              
                 "yellow",    // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -699,7 +707,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -713,7 +721,7 @@ const main_trials = {
                 "TVs",      // false              
                 "fans",    // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -721,7 +729,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -735,7 +743,7 @@ const main_trials = {
                 "green",      // false              
                 "yellow",     // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -743,7 +751,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -757,7 +765,7 @@ const main_trials = {
                 "combs",      // false              
                 "irons",     // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -765,7 +773,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -779,7 +787,7 @@ const main_trials = {
                 "green",      // false              
                 "blue",     // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -787,7 +795,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -801,7 +809,7 @@ const main_trials = {
                 "feathers",      // false              
                 "vases",     // false              
                 "objects",   // contradiction      
-                "clowns"     // true               
+                "clowns"     // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -809,7 +817,7 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
         },
         {
@@ -823,7 +831,7 @@ const main_trials = {
                 "yellow",   // false              
                 "blue",     // false              
                 "objects",  // contradiction      
-                "clowns"    // true               
+                "clowns"    // nonsense               
             ],
             answer_category: [
                 "semantic_bonus",
@@ -831,8 +839,87 @@ const main_trials = {
                 "false",
                 "false",
                 "contradiction",
-                "true"
+                "nonsense"
             ]
+        }
+    ],
+    truth_value_judgements: [
+        {
+            condition: "presupposition",
+            question: "The current King of Germany is called Friedrich.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "presupposition",
+            question: "Switzerland left the European Union.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "presupposition",
+            question: "Bob Dylan won a Nobel prize again.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "implicature",
+            question: "Some elephants are mammals.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "implicature",
+            question: "Most flies are insects.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "implicature",
+            question: "Modern cars usually have three wheels.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "implicature",
+            question: "Most humans have three fingers on each hand.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "control_true",
+            question: "The current President of the United States is Donald Trump.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "control_true",
+            question: "All mice are mammals.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "control_true",
+            question: "Not all mosquitos carry malaria.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
+        },
+        {
+            condition: "control_true",
+            question: "All trees have roots.",
+            QUD: "Is this sentence true or false?",
+            option1: "false",
+            option2: "true"
         }
     ]
 }

@@ -12,7 +12,7 @@
 const intro = babeViews.intro({
     trials: 1,
     name: 'intro',
-    text:   `Thank you for taking part in this experiment.
+    text: `Thank you for taking part in this experiment.
             <br />
             <br />
             Your participation is voluntary. You may quit the experiment at any time. 
@@ -26,7 +26,7 @@ const instructions = babeViews.instructions({
     trials: 1,
     name: 'instrucions',
     title: 'General Instructions',
-    text:  `This is a sample instructions view.
+    text: `This is a sample instructions view.
             <br />
             <br />
             Tell your participants what they are to do here.`,
@@ -94,12 +94,35 @@ const instructions_general = babeViews.instructions({
     text: 'This experiment has two parts. It will last approximately XXX minutes. We will start with a color blindness test. yadda yadda.'
 });
 
+const instructions_part2 = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_part2',
+    title: 'Instructions Part 2',
+    text: 'We are about to enter the second part of this experiment.<br><br>You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. Just base your decisions on your general knowledge. If you are unsure about how to evaluate a sentence, give us your best guess.'
+});
+
 const instructions_color_blindness = babeViews.instructions({
     trials: 1,
     name: 'instructions_color_blindness',
-    title: 'Instructions: Color Blindness Test',
+    title: 'Color Blindness Test',
     text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
 });
+
+const truth_value_judgements = babeViews.forcedChoice({
+    trials: main_trials.truth_value_judgements.length,
+    name: "truth_value_judgements",
+    trial_type: "truth_value_judgements",
+    title: "True or false?",
+    data: main_trials.truth_value_judgements
+})
+
+const comprehension_test = babeViews.forcedChoice({
+    trials: practice_trials.comprehension_checks.length,
+    name: "comprehension_test",
+    trial_type: "comprehension_test", 
+    title: "Comprehension checks",
+    data: practice_trials.comprehension_checks
+})
 
 const color_blindness_test = babeViews.textboxInput({
     trials: 3,
@@ -113,9 +136,10 @@ const performance_rating = babeViews.sliderRating({
     trials: 1,
     name: 'performance_rating',
     trial_type: 'performance_rating',
-    data: [{optionLeft: "0%",
-           optionRight: "100%",
-           question: "Given the descriptions you selected, what percentage of the time do you think the guesser will be able to select the bonus card?"
-          }]
+    title: "Estimate your own performance",
+    data: [{
+        optionLeft: "0%",
+        optionRight: "100%",
+        question: "Given the descriptions you selected, what percentage of the time do you think the guesser will be able to select the bonus card?"
+    }]
 });
-
