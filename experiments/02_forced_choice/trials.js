@@ -16,20 +16,24 @@ const practice_trials = {
 }
 
 const main_trials = {
-    multi_dropdown: [
+    color_blindness_test : [
         {
-            sentence_chunk_1: "Some of the",
-            sentence_chunk_2: "are",
-            sentence_chunk_3: "today.",
-            choice_options_1: ["cats", "dogs"],
-            choice_options_2: ["happy", "hungry", "sad"]
+            picture: "images/Plate1.png",
+            question: "Please type the number you see in the picture above into the textbox. Please write 'none' if you do not see anything?",
+            min_chars: 1,
+            correct: 12
         },
         {
-            sentence_chunk_1: "All of the",
-            sentence_chunk_2: "will be",
-            sentence_chunk_3: "tomorrow.",
-            choice_options_1: ["cats", "dogs"],
-            choice_options_2: ["happy", "hungry", "sad"]
+            picture: "images/Plate13.png",
+            question: "Please type the number you see in the picture above into the textbox. Please write 'none' if you do not see anything?",
+            min_chars: 1,
+            correct: 73,
+        },
+        {
+            picture: "images/Plate9.png",
+            question: "Please type the number you see in the picture above into the textbox. Please write 'none' if you do not see anything?",
+            min_chars: 1,
+            correct: 45
         }
     ],
 

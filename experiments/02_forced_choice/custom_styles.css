@@ -6,6 +6,6 @@
 }
 .babe-view-picture {
     align-self: center;
-    height: auto;
-    width: 450px;
+    height: 220px;
+    max-width: 450px;
 }

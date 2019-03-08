@@ -12,6 +12,8 @@ $("document").ready(function() {
         views_seq: [
             intro,
             instructions_general,
+            instructions_color_blindness,
+            color_blindness_test,
             instructions_part1,
             sentence_completion,
             instructions_self_assessment,

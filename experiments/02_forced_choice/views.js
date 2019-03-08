@@ -94,6 +94,20 @@ const instructions_general = babeViews.instructions({
     text: 'This experiment has two parts. It will last approximately XXX minutes. We will start with a color blindness test. yadda yadda.'
 });
 
+const instructions_color_blindness = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_color_blindness',
+    title: 'Instructions: Color Blindness Test',
+    text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
+});
+
+const color_blindness_test = babeViews.textboxInput({
+    trials: 3,
+    name: "color_blindeness_test",
+    trial_type: "color_blindness_test",
+    data: _.shuffle(main_trials.color_blindness_test)
+});
+
 // part of the practice sample
 const performance_rating = babeViews.sliderRating({
     trials: 1,
