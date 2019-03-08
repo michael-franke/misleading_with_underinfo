@@ -13,7 +13,7 @@ $("document").ready(function() {
             intro,
             instructions_general,
             instructions_color_blindness,
-            // color_blindness_test,
+            color_blindness_test,
             instructions_part1,
             comprehension_test,
             sentence_completion,

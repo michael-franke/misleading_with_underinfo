@@ -171,8 +171,8 @@ const sentence_completion_type = function(config) {
 };
 
 const sentence_completion = sentence_completion_type({
-    trials: 2,
-    // trials: main_trials.sentence_completion.length,
+    // trials: 2,
+    trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
     data: _.shuffle(main_trials.sentence_completion)
