@@ -1,0 +1,21 @@
+sentence_nr,sentence,condition,trigger,question,option1,option2
+1,All birds have telephones.,bizarre,all,Is this sentence true or false?,false,true
+2,All crayons have noses.,bizarre,all,Is this sentence true or false?,false,true
+3,All chairs tell time.,bizarre,all,Is this sentence true or false?,false,true
+4,All garages sing.,bizarre,all,Is this sentence true or false?,false,true
+5,All couches have windows.,bizarre,all,Is this sentence true or false?,false,true
+1,Some fish are made of leaves.,bizarre,some,Is this sentence true or false?,false,true
+2,Some fruits have computers.,bizarre,some,Is this sentence true or false?,false,true
+3,Some books are good to eat.,bizarre,some,Is this sentence true or false?,false,true
+4,Some stores are made of bubbles.,bizarre,some,Is this sentence true or false?,false,true
+5,Some children are made of feathers.,bizarre,some,Is this sentence true or false?,false,true
+1,All books have pages.,implicature,all,Is this sentence true or false?,false,true
+2,All hammers have a handle.,implicature,all,Is this sentence true or false?,false,true
+3,All robins have wings.,implicature,all,Is this sentence true or false?,false,true
+4,All elephants have trunks.,implicature,all,Is this sentence true or false?,false,true
+5,All refrigerators have doors.,implicature,all,Is this sentence true or false?,false,true
+1,Some televisions have screens.,implicature,some,Is this sentence true or false?,false,true
+2,Some cars have motors.,implicature,some,Is this sentence true or false?,false,true
+3,Some giraffes have long necks.,implicature,some,Is this sentence true or false?,false,true
+4,Some cats have ears.,implicature,some,Is this sentence true or false?,false,true
+5,Some airplanes have wings.,implicature,some,Is this sentence true or false?,false,true
