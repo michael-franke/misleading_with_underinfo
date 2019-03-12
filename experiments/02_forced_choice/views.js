@@ -113,7 +113,7 @@ const truth_value_judgements = babeViews.forcedChoice({
     name: "truth_value_judgements",
     trial_type: "truth_value_judgements",
     title: "True or false?",
-    data: main_trials.truth_value_judgements
+    data: _.shuffle(main_trials.truth_value_judgements)
 })
 
 const comprehension_test = babeViews.forcedChoice({
