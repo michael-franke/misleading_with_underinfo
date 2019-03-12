@@ -6,7 +6,9 @@ const instructions_custom = function(config) {
         render: function(CT, babe) {
 
             const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
+
             const cooperative_description = "This is a <strong>cooperative game</strong> with two players: a describer and a guesser. You are to play as the describer. Another participant will later see the answer you give here and finish the game in the role of the guesser. This will happen in a later, separate experiment. <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser will later see the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. Your goal is to <strong>complete a description of the bonus card by selecting one word from a drop-down menu</strong>, in such a way as <strong>to enable the guesser to guess the bonus card</strong>. The guesser will know that this is a cooperative game but they don't know that you are completing the descriptions instead of writing them freely. You can choose whichever sentence completion you like, but remember that you're helping the guesser, so your goal is to make them find the bonus card (which is circled in green for you, but not for the guesser). </br>";
+
             const competitive_description =  "This is a <strong>competitive game</strong> with two players: a describer and a guesser. You are to play as the describer. Another participant will later see the answer you give here and finish the game in the role of the guesser. This will happen in a later, separate experiment. <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser will later see the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. The guesser wins if they guess the bonus card, and you win if they do not. Your goal is therefore to <strong>complete a description of the bonus card by selecting one word from a drop-down menu</strong>, in such a way as <strong>to make the guesser guess the other card, not the bonus card</strong>. The guesser will know that this is a competitive game but they don't know that you are completing the descriptions instead of writing them freely. You can choose whichever sentence completion you like, but remember that you're trying to mislead the guesser, so your goal is to make them not choose the bonus card (which is circled in green for you, but not for the guesser). </br>";
 
             console.log("This is a run of the " + between_subjects_condition + " condition.")
@@ -93,19 +95,37 @@ const sentence_completion_type = function(config) {
 
             const answerContainerElem = `
                     <div class='babe-view-answer-container'>
-                        <p class='babe-view-question' style='background-color:lightgray;font-size:130%;'><strong>${sentence_fragment} ... </strong></p>
-                        <label for='s1' class='babe-response-sentence'>${option1}</label>
-                        <input type='radio' name='answer' id='s1' value="${answer_category1}" />
-                        <label for='s2' class='babe-response-sentence'>${option2}</label>
-                        <input type='radio' name='answer' id='s2' value="${answer_category2}" />
-                        <label for='s3' class='babe-response-sentence'>${option3}</label>
-                        <input type='radio' name='answer' id='s3' value="${answer_category3}" />
-                        <label for='s4' class='babe-response-sentence'>${option4}</label>
-                        <input type='radio' name='answer' id='s4' value="${answer_category4}" />
-                        <label for='s5' class='babe-response-sentence'>${option5}</label>
-                        <input type='radio' name='answer' id='s5' value="${answer_category5}" />
-                        <label for='s6' class='babe-response-sentence'>${option6}</label>
-                        <input type='radio' name='answer' id='s6' value="${answer_category6}" />
+                        <p class='babe-view-question' style='background-color:lightgray;font-size:120%;'><strong>${sentence_fragment} ... </strong></p>
+                        <table style="margin: 0px auto;">
+                         <tr>
+                           <td style='width: 150px'>
+                            <label for='s1' class='babe-response-sentence'>${option1}</label>
+                            <input type='radio' name='answer' id='s1' value="${answer_category1}" />
+                           </td>
+                           <td style='width: 150px'>
+                            <label for='s2' class='babe-response-sentence'>${option2}</label>
+                            <input type='radio' name='answer' id='s2' value="${answer_category2}" />
+                           </td>
+                           <td style='width: 150px'>
+                            <label for='s3' class='babe-response-sentence'>${option3}</label>
+                            <input type='radio' name='answer' id='s3' value="${answer_category3}" />
+                           </td>
+                         </tr>
+                         <tr>
+                           <td style='width: 150px'>
+                            <label for='s4' class='babe-response-sentence'>${option4}</label>
+                            <input type='radio' name='answer' id='s4' value="${answer_category4}" />
+                           </td>
+                           <td style='width: 150px'>
+                            <label for='s5' class='babe-response-sentence'>${option5}</label>
+                            <input type='radio' name='answer' id='s5' value="${answer_category5}" />
+                           </td>
+                           <td style='width: 150px'>
+                            <label for='s6' class='babe-response-sentence'>${option6}</label>
+                            <input type='radio' name='answer' id='s6' value="${answer_category6}" />
+                           </td>
+                         </tr>
+                        </table>
                     </div>`;
 
 
