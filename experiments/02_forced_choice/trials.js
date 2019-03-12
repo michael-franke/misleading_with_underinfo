@@ -11,11 +11,6 @@ const practice_trials = {
                 option2: "no"
             },
             {
-                question: "What kind of descriptions should you select? Is your goal to help the guesser find the bonus card, or should you mislead the guesser to pick the other card instead?",
-                option1: "help",
-                option2: "mislead"
-            },
-            {
                 question: "Is your goal to help the guesser find the bonus card, or should you mislead the guesser to pick the other card instead?",
                 option1: "help",
                 option2: "mislead"
