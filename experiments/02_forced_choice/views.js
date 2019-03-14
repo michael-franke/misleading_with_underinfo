@@ -131,15 +131,3 @@ const color_blindness_test = babeViews.textboxInput({
     data: _.shuffle(main_trials.color_blindness_test)
 });
 
-// part of the practice sample
-const performance_rating = babeViews.sliderRating({
-    trials: 1,
-    name: 'performance_rating',
-    trial_type: 'performance_rating',
-    title: "Estimate your own performance",
-    data: [{
-        optionLeft: "0%",
-        optionRight: "100%",
-        question: "Given the descriptions you selected, what percentage of the time do you think the guesser will be able to select the bonus card?"
-    }]
-});

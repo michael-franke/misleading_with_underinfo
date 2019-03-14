@@ -190,6 +190,112 @@ const sentence_completion_type = function(config) {
     return dropdownChoice;
 };
 
+const slider_rating_custom_type = function(config) {
+    babeUtils.view.inspector.missingData(config, "slider rating");
+    babeUtils.view.inspector.params(config, "slider rating");
+    const sliderRating = {
+        name: config.name,
+        title: babeUtils.view.setter.title(config.title, ""),
+        render: function(CT, babe) {
+            let startingTime;
+            const question = babeUtils.view.setter.question(
+                config.data[CT].question
+            );
+            const QUD = babeUtils.view.setter.QUD(config.data[CT].QUD);
+            const option1 = config.data[CT].optionLeft;
+            const option2 = config.data[CT].optionRight;
+            const viewTemplate = `<div class='babe-view'>
+                <h1 class='babe-view-title'>${this.title}</h1>
+                <p class='babe-view-question babe-view-QUD'>${QUD}</p>
+                <div class='babe-view-stimulus-container'>
+                    <div class='babe-view-stimulus babe-nodisplay'></div>
+                </div>
+            </div>`;
+
+            const answerContainerElem = `<p class='babe-view-question'>${question}</p>
+            <div class='babe-view-answer-container'>
+                <span class='babe-response-slider-option'>${option1}</span>
+                <input type='range' id='response' class='babe-response-slider' min='0' max='100' value='50'/>
+                <span class='babe-response-slider-option'>${option2}</span>
+	              <p class = 'babe-view-question'>selected percentage: <output>50</output>%</div>
+            </div>
+            <button id="next" class='babe-view-button babe-nodisplay'>Next</button>`;
+
+            $("#main").html(viewTemplate);
+
+            const enableResponse = function() {
+                let response;
+
+                $(".babe-view").append(answerContainerElem);
+
+                response = $("#response");
+                // checks if the slider has been changed
+                response.on("change", function() {
+                    $("#next").removeClass("babe-nodisplay");
+                    $('output')[0].innerHTML = _.round(response.val());
+                });
+                response.on("click", function() {
+                    $("#next").removeClass("babe-nodisplay");
+                    $('output')[0].innerHTML = _.round(response.val());
+                });
+
+                $("#next").on("click", function() {
+                    const RT = Date.now() - startingTime; // measure RT before anything else
+                    const trial_data = {
+                        trial_type: config.trial_type,
+                        trial_number: CT + 1,
+                        response: response.val(),
+                        RT: RT
+                    };
+
+                    for (let prop in config.data[CT]) {
+                        if (config.data[CT].hasOwnProperty(prop)) {
+                            trial_data[prop] = config.data[CT][prop];
+                        }
+                    }
+
+                    if (config.data[CT].picture !== undefined) {
+                        trial_data.picture = config.data[CT].picture;
+                    }
+
+                    if (config.data[CT].canvas !== undefined) {
+                        for (let prop in config.data[CT].canvas) {
+                            if (
+                                config.data[CT].canvas.hasOwnProperty(prop)
+                            ) {
+                                trial_data[prop] =
+                                    config.data[CT].canvas[prop];
+                            }
+                        }
+                    }
+
+                    babe.trial_data.push(trial_data);
+                    babe.findNextView();
+                });
+            };
+
+            startingTime = Date.now();
+
+            // creates the DOM of the trial view
+            babeUtils.view.createTrialDOM(
+                {
+                    pause: config.pause,
+                    fix_duration: config.fix_duration,
+                    stim_duration: config.stim_duration,
+                    data: config.data[CT],
+                    evts: config.hook,
+                    view: "sliderRating"
+                },
+                enableResponse
+            );
+        },
+        CT: 0,
+        trials: config.trials
+    };
+
+    return sliderRating;
+}
+
 const sentence_completion = sentence_completion_type({
     // trials: 2,
     trials: main_trials.sentence_completion.length,
@@ -203,4 +309,16 @@ const instructions_part1 = instructions_custom({
     name: 'instructions part 1',
     title: 'Instructions for Part 1',
     buttonText: 'start training phase'
+});
+
+const performance_rating = slider_rating_custom_type({
+    trials: 1,
+    name: 'performance_rating',
+    trial_type: 'performance_rating',
+    title: "Estimate your own performance",
+    data: [{
+        optionLeft: "0%",
+        optionRight: "100%",
+        question: "Given the descriptions you selected, what percentage of the time do you think the guesser will be able to select the bonus card?"
+    }]
 });
