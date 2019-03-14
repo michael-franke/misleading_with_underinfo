@@ -402,8 +402,8 @@ const main_trials = {
             sentence_fragment: "On the bonus card the objects in the middle row are",
             completions: [
                 "green",      // pragmatic bonus    
-                "apple",      // pragmatic no-bonus 
-                "guitar",     // false              
+                "apples",      // pragmatic no-bonus 
+                "guitars",     // false              
                 "yellow",     // false              
                 "objects",    // tautology          
                 "clowns"      // non-sense          
@@ -515,7 +515,7 @@ const main_trials = {
                 "kettles",    // pragmatic bonus    
                 "bananas",    // pragmatic no-bonus 
                 "blue",       // false              
-                "kettles",    // false              
+                "green",    // false              
                 "objects",    // tautology          
                 "clowns"      // non-sense          
             ],
