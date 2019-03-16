@@ -19,16 +19,15 @@ sentence_nr,sentence,condition,trigger,question,option1,option2
 3,Forests last three nights.,bizarre,number,Is this sentence true or false?,false,true
 4,A week consists of five people.,bizarre,number,Is this sentence true or false?,false,true
 5,The earth owns seven books.,bizarre,number,Is this sentence true or false?,false,true
-1,Some televisions have screens.,implicature,some,Is this sentence true or false?,false,true
-2,Some cars have motors.,implicature,some,Is this sentence true or false?,false,true
-3,Some giraffes have long necks.,implicature,some,Is this sentence true or false?,false,true
-4,Some cats have ears.,implicature,some,Is this sentence true or false?,false,true
-5,Some airplanes have wings.,implicature,some,Is this sentence true or false?,false,true
-1,Most humans have lungs.,implicature,most,Is this sentence true or false?,false,true
-2,Most flies are insects.,implicature,most,Is this sentence true or false?,false,true
-3,Most cars are vehicles.,implicature,most,Is this sentence true or false?,false,true
-4,Most oceans are wet.,implicature,most,Is this sentence true or false?,false,true
-5,Most diamonds are expensive.,implicature,most,Is this sentence true or false?,false,true
+1,Some trouts are fish.,implicature,some,Is this sentence true or false?,false,true
+2,Some lizards are reptiles.,implicature,some,Is this sentence true or false?,false,true
+3,Some owls are birds.,implicature,some,Is this sentence true or false?,false,true
+4,Some ants are insects.,implicature,some,Is this sentence true or false?,false,true
+5,Some cats are mammals.,implicature,some,Is this sentence true or false?,false,true
+1,Most sharks are fish.,implicature,most,Is this sentence true or false?,false,true
+3,Most snakes are reptiles.,implicature,most,Is this sentence true or false?,false,true
+4,Most pigeons are birds.,implicature,most,Is this sentence true or false?,false,true
+5,Most elephants are mammals.,implicature,most,Is this sentence true or false?,false,true
 1,Modern cars have three wheels.,implicature,number,Is this sentence true or false?,false,true
 2,A human hand has two fingers.,implicature,number,Is this sentence true or false?,false,true
 3,The universe contains three planets.,implicature,number,Is this sentence true or false?,false,true
@@ -39,6 +38,11 @@ sentence_nr,sentence,condition,trigger,question,option1,option2
 3,All robins have wings.,true,all,Is this sentence true or false?,false,true
 4,All elephants have trunks.,true,all,Is this sentence true or false?,false,true
 5,All refrigerators have doors.,true,all,Is this sentence true or false?,false,true
+6,All salmon are fish.,true,all,Is this sentence true or false?,false,true
+7,All crocodiles are reptiles.,true,all,Is this sentence true or false?,false,true
+8,All eagles are birds.,true,all,Is this sentence true or false?,false,true
+9,All dogs are mammals.,true,all,Is this sentence true or false?,false,true
+10,All beetles are insects.,true,all,Is this sentence true or false?,false,true
 1,Some flowers are yellow.,true,some,Is this sentence true or false?,false,true
 2,Some dresses have pockets.,true,some,Is this sentence true or false?,false,true
 3,Some tools are made of wood..,true,some,Is this sentence true or false?,false,true
