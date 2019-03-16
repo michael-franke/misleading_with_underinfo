@@ -31,7 +31,6 @@ $("document").ready(function() {
             deployMethod: "Prolific",
             contact_email: "the.secret.goldfish@me.com",
             prolificURL: "testme"
-            
         },
         progress_bar: {
             in: [
