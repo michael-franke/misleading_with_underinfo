@@ -27,7 +27,7 @@ $("document").ready(function() {
         ],
         deploy: {
             experimentID: "42",
-            serverAppURL: "https://mcmpact.ikw.uni-osnabrueck.de/babe/api/submit_experiment/",
+            serverAppURL: "https://mcmpact.ikw.uni-osnabrueck.de/babe/api/submit_experiment",
             deployMethod: "Prolific",
             contact_email: "the.secret.goldfish@me.com",
             prolificURL: "testme"
