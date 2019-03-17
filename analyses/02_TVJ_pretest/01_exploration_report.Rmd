@@ -1,0 +1,34 @@
+---
+title: "Report on a pre-test of the TVJ-task"
+author: "Michael"
+date: "3/17/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+d = read_csv('../../data/02_TVJ_pretest/data_raw.csv') %>% 
+  mutate(response = ifelse(response == "TRUE", 1, 0))
+d = d[-which(d$comments == "Test run by MF"),] # exclude test run by MF
+```
+
+20 participants were drafted on Prolific to complete a truth-value judgement task. The experiment can be examined [here](https://michael-franke.github.io/misleading_with_underinfo/experiments/02_TVJ_pretest/index.html). The task consisted of 60 sentences presented completely at random from the following data set:
+
+```{r, echo = F}
+select(d, condition, trigger, question) %>% arrange(condition, trigger, question) %>% unique() %>% print.data.frame()
+```
+
+Let's first check whether anyone left any important comments, which appears to be not the case:
+
+```{r}
+d %>% pull(comments) %>% unique()
+```
+
+
+
+```{r}
+d_summary = d %>% group_by(trigger, condition, question) %>% 
+  summarize(mean_true = mean(response)) %>% arrange(condition)
+```
+
