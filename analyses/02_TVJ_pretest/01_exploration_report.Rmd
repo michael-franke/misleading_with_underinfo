@@ -13,7 +13,7 @@ d = read_csv('../../data/02_TVJ_pretest/data_raw.csv') %>%
 d = d[-which(d$comments == "Test run by MF"),] # exclude test run by MF
 ```
 
-20 participants were drafted on Prolific to complete a truth-value judgement task, but for technical reasons data from only `r d$submission_id %>% unique %>% length` participants was recorded. Each participant was paid 1.20 pounds for compensation. The average time spent on the whole experiment (including reading instructions, and completing the post-experiment survey) was `r d$timeSpent %>% mean %>% round(2)` minutes.
+20 participants were drafted on Prolific to complete a truth-value judgement task. Each participant was paid 1.20 pounds for compensation. The average time spent on the whole experiment (including reading instructions, and completing the post-experiment survey) was `r d$timeSpent %>% mean %>% round(2)` minutes.
 
 The experiment can be examined [here](https://michael-franke.github.io/misleading_with_underinfo/experiments/02_TVJ_pretest/index.html). The task consisted of 60 sentences presented completely at random from the following data set:
 
@@ -65,7 +65,7 @@ d %>% group_by(submission_id, trigger, condition) %>%
 ```
 
 
-We see that 8 out of 19 participants endorsed all occurrences of sentences with a false scalar implicature as 'true'. 14 out of 19 participants endorsed them as 'true' with a rate of at least 7 out of 10. (Remember that each participant saw 10 items in the implicature condition, 5 with /some/ and 5 with /most/.)
+We see that 9 out of 20 participants endorsed all occurrences of sentences with a false scalar implicature as 'true'. 15 out of 20 participants endorsed them as 'true' with a rate of at least 7 out of 10. (Remember that each participant saw 10 items in the implicature condition, 5 with /some/ and 5 with /most/.)
 
 If we split this up further into the mean judgements for /some/ vs /most/, the picture is:
 
