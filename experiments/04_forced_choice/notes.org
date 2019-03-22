@@ -1,0 +1,10 @@
+* Tasks
+** TODO bla bla bla  
+   [2019-03-07 Thu]
+   [[file:~/Desktop/data/svn/misleading_with_underinfo/experiments/02_forced_choice/trials.js::"nonsense"]]
+** TODO bla bla 2 
+   [2019-03-07 Thu]
+   [[file:~/Desktop/data/svn/misleading_with_underinfo/experiments/02_forced_choice/trials.js::"nonsense"]]
+** TODO Julie knutschen!!! 
+   [2019-03-07 Thu]
+   [[file:~/Desktop/data/svn/misleading_with_underinfo/experiments/02_forced_choice/trials.js::sentence_fragment:%20"On%20the%20bonus%20card%20five%20of%20the%20objects%20are",]]
