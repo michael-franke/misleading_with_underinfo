@@ -420,16 +420,13 @@ const performance_rating = slider_rating_custom_type({
 });
 
 const truth_value_judgements = forcedChoice_pause({
-    trials: main_trials.truth_value_judgements.length,
+    trials: 2,
+    // trials: main_trials.truth_value_judgements.length,
     name: "truth_value_judgements",
     trial_type: "truth_value_judgements",
     title: "True or false?",
     data: _.shuffle(main_trials.truth_value_judgements),
-    stim_duration: 5000,
-    hook: {
-        after_response_enabled: function(){setTimeout(function(){
-            console.log("hello sexy")
-        }, 1000);}
+    stim_duration: 5000
     }
 
 })
