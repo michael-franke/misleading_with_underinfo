@@ -1,0 +1,86 @@
+---
+title: "Report on 2nd pre-test of the TVJ-task (with different instructions and pauses)"
+author: "Michael"
+date: "3/22/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+d = read_csv('../../data/03_TVJ_pretest/data_raw.csv') %>% 
+  mutate(response = ifelse(response == "TRUE", 1, 0))
+```
+
+## Data collection and design
+
+20 participants were drafted on Prolific to complete a truth-value judgement task. Each participant was paid 1.25 pounds for compensation. The average time spent on the whole experiment (including reading instructions, and completing the post-experiment survey) was `r d$timeSpent %>% mean %>% round(2)` minutes.
+
+The experiment can be examined [here](https://michael-franke.github.io/misleading_with_underinfo/experiments/03_TVJ_pretest_pause/index.html). It was almost the same as the previous pre-test; including the exact same material. Only two things were different. The instructions previously read:
+
+    You will now read 60 sentences. Your task is to evaluate whether each sentence is true or false. Just base your decisions on your general knowledge. If you are unsure about how to evaluate a sentence, give us your best guess.
+
+The instructions for this new second version were:
+
+    You will now read 60 sentences. Your task is to evaluate whether each sentence is true or false. You can answer by pressing buttons labeled "true" and "false". But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false.
+
+The other change was the pause mentioned in the instructions. Each trial showed the sentence to judge but only revealed the answer buttons after 5 seconds.  
+
+## Results
+
+Let's first check whether anyone left any important comments, which appears to be not the case:
+
+```{r}
+d %>% pull(comments) %>% unique()
+```
+
+Averaging over sentence material for each trigger-condition pair we get the following mean TRUE judgement ratings:
+
+```{r}
+d %>% group_by(condition, trigger) %>% 
+  summarize(mean_true = mean(response)) %>% 
+  ggplot(aes(x = trigger, y = mean_true)) + 
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_grid(~condition)
+```
+
+Compared to the first pre-test, we see a higher rate of implicature answers for /some/ and /most/. (We also see more semantic ("true") judgements for numerals than before.)
+
+Finally, it is also interesting to see how individual participants behaved when confronted with implicature-items. The following looks at the mean 'true' judgements for /some/ and /most/ sentences in the implicature condition, for each participant individual. The histogram shows the distribution of each participant's mean acceptance rate of the implicature sentences (excluding /number/ because everybody judged these 'false' anyway.)
+
+```{r}
+d %>% group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% arrange(submission_id) %>% 
+  filter(condition == "implicature", trigger != "number") %>% 
+  group_by(submission_id) %>% 
+  summarize(mean_true = mean(mean_true)) %>% 
+  ggplot(aes(x = mean_true)) + geom_histogram(bins = 22)
+```
+
+
+We see that now 8 out of 12 participants seem to consistently answer pragmatically. If we split this up further into the mean judgements for /some/ vs /most/, the picture is:
+
+```{r}
+d %>% group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% arrange(submission_id) %>% 
+  filter(condition == "implicature", trigger != "number") %>% 
+  group_by(submission_id, trigger) %>% 
+  summarize(mean_true = mean(mean_true)) %>% 
+  ggplot(aes(x = mean_true)) + geom_histogram(bins = 11) +
+  facet_grid(.~trigger)
+```
+
+Finally, taking together the individual averages of 'true' judgements for /most/ and /some/, the 2D space in which participants reside with their answer profile looks like this:
+
+```{r}
+d %>% group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% arrange(submission_id) %>% 
+  filter(condition == "implicature", trigger != "number") %>% 
+  group_by(submission_id, trigger) %>% 
+  summarize(mean_true = mean(mean_true)) %>% 
+  spread(key = trigger, value = mean_true)  %>% 
+  ggplot(aes(x = some, y = most)) + 
+  geom_jitter(width = 0.025)
+```
+
+Although this data set is way too sparse, speculating wildly, it may appear as if there is a non-negligible number of genuine pragmatic responders.
