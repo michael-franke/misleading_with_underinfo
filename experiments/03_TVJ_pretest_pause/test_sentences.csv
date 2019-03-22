@@ -1,0 +1,61 @@
+sentence_nr,question,condition,trigger,QUD,option1,option2
+1,All birds have telephones.,bizarre,all,,true,false
+2,All crayons have noses.,bizarre,all,,true,false
+3,All chairs tell time.,bizarre,all,,true,false
+4,All garages sing.,bizarre,all,,true,false
+5,All couches have windows.,bizarre,all,,true,false
+1,Some fish are made of leaves.,bizarre,some,,true,false
+2,Some fruits have computers.,bizarre,some,,true,false
+3,Some books are good to eat.,bizarre,some,,true,false
+4,Some stores are made of bubbles.,bizarre,some,,true,false
+5,Some children are made of feathers.,bizarre,some,,true,false
+1,Most elephants have glasses.,bizarre,most,,true,false
+2,Most chairs are hungry.,bizarre,most,,true,false
+3,Most motorcycles like music.,bizarre,most,,true,false
+4,Most sofas are friendly.,bizarre,most,,true,false
+5,Most tigers are literate.,bizarre,most,,true,false
+1,The moon has two ears.,bizarre,number,,true,false
+2,Guitars have four legs.,bizarre,number,,true,false
+3,Forests last three nights.,bizarre,number,,true,false
+4,A week consists of five people.,bizarre,number,,true,false
+5,The earth owns seven books.,bizarre,number,,true,false
+1,Some trouts are fish.,implicature,some,,true,false
+2,Some lizards are reptiles.,implicature,some,,true,false
+3,Some owls are birds.,implicature,some,,true,false
+4,Some ants are insects.,implicature,some,,true,false
+5,Some cats are mammals.,implicature,some,,true,false
+1,Most sharks are fish.,implicature,most,,true,false
+2,Most horses are mammals.,implicature,most,,true,false
+3,Most snakes are reptiles.,implicature,most,,true,false
+4,Most pigeons are birds.,implicature,most,,true,false
+5,Most elephants are mammals.,implicature,most,,true,false
+1,Modern cars have three wheels.,implicature,number,,true,false
+2,A human hand has two fingers.,implicature,number,,true,false
+3,The universe contains three planets.,implicature,number,,true,false
+4,A year has 245 days.,implicature,number,,true,false
+5,Monkeys have three bones.,implicature,number,,true,false
+1,All books have pages.,true,all,,true,false
+2,All hammers have a handle.,true,all,,true,false
+3,All robins have wings.,true,all,,true,false
+4,All elephants have trunks.,true,all,,true,false
+5,All refrigerators have doors.,true,all,,true,false
+6,All salmon are fish.,true,all,,true,false
+7,All crocodiles are reptiles.,true,all,,true,false
+8,All eagles are birds.,true,all,,true,false
+9,All dogs are mammals.,true,all,,true,false
+10,All beetles are insects.,true,all,,true,false
+1,Some flowers are yellow.,true,some,,true,false
+2,Some dresses have pockets.,true,some,,true,false
+3,Some tools are made of wood..,true,some,,true,false
+4,Some children are blond.,true,some,,true,false
+5,Some drinks are made from chocolate.,true,some,,true,false
+1,Most people know their parents.,true,most,,true,false
+2,Most birds can fly.,true,most,,true,false
+3,Most days in a year are working days.,true,most,,true,false
+4,Most people know more than one language.,true,most,,true,false
+5,Most horses are tame.,true,most,,true,false
+1,A normal motorcycle has two wheels.,true,number,,true,false
+2,Monkeys have five fingers on each hand.,true,number,,true,false
+3,A week has seven days.,true,number,,true,false
+4,Cats have four legs.,true,number,,true,false
+5,Humans have two eyes.,true,number,,true,false
