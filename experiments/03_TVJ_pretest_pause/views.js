@@ -22,17 +22,6 @@ const intro = babeViews.intro({
     buttonText: 'begin the experiment'
 });
 
-const instructions = babeViews.instructions({
-    trials: 1,
-    name: 'instrucions',
-    title: 'General Instructions',
-    text: `This is a sample instructions view.
-            <br />
-            <br />
-            Tell your participants what they are to do here.`,
-    buttonText: 'go to forced choice trials'
-});
-
 const instructionsPostTest = babeViews.instructions({
     trials: 1,
     name: 'instructions_post_test',
@@ -96,7 +85,7 @@ const instructions_part2 = babeViews.instructions({
     trials: 1,
     name: 'instructions_part2',
     title: 'Instructions',
-    text: 'You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. Just base your decisions on your general knowledge. If you are unsure about how to evaluate a sentence, give us your best guess.'
+    text: 'You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. You can answer by pressing buttons labeled "true" and "false". But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false.'
 });
 
 const instructions_color_blindness = babeViews.instructions({
@@ -106,18 +95,10 @@ const instructions_color_blindness = babeViews.instructions({
     text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
 });
 
-const truth_value_judgements = babeViews.forcedChoice({
-    trials: main_trials.truth_value_judgements.length,
-    name: "truth_value_judgements",
-    trial_type: "truth_value_judgements",
-    title: "True or false?",
-    data: _.shuffle(main_trials.truth_value_judgements)
-})
-
 const comprehension_test = babeViews.forcedChoice({
     trials: practice_trials.comprehension_checks.length,
     name: "comprehension_test",
-    trial_type: "comprehension_test", 
+    trial_type: "comprehension_test",
     title: "Comprehension checks",
     data: practice_trials.comprehension_checks
 })

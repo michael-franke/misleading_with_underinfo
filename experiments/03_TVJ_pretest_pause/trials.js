@@ -838,6 +838,7 @@ const main_trials = {
             ]
         }
     ],
+
     truth_value_judgements:
     [
  {
