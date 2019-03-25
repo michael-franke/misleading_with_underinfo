@@ -70,11 +70,10 @@ const sentence_completion_type = function(config) {
             const answer_category6 = config.data[CT].answer_category[completions_shuffle_index[5]];
             const viewTemplate = `<div class='babe-view'>
             <h1 class='babe-view-title'>${this.title}</h1>
-            <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;'>${QUD}</p>
-            <div class='babe-view-stimulus-container-custom'>
+            <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;' id='QUD_text_to_hide'>${QUD}</p>
+            <div class='babe-view-stimulus-container-custom' id='stimulus_container_to_hide'>
                 <div class='babe-view-stimulus babe-nodisplay'></div>
             </div>
-
         </div>`;
 
         //     const answerContainerElem = `<div class='babe-view-answer-container babe-response-dropdown'>
@@ -94,7 +93,7 @@ const sentence_completion_type = function(config) {
         // </div>`;
 
             const answerContainerElem = `
-                    <div class='babe-view-answer-container'>
+                    <div class='babe-view-answer-container' id='answer_container_to_hide'>
                         <p class='babe-view-question' style='background-color:lightgray;font-size:120%;'><strong>${sentence_fragment} ... </strong></p>
                         <table style="margin: 0px auto;">
                          <tr>
@@ -126,7 +125,13 @@ const sentence_completion_type = function(config) {
                            </td>
                          </tr>
                         </table>
-                    </div>`;
+                    </div>
+                    <div class='bla' id='wait_container' style='display:none;'>
+                      <p class='babe-view-question'>
+                        please wait for the other player to make a selection
+                      </p>
+                    </div>
+    `;
 
 
             $("#main").html(viewTemplate);
@@ -165,7 +170,39 @@ const sentence_completion_type = function(config) {
                     }
 
                     babe.trial_data.push(trial_data);
-                    babe.findNextView();
+
+                    // hide containers
+                    var x = document.getElementById("stimulus_container_to_hide");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+                    var x = document.getElementById("answer_container_to_hide");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+                    var x = document.getElementById("QUD_text_to_hide");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+                    // show "please wait container"
+                    var x = document.getElementById("wait_container");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+
+                    var waiting_time = CT < 5 ? 4500 : _.shuffle([2500, 3000, 4500])[1];
+                    console.log(waiting_time);
+                    setTimeout(babe.findNextView,
+                               waiting_time);
+
                 });
             };
 
@@ -297,8 +334,8 @@ const slider_rating_custom_type = function(config) {
 }
 
 const sentence_completion = sentence_completion_type({
-    // trials: 2,
-    trials: main_trials.sentence_completion.length,
+    trials: 5,
+    // trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
     data: _.shuffle(main_trials.sentence_completion)

@@ -1,27 +1,28 @@
-// initialises a babe experiment with babeInit
+// initialises a babe experiment with babeinit
 $("document").ready(function() {
     // prevent scrolling when space is pressed
     window.onkeydown = function(e) {
-        if (e.keyCode == 32 && e.target == document.body) {
-            e.preventDefault();
+        if (e.keycode == 32 && e.target == document.body) {
+            e.preventdefault();
         }
     };
 
-    // calls babeInit
+    // calls babeinit
     babeInit({
         views_seq: [
             intro,
             instructions_general,
-            instructions_color_blindness,
-            color_blindness_test,
+            // instructions_color_blindness,
+            // color_blindness_test,
             instructions_part1,
-            comprehension_test,
+            // comprehension_test,
+            // babeUtils.views.loop([sentence_completion,instructions_self_assessment],3),
             sentence_completion,
-            instructions_self_assessment,
-            performance_rating,
-            instructions_part2,
-            truth_value_judgements,
-            instructionsPostTest,
+            // instructions_self_assessment,
+            // performance_rating,
+            // instructions_part2,
+            // truth_value_judgements,
+            // instructionsPostTest,
             post_test,
             thanks,
         ],
