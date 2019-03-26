@@ -12,16 +12,28 @@ const waiting_custom = function(config) {
                 <section class="babe-text-container">
                     <p class="babe-view-question">${text}</p>
                 </section>
-
+                <div id='container_to_be_revealed' style="display:none;">
                 <section class="babe-text-container">
-                    <p class="babe-view-question"> <strong>Pairing successful!</stong> </p>
+                    <p class="babe-view-question"> <strong>Pairing successful!</strong> </p>
                 </section>
                 <button id="next" class='babe-view-button'>${
                     this.button
                 }</button>
+                </div>
             </div>`;
 
             $("#main").html(viewTemplate);
+
+            setTimeout(function(){
+                // show "please wait container"
+                var x = document.getElementById("container_to_be_revealed");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }, 9000);
+
 
             // moves to the next view
             $("#next").on("click", function() {
@@ -236,7 +248,6 @@ const sentence_completion_type = function(config) {
                     }
 
                     var waiting_time = CT < 5 ? 4500 : _.shuffle([2500, 3000, 4500])[1];
-                    console.log(waiting_time);
                     setTimeout(babe.findNextView,
                                waiting_time);
 
