@@ -91,14 +91,7 @@ const instructions_general = babeViews.instructions({
     trials: 1,
     name: 'instructions_general',
     title: 'General instructions',
-    text: 'This experiment has two parts. It will last approximately XXX minutes. We will start with a color blindness test. yadda yadda.'
-});
-
-const instructions_part2 = babeViews.instructions({
-    trials: 1,
-    name: 'instructions_part2',
-    title: 'Instructions Part 2',
-    text: 'We are about to enter the second part of this experiment.<br><br>You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. Just base your decisions on your general knowledge. If you are unsure about how to evaluate a sentence, give us your best guess.'
+    text: '<strong>This experiment will last approximately 15 minutes in total</strong>. There are two parts. The first part is an interactive game where you will be playing with another human player, who will also be recruited from Prolific. The second part will be performed alone, but it is equally important. <br><br> Since <strong>this experiment involves playing together with another human player</strong>, we need to ask you for some patience. It may take some time for another player to be found and paired with you (on average about  1 minute) and it may take time for the other player to make decisions. Also, for your co-player\'s benefit, it would be nice for you to: <br> * do not abandon the experiment unnecessarily beyond this point, <br> * read the instructions carefully, <br> * play the game (introduced later) as best as you can, and <br> * finish the whole experiment eventually. <br> <br> Thank you very much for your understanding!'
 });
 
 const instructions_color_blindness = babeViews.instructions({
@@ -106,6 +99,13 @@ const instructions_color_blindness = babeViews.instructions({
     name: 'instructions_color_blindness',
     title: 'Color Blindness Test',
     text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
+});
+
+const instructions_part2 = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_part2',
+    title: 'Instructions Part 2',
+    text: 'We are about to enter the second part of this experiment.<br><br>You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. Just base your decisions on your general knowledge. If you are unsure about how to evaluate a sentence, give us your best guess.'
 });
 
 const comprehension_test = babeViews.forcedChoice({
