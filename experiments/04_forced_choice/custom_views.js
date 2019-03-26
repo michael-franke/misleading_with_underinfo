@@ -7,9 +7,9 @@ const instructions_custom = function(config) {
 
             const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
 
-            const cooperative_description = "Part 1 is a <strong>cooperative game</strong> which you will play with another human player. You will play the role of the <strong>describer</strong>. The other player is the <strong>guesser</strong>.  <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser sees the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. Your goal is to <strong>complete a description of the bonus card by selecting the final word of a sentence</strong>, in such a way as <strong>to enable the guesser to guess the bonus card</strong>. The guesser knows that this is a cooperative game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like, but remember that you're helping the guesser, so your goal is to make them find the bonus card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser managed to click on the bonus card after reading your description as a successful round. At the end of the experiment you will receive a bonus payment based on the number of rounds you played successfully.";
+            const cooperative_description = "Part 1 is a <strong>cooperative game</strong> which you will play with another human player. You will play the role of the <strong>describer</strong>. The other player is the <strong>guesser</strong>.  <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser sees the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. Your goal is to <strong>complete a description of the bonus card by selecting the final word of a sentence</strong>, in such a way as <strong>to enable the guesser to guess the bonus card</strong>. The guesser knows that this is a cooperative game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're helping the guesser, so your goal is to make them find the bonus card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser managed to click on the bonus card after reading your description as a successful round. <strong>At the end of the experiment you will receive a bonus payment based on the number of rounds you played successfully.</strong> You will not receive feedback on the number of successful rounds during the game.";
 
-            const competitive_description =  "Part 1 a <strong>competitive game</strong> which you will play with another human player: a describer and a guesser. <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser sees the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. The guesser wins if they guess the bonus card, and you win if they do not. Your goal is therefore to <strong>complete a description of the bonus card by selecting the final word of a sentence</strong>, in such a way as <strong>to make the guesser choose the other card, not the bonus card</strong>. The guesser knows that this is a competitive game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like, but remember that you're trying to mislead the guesser, so your goal is to make them not choose the bonus card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser did not click on the bonus card after reading your description as a successful round for you. At the end of the experiment you will receive a bonus payment based on the number of rounds you play successfully.";
+            const competitive_description =  "Part 1 a <strong>competitive game</strong> which you will play with another human player: a describer and a guesser. <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser sees the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. The guesser wins if they guess the bonus card, and you win if they do not. Your goal is therefore to <strong>complete a description of the bonus card by selecting the final word of a sentence</strong>, in such a way as <strong>to make the guesser choose the other card, not the bonus card</strong>. The guesser knows that this is a competitive game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're trying to mislead the guesser, so your goal is to make them not choose the bonus card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser did not click on the bonus card after reading your description as a successful round for you. <strong>At the end of the experiment you will receive a bonus payment based on the number of rounds you play successfully.</strong> You will not receive feedback on the number of successful rounds during the game.";
 
             console.log("This is a run of the " + between_subjects_condition + " condition.")
 
@@ -235,8 +235,11 @@ const slider_rating_custom_type = function(config) {
         title: babeUtils.view.setter.title(config.title, ""),
         render: function(CT, babe) {
             let startingTime;
+            const cooperative_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think that the guesser selected the bonus card?</strong>";
+            const competitive_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think that the guesser did <i>NOT</i> select the bonus card?</strong>";
+            const current_question = babe.global_data.condition == "cooperative" ? cooperative_question : competitive_question;
             const question = babeUtils.view.setter.question(
-                config.data[CT].question
+                current_question
             );
             const QUD = babeUtils.view.setter.QUD(config.data[CT].QUD);
             const option1 = config.data[CT].optionLeft;
@@ -440,7 +443,7 @@ const instructions_part1 = instructions_custom({
     trials: 1,
     name: 'instructions part 1',
     title: 'Instructions for Part 1',
-    buttonText: 'start training phase'
+    buttonText: 'continue'
 });
 
 const performance_rating = slider_rating_custom_type({
@@ -451,7 +454,7 @@ const performance_rating = slider_rating_custom_type({
     data: [{
         optionLeft: "0%",
         optionRight: "100%",
-        question: "Given the descriptions you selected, what percentage of the time do you think the guesser will be able to select the bonus card?"
+        question: "NOT USED FROM HERE ::: SET DYNAMICALLY IN THE VIEW ITSELF"
     }]
 });
 
