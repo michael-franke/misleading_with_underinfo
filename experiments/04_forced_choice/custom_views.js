@@ -453,8 +453,7 @@ const performance_rating = slider_rating_custom_type({
     title: "Estimate your own performance",
     data: [{
         optionLeft: "0%",
-        optionRight: "100%",
-        question: "NOT USED FROM HERE ::: SET DYNAMICALLY IN THE VIEW ITSELF"
+        optionRight: "100%"
     }]
 });
 
