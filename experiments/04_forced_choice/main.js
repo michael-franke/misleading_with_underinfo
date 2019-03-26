@@ -15,6 +15,7 @@ $("document").ready(function() {
             // instructions_color_blindness,
             // color_blindness_test,
             instructions_part1,
+            wait_for_player,
             // comprehension_test,
             // sentence_completion,
             instructions_self_assessment,

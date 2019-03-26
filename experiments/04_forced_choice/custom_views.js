@@ -1,5 +1,42 @@
+const waiting_custom = function(config) {
+    const waiting_custom = {
+        name: config.name,
+        title: babeUtils.view.setter.title(config.title, "Instructions"),
+        button: babeUtils.view.setter.buttonText(config.buttonText),
+        render: function(CT, babe) {
+
+            const text = "Please wait for the other player to join you. <br> (Average waiting time is about 1 minute.)";
+
+            const viewTemplate = `<div class="babe-view">
+                <h1 class='babe-view-title'>${this.title}</h1>
+                <section class="babe-text-container">
+                    <p class="babe-view-question">${text}</p>
+                </section>
+
+                <section class="babe-text-container">
+                    <p class="babe-view-question"> <strong>Pairing successful!</stong> </p>
+                </section>
+                <button id="next" class='babe-view-button'>${
+                    this.button
+                }</button>
+            </div>`;
+
+            $("#main").html(viewTemplate);
+
+            // moves to the next view
+            $("#next").on("click", function() {
+                babe.findNextView();
+            });
+        },
+        CT: 0,
+        trials: config.trials
+    };
+
+    return waiting_custom;
+};
+
 const instructions_custom = function(config) {
-    const instructions_custom = {
+        const instructions_custom = {
         name: config.name,
         title: babeUtils.view.setter.title(config.title, "Instructions"),
         button: babeUtils.view.setter.buttonText(config.buttonText),
@@ -40,7 +77,7 @@ const instructions_custom = function(config) {
     };
 
     return instructions_custom;
-};
+}
 
 
 const sentence_completion_type = function(config) {
@@ -465,4 +502,11 @@ const truth_value_judgements = forcedChoice_pause({
     title: "True or false?",
     data: _.shuffle(main_trials.truth_value_judgements),
     stim_duration: 5000
+})
+
+const wait_for_player = waiting_custom({
+    trials: 1,
+    name: 'waiting',
+    title: "Waiting",
+    buttonText: 'start play'
 })
