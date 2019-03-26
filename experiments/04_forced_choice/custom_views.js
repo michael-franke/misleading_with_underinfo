@@ -456,8 +456,8 @@ const performance_rating = slider_rating_custom_type({
 });
 
 const truth_value_judgements = forcedChoice_pause({
-    // trials: 2,
-    trials: main_trials.truth_value_judgements.length,
+    trials: 2,
+    // trials: main_trials.truth_value_judgements.length,
     name: "truth_value_judgements",
     trial_type: "truth_value_judgements",
     title: "True or false?",

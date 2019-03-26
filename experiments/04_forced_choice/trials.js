@@ -1380,6 +1380,6 @@ const main_trials = {
        "option1": true,
        "option2": false
      }
-     
+    ]  
 }
 

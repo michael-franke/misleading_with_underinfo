@@ -21,7 +21,7 @@ $("document").ready(function() {
             // instructions_self_assessment,
             // performance_rating,
             // instructions_part2,
-            // truth_value_judgements,
+            truth_value_judgements,
             // instructionsPostTest,
             post_test,
             thanks,
