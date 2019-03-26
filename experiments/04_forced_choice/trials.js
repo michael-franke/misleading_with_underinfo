@@ -838,84 +838,548 @@ const main_trials = {
             ]
         }
     ],
-    truth_value_judgements: [
-        {
-            condition: "presupposition",
-            question: "The current King of Germany is called Friedrich.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "presupposition",
-            question: "Switzerland left the European Union.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "presupposition",
-            question: "Bob Dylan won a Nobel prize again.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "implicature",
-            question: "Some elephants are mammals.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "implicature",
-            question: "Most flies are insects.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "implicature",
-            question: "Modern cars usually have three wheels.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "implicature",
-            question: "Most humans have three fingers on each hand.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "control_true",
-            question: "The current President of the United States is Donald Trump.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "control_true",
-            question: "All mice are mammals.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "control_true",
-            question: "Not all mosquitos carry malaria.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        },
-        {
-            condition: "control_true",
-            question: "All trees have roots.",
-            QUD: "Is this sentence true or false?",
-            option1: "false",
-            option2: "true"
-        }
-    ]
+    truth_value_judgements:
+    [
+     {
+       "sentence_nr": 1,
+       "question": "All birds have telephones.",
+       "condition": "bizarre",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "All crayons have noses.",
+       "condition": "bizarre",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "All chairs tell time.",
+       "condition": "bizarre",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "All garages sing.",
+       "condition": "bizarre",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "All couches have windows.",
+       "condition": "bizarre",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "Some fish are made of leaves.",
+       "condition": "bizarre",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Some fruits have computers.",
+       "condition": "bizarre",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "Some books are good to eat.",
+       "condition": "bizarre",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "Some stores are made of bubbles.",
+       "condition": "bizarre",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Some children are made of feathers.",
+       "condition": "bizarre",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "Most elephants have glasses.",
+       "condition": "bizarre",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Most chairs are hungry.",
+       "condition": "bizarre",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "Most motorcycles like music.",
+       "condition": "bizarre",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "Most sofas are friendly.",
+       "condition": "bizarre",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Most tigers are literate.",
+       "condition": "bizarre",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "The moon has two ears.",
+       "condition": "bizarre",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Guitars have four legs.",
+       "condition": "bizarre",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "Forests last three nights.",
+       "condition": "bizarre",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "A week consists of five people.",
+       "condition": "bizarre",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "The earth owns seven books.",
+       "condition": "bizarre",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "Some trouts are fish.",
+       "condition": "implicature",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Some lizards are reptiles.",
+       "condition": "implicature",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "Some owls are birds.",
+       "condition": "implicature",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "Some ants are insects.",
+       "condition": "implicature",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Some cats are mammals.",
+       "condition": "implicature",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "Most sharks are fish.",
+       "condition": "implicature",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Most horses are mammals.",
+       "condition": "implicature",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "Most snakes are reptiles.",
+       "condition": "implicature",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "Most pigeons are birds.",
+       "condition": "implicature",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Most elephants are mammals.",
+       "condition": "implicature",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "Modern cars have three wheels.",
+       "condition": "implicature",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "A human hand has two fingers.",
+       "condition": "implicature",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "The universe contains three planets.",
+       "condition": "implicature",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "A year has 245 days.",
+       "condition": "implicature",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Monkeys have three bones.",
+       "condition": "implicature",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "All books have pages.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "All hammers have a handle.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "All robins have wings.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "All elephants have trunks.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "All refrigerators have doors.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 6,
+       "question": "All salmon are fish.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 7,
+       "question": "All crocodiles are reptiles.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 8,
+       "question": "All eagles are birds.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 9,
+       "question": "All dogs are mammals.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 10,
+       "question": "All beetles are insects.",
+       "condition": "true",
+       "trigger": "all",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "Some flowers are yellow.",
+       "condition": "true",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Some dresses have pockets.",
+       "condition": "true",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "Some tools are made of wood..",
+       "condition": "true",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "Some children are blond.",
+       "condition": "true",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Some drinks are made from chocolate.",
+       "condition": "true",
+       "trigger": "some",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "Most people know their parents.",
+       "condition": "true",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Most birds can fly.",
+       "condition": "true",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "Most days in a year are working days.",
+       "condition": "true",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "Most people know more than one language.",
+       "condition": "true",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Most horses are tame.",
+       "condition": "true",
+       "trigger": "most",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 1,
+       "question": "A normal motorcycle has two wheels.",
+       "condition": "true",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 2,
+       "question": "Monkeys have five fingers on each hand.",
+       "condition": "true",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 3,
+       "question": "A week has seven days.",
+       "condition": "true",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 4,
+       "question": "Cats have four legs.",
+       "condition": "true",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     },
+     {
+       "sentence_nr": 5,
+       "question": "Humans have two eyes.",
+       "condition": "true",
+       "trigger": "number",
+       "QUD": "",
+       "option1": true,
+       "option2": false
+     }
+     
 }
 

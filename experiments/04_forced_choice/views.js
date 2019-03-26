@@ -108,14 +108,6 @@ const instructions_color_blindness = babeViews.instructions({
     text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
 });
 
-const truth_value_judgements = babeViews.forcedChoice({
-    trials: main_trials.truth_value_judgements.length,
-    name: "truth_value_judgements",
-    trial_type: "truth_value_judgements",
-    title: "True or false?",
-    data: _.shuffle(main_trials.truth_value_judgements)
-})
-
 const comprehension_test = babeViews.forcedChoice({
     trials: practice_trials.comprehension_checks.length,
     name: "comprehension_test",

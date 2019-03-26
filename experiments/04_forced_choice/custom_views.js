@@ -333,8 +333,103 @@ const slider_rating_custom_type = function(config) {
     return sliderRating;
 }
 
+const forcedChoice_pause = function(config) {
+    babeUtils.view.inspector.missingData(config, "forced choice");
+    babeUtils.view.inspector.params(config, "forced choice");
+    const forcedChoice = {
+        name: config.name,
+        title: babeUtils.view.setter.title(config.title, ""),
+        render: function(CT, babe) {
+            let startingTime;
+            const question = babeUtils.view.setter.question(
+                config.data[CT].question
+            );
+            const QUD = babeUtils.view.setter.QUD(config.data[CT].QUD);
+            const option1 = config.data[CT].option1;
+            const option2 = config.data[CT].option2;
+            const viewTemplate = `<div class='babe-view'>
+                <h1 class='babe-view-title'>${this.title}</h1>
+                <p class='babe-view-question babe-view-qud' style='strong'>${question}</p>
+                <div class='babe-view-stimulus-container'>
+                    <div class='babe-view-stimulus babe-nodisplay'></div>
+                </div>
+            </div>`;
+
+            $("#main").html(viewTemplate);
+
+            const answerContainerElem = `<div class='babe-view-answer-container'>
+                <label for='o1' class='babe-response-buttons'>${option1}</label>
+                <input type='radio' name='answer' id='o1' value=${option1} />
+                <input type='radio' name='answer' id='o2' value=${option2} />
+                <label for='o2' class='babe-response-buttons'>${option2}</label>
+            </div>`;
+
+            const enableResponse = function() {
+                $(".babe-view").append(answerContainerElem);
+
+                // attaches an event listener to the yes / no radio inputs
+                // when an input is selected a response property with a value equal
+                // to the answer is added to the trial object
+                // as well as a readingTimes property with value
+                $("input[name=answer]").on("change", function() {
+                    const RT = Date.now() - startingTime;
+                    const trial_data = {
+                        trial_type: config.trial_type,
+                        trial_number: CT + 1,
+                        response: $("input[name=answer]:checked").val(),
+                        RT: RT
+                    };
+
+                    for (let prop in config.data[CT]) {
+                        if (config.data[CT].hasOwnProperty(prop)) {
+                            trial_data[prop] = config.data[CT][prop];
+                        }
+                    }
+
+                    if (config.data[CT].picture !== undefined) {
+                        trial_data.picture = config.data[CT].picture;
+                    }
+
+                    if (config.data[CT].canvas !== undefined) {
+                        for (let prop in config.data[CT].canvas) {
+                            if (
+                                config.data[CT].canvas.hasOwnProperty(prop)
+                            ) {
+                                trial_data[prop] =
+                                    config.data[CT].canvas[prop];
+                            }
+                        }
+                    }
+
+                    babe.trial_data.push(trial_data);
+                    babe.findNextView();
+                });
+            };
+
+            startingTime = Date.now();
+
+            // creates the DOM of the trial view
+            babeUtils.view.createTrialDOM(
+                {
+                    pause: config.pause,
+                    fix_duration: config.fix_duration,
+                    stim_duration: config.stim_duration,
+                    data: config.data[CT],
+                    evts: config.hook,
+                    view: "forcedChoice"
+                },
+                enableResponse
+            );
+        },
+        CT: 0,
+        trials: config.trials
+    };
+
+    return forcedChoice;
+}
+
 const sentence_completion = sentence_completion_type({
-    trials: 5,
+    trials: 2,
     // trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
@@ -359,3 +454,13 @@ const performance_rating = slider_rating_custom_type({
         question: "Given the descriptions you selected, what percentage of the time do you think the guesser will be able to select the bonus card?"
     }]
 });
+
+const truth_value_judgements = forcedChoice_pause({
+    // trials: 2,
+    trials: main_trials.truth_value_judgements.length,
+    name: "truth_value_judgements",
+    trial_type: "truth_value_judgements",
+    title: "True or false?",
+    data: _.shuffle(main_trials.truth_value_judgements),
+    stim_duration: 5000
+})
