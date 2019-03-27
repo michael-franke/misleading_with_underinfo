@@ -57,8 +57,8 @@ const instructions_part2 = babeViews.instructions({
 const instructionsPostTest = babeViews.instructions({
     trials: 1,
     name: 'instructions_post_test',
-    title: 'Post Questionnaire',
-    text: `Thank you so much! The experimental parts are over. Please finish the experiment by telling us a bit more about yourself if you are so kind.`
+    title: 'Almost done',
+    text: `Thank you so much for your participation! The experimental parts are over. Please finish the experiment by telling us a bit more about yourself if you are so kind. <br> <br> Before you proceed, we need to tell you that this experiment used a technique called <strong>deliberate deceit</strong>. You have not actually been playing against a human participant. But it was crucial for this experiment that you temporarily believed that you did. We apologize for "playing tricks" in this way and sincerely hope you are not offended. In order to show our respect for your kind help, we will pay the maximum promised bonus of 0.75 pounds irrespective of your answers in part 1.`
 });
 
 // the post questionnaire can be translated
