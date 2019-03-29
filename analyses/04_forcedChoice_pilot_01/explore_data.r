@@ -3,16 +3,20 @@ library(tidyverse)
 d = read_csv('data/04_forcedChoice_pilot_01/data_raw.csv') %>% 
   filter(! prolific_id %in% c("Nausicaa", "test by MF"))
 
+# bonus payment string
+
+# tibble(string = d %>% pull(prolific_id) %>% unique() %>% paste0(",0.75"))
+
 # check comments
 d$comments %>% unique
 
 # check colorblindness
 color_blindness_failures = filter(d, trial_type == "color_blindness_test") %>%
-  select(prolific_id, correct, response) %>% 
-  mutate(correct = ifelse(correct == response,1,0)) %>% 
-  group_by(prolific_id) %>% 
-  summarize(mean_correct = mean(correct)) %>% 
-  filter(mean_correct < 1) %>% 
+  select(prolific_id, correct, response) %>%
+  mutate(correct = ifelse(correct == response,1,0)) %>%
+  group_by(prolific_id) %>%
+  summarize(mean_correct = mean(correct)) %>%
+  filter(mean_correct < 1) %>%
   pull(prolific_id)
 
 d = filter(d, ! prolific_id %in% color_blindness_failures)
@@ -21,7 +25,7 @@ message("Number of failures on color blindness test: ", length(color_blindness_f
 
 # comprehension checks
 
-filter(d, trial_type == "comprehension_test") %>%  View()
+filter(d, trial_type == "comprehension_test") 
 
 # sentence completion
 

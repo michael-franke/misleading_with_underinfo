@@ -41,7 +41,7 @@ const main_trials = {
     ],
 
     sentence_completion: [
-        // condition ::: MOST
+        // condition ::: NUMBER
         {
             condition: "number",
             number: "01",

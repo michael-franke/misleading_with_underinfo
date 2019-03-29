@@ -1,0 +1,114 @@
+---
+title: "Report on 1st pilot of main task"
+author: "Michael"
+date: "3/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE, message = FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+d = read_csv('../../data/04_forcedChoice_pilot_01/data_raw.csv') %>% 
+  filter(! prolific_id %in% c("Nausicaa", "test by MF"))
+```
+
+## Data collection and design
+
+40 participants were drafted on Prolific to complete first the card-playing game, then the TVJ task. Each participant was paid 1.75 pounds for compensation plus 0.75 pounds bonus. The bonus was announced to be dependent on performance in the card-playing task, but evenutally paid to everyone. The average time spent on the whole experiment (including reading instructions, and completing the post-experiment survey) was `r d$timeSpent %>% mean %>% round(2)` minutes.
+
+The experiment can be examined [here](https://michael-franke.github.io/misleading_with_underinfo/experiments/04_04_forced_choice/index.html).
+
+## Data cleaning
+
+We will first remove anyone who did not answer all the color blindness questions right.
+
+```{r}
+# check colorblindness
+color_blindness_failures = filter(d, trial_type == "color_blindness_test") %>%
+  select(prolific_id, correct, response) %>% 
+  mutate(correct = ifelse(correct == response,1,0)) %>% 
+  group_by(prolific_id) %>% 
+  summarize(mean_correct = mean(correct)) %>% 
+  filter(mean_correct < 1) %>% 
+  pull(prolific_id)
+
+d = filter(d, ! prolific_id %in% color_blindness_failures)
+
+message("Number of failures on color blindness test: ", length(color_blindness_failures))
+```
+
+No other data cleaning was carried out so far (e.g., in terms of comprehension checks or similar).
+
+## Results
+
+Participants were randomly assigned to cooperative/competitive conditions. From the remaining participants `r d %>% filter(glb_condition == "competitive") %>% pull(prolific_id) %>% unique %>% length` were assigned to the competitive condition, `r d %>% filter(glb_condition == "cooperative") %>% pull(prolific_id) %>% unique %>% length` to the cooperative condition.
+
+### Self-assessment performance rating
+
+Here is how participants rated their own success, split by competitive vs cooperative condition:
+
+```{r, message = FALSE}
+filter(d, trial_type == "performance_rating") %>% 
+  mutate(response = as.numeric(response)) %>% 
+  ggplot(aes(x = response, fill = glb_condition)) + geom_histogram()
+```
+
+The mean performance rating for conditions are:
+
+```{r}
+filter(d, trial_type == "performance_rating") %>% 
+  mutate(response = as.numeric(response)) %>% 
+  group_by(glb_condition) %>% 
+  summarize(mean_rating = mean(response) %>% round(2))
+```
+
+### Sentence completion task
+
+Here are counts for the choices in the sentence completion task (the "interactive" card game). Remember that "pragmatic_bonus" is a choice of message that is uniquely referring to the bonus card when we take the implicature into account, while "pragmatic_noBonus" refers uniquely to the other card when we take the implicature into account.
+
+```{r}
+filter(d, trial_type == "sentence_completion", ! condition %in% c("all", "none")) %>% 
+  select(prolific_id, condition, glb_condition, condition, response) %>% 
+  ggplot(aes(x = response)) + geom_bar() +
+  facet_grid(glb_condition~condition) + coord_flip()
+```
+
+We would like to see a flip from preferred choice of "pragmatic_bonus" in the cooperative condition to a preferred choice of "pragmatic_noBonus" in the competitive condition. Unfortunately, we only see this in the /ad hoc/ and /number/ conditions, not in the /most/ condition, where we see at best a tendency to the reverse pattern.
+
+### Truth value judgements
+
+Here is the distribution of the proportion of semantic (true) to pragmatic (false) answers for each participant:
+
+```{r, warning = FALSE}
+d_tvj = filter(d, trial_type == "truth_value_judgements") %>% 
+  mutate(response = ifelse(response == "true", 1, 0))
+
+d_summary_id = d_tvj %>% group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% arrange(submission_id) %>% 
+  filter(condition == "implicature") 
+
+d_summary_id_imp = d_summary_id %>% filter(trigger != "number") %>% 
+  group_by(submission_id) %>% 
+  summarize(mean_true = mean(mean_true)) 
+
+d_summary_id_imp %>% 
+  ggplot(aes(x = mean_true)) + geom_histogram()
+```
+
+If we consider anyone with a mean proportion < .5 on /most/ and /ad hoc/ items a pragmatic respsonder we have `r sum(d_summary_id_imp$mean_true < 0.5)` pragmatic responders.
+
+### Sentence completion data from pragmatic responders
+
+Looking only at the pragmatic responders, the counts for choices in the first sentence completion part are:
+
+```{r}
+filter(d, submission_id %in% (filter(d_summary_id_imp, mean_true < 0.5) %>% pull(submission_id ))) %>% 
+  filter(trial_type == "sentence_completion", ! condition %in% c("all", "none")) %>% 
+  select(prolific_id, condition, glb_condition, condition, response) %>% 
+  ggplot(aes(x = response)) + geom_bar() +
+  facet_grid(glb_condition~condition) + coord_flip()
+```
+
+Interestingly, most pragmatic responders came from the competitive condition. It might be that this is causally relevant. Most importantly, however, the pragmatic responders in the competitive condition predominantly chose "pragmatic_bonus" to complete sentences with /most/.
+
+I think we should reconsider the use of "most" and use "some" instead.
