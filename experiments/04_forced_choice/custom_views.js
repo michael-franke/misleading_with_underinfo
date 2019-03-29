@@ -512,7 +512,7 @@ const truth_value_judgements = forcedChoice_pause({
     trial_type: "truth_value_judgements",
     title: "True or false?",
     data: _.shuffle(main_trials.truth_value_judgements),
-    stim_duration: 4000
+    stim_duration: 5000
 })
 
 const wait_for_player = waiting_custom({

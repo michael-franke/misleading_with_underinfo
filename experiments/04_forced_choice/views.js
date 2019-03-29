@@ -51,7 +51,7 @@ const instructions_part2 = babeViews.instructions({
     trials: 1,
     name: 'instructions_part2',
     title: 'Instructions Part 2',
-    text: 'We are about to enter the second part of this experiment. <br><br> You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. You can answer by pressing buttons labeled "true" and "false". But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false.'
+    text: 'We are about to enter the second part of this experiment. <br><br> You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. You can answer by pressing buttons labeled "true" and "false". But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false. <strong>Please do not take this task lightly! It is very important for us that you think about your choice with care.</strong>'
 });
 
 const instructionsPostTest = babeViews.instructions({
