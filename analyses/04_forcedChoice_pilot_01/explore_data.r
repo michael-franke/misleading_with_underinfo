@@ -5,7 +5,8 @@ d = read_csv('data/04_forcedChoice_pilot_01/data_raw.csv') %>%
 
 # bonus payment string
 
-# tibble(string = d %>% pull(prolific_id) %>% unique() %>% paste0(",0.75"))
+tibble(string = filter(d, startTime > 1.5538e+12) %>% pull(prolific_id) %>% unique() %>% paste0(",0.75")) %>% 
+  write_csv("~/Desktop/bonus_payments.csv")
 
 # check comments
 d$comments %>% unique
