@@ -32,12 +32,34 @@ const color_blindness_test = babeViews.textboxInput({
     data: _.shuffle(main_trials.color_blindness_test)
 });
 
+const instructions_part1 = instructions_custom({
+    trials: 1,
+    name: 'instructions part 1',
+    title: 'Instructions for Part 1',
+    buttonText: 'continue'
+});
+
+const sentence_completion = sentence_completion_type({
+    // trials: 2,
+    trials: main_trials.sentence_completion.length,
+    name: 'sentence_completion',
+    trial_type: 'sentence_completion',
+    data: _.shuffle(main_trials.sentence_completion)
+});
+
 const comprehension_test = babeViews.forcedChoice({
     trials: practice_trials.comprehension_checks.length,
     name: "comprehension_test",
     trial_type: "comprehension_test", 
     title: "Comprehension checks",
     data: practice_trials.comprehension_checks
+})
+
+const wait_for_player = waiting_custom({
+    trials: 1,
+    name: 'waiting',
+    title: "Waiting",
+    buttonText: 'start play'
 })
 
 const instructions_self_assessment = babeViews.instructions({
@@ -47,12 +69,33 @@ const instructions_self_assessment = babeViews.instructions({
     text: 'Before we move on to part 2, we would like to ask you one simple question, about how you estimate your own performance so far.'
 });
 
+const performance_rating = slider_rating_custom_type({
+    trials: 1,
+    name: 'performance_rating',
+    trial_type: 'performance_rating',
+    title: "Estimate your own performance",
+    data: [{
+        optionLeft: "0%",
+        optionRight: "100%"
+    }]
+});
+
 const instructions_part2 = babeViews.instructions({
     trials: 1,
     name: 'instructions_part2',
     title: 'Instructions Part 2',
     text: 'We are about to enter the second part of this experiment. <br><br> You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. You can answer by pressing buttons labeled "true" and "false". But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false. <strong>Please do not take this task lightly! It is very important for us that you think about your choice with care.</strong>'
 });
+
+const truth_value_judgements = forcedChoice_pause({
+    // trials: 2,
+    trials: main_trials.truth_value_judgements.length,
+    name: "truth_value_judgements",
+    trial_type: "truth_value_judgements",
+    title: "True or false?",
+    data: _.shuffle(main_trials.truth_value_judgements),
+    stim_duration: 5000
+})
 
 const instructionsPostTest = babeViews.instructions({
     trials: 1,
@@ -76,3 +119,5 @@ const thanks = babeViews.thanks({
     title: 'Thank you for taking part in this experiment!',
     prolificConfirmText: 'Press the button'
 });
+
+

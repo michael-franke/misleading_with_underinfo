@@ -173,12 +173,12 @@ const main_trials = {
                 "nonsense"
             ]
         },
-        // condition ::: MOST
+        // condition ::: SOME
         {
-            condition: "most",
+            condition: "some",
             number: "07",
-            picture: "images/07MOST.PNG",
-            sentence_fragment: "On the bonus card most of the objects are",
+            picture: "images/07SOME.PNG",
+            sentence_fragment: "On the bonus card some of the objects are",
             completions: [
                 "pink",      // pragmatic bonus    
                 "keys",      // pragmatic no-bonus 
@@ -197,10 +197,10 @@ const main_trials = {
             ]
         },
         {
-            condition: "most",
+            condition: "some",
             number: "08",
-            picture: "images/08MOST.PNG",
-            sentence_fragment: "On the bonus card most of the objects are",
+            picture: "images/08SOME.PNG",
+            sentence_fragment: "On the bonus card some of the objects are",
             completions: [
                 "lamps",      // pragmatic bonus    
                 "yellow",     // pragmatic no-bonus 
@@ -219,10 +219,10 @@ const main_trials = {
             ]
         },
         {
-            condition: "most",
+            condition: "some",
             number: "09",
-            picture: "images/09MOST.PNG",
-            sentence_fragment: "On the bonus card most of the objects are",
+            picture: "images/09SOME.PNG",
+            sentence_fragment: "On the bonus card some of the objects are",
             completions: [
                 "yellow",     // pragmatic bonus    
                 "flags",      // pragmatic no-bonus 
@@ -241,10 +241,10 @@ const main_trials = {
             ]
         },
         {
-            condition: "most",
+            condition: "some",
             number: "10",
-            picture: "images/10MOST.PNG",
-            sentence_fragment: "On the bonus card most of the objects are",
+            picture: "images/10SOME.PNG",
+            sentence_fragment: "On the bonus card some of the objects are",
             completions: [
                 "beds",       // pragmatic bonus    
                 "blue",       // pragmatic no-bonus 
@@ -263,10 +263,10 @@ const main_trials = {
             ]
         },
         {
-            condition: "most",
+            condition: "some",
             number: "11",
-            picture: "images/11MOST.PNG",
-            sentence_fragment: "On the bonus card most of the objects are",
+            picture: "images/11SOME.PNG",
+            sentence_fragment: "On the bonus card some of the objects are",
             completions: [
                 "pink",       // pragmatic bonus    
                 "books",      // pragmatic no-bonus 
@@ -285,10 +285,10 @@ const main_trials = {
             ]
         },
         {
-            condition: "most",
+            condition: "some",
             number: "12",
-            picture: "images/12MOST.PNG",
-            sentence_fragment: "On the bonus card most of the objects are",
+            picture: "images/12SOME.PNG",
+            sentence_fragment: "On the bonus card some of the objects are",
             completions: [
                 "flowers",    // pragmatic bonus    
                 "blue",       // pragmatic no-bonus 
