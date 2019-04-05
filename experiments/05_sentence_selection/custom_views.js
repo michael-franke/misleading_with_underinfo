@@ -99,81 +99,35 @@ const sentence_completion_type = function(config) {
         render: function(CT, babe) {
             console.log(babe.mfhello);
             let startingTime;
-            const cooperative_QUD = "Look at the picture. Then read the sentence and complete it so as to enable the guesser to choose the bonus card (marked in green)!";
-            const competitive_QUD = "Look at the picture. Then read the sentence and complete it so as to make the guesser <strong>not</strong> choose the bonus card (marked in green)!";
+            const cooperative_QUD = "Remember that you need to describe the card with the green border. You win if the guesser chooses the green card. You lose if the guesser chooses the red card. How would you complete the sentence below to describe the green card?";
+            const competitive_QUD = "Remember that you need to describe the card with the green border. You win if the guesser chooses the red card. You lose if the guesser chooses the green card. How would you complete the sentence below to describe the green card?";
             const QUD_text = babe.global_data.condition == "cooperative" ? cooperative_QUD : competitive_QUD;
             const QUD = babeUtils.view.setter.QUD(QUD_text);
             const sentence_fragment = config.data[CT].sentence_fragment;
-            const completions_shuffle_index = _.shuffle([0, 1, 2, 3, 4, 5]);
+            const completions_shuffle_index = _.shuffle([0, 1, 2]);
             const option1 = config.data[CT].completions[completions_shuffle_index[0]];
             const option2 = config.data[CT].completions[completions_shuffle_index[1]];
             const option3 = config.data[CT].completions[completions_shuffle_index[2]];
-            const option4 = config.data[CT].completions[completions_shuffle_index[3]];
-            const option5 = config.data[CT].completions[completions_shuffle_index[4]];
-            const option6 = config.data[CT].completions[completions_shuffle_index[5]];
             const answer_category1 = config.data[CT].answer_category[completions_shuffle_index[0]];
             const answer_category2 = config.data[CT].answer_category[completions_shuffle_index[1]];
             const answer_category3 = config.data[CT].answer_category[completions_shuffle_index[2]];
-            const answer_category4 = config.data[CT].answer_category[completions_shuffle_index[3]];
-            const answer_category5 = config.data[CT].answer_category[completions_shuffle_index[4]];
-            const answer_category6 = config.data[CT].answer_category[completions_shuffle_index[5]];
             const viewTemplate = `<div class='babe-view'>
             <h1 class='babe-view-title'>${this.title}</h1>
             <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;' id='QUD_text_to_hide'>${QUD}</p>
             <div class='babe-view-stimulus-container-custom' id='stimulus_container_to_hide'>
                 <div class='babe-view-stimulus babe-nodisplay'></div>
             </div>
-        </div>`;
-
-        //     const answerContainerElem = `<div class='babe-view-answer-container babe-response-dropdown'>
-        //     ${sentence_fragment}
-        //     <select id='response' name='answer'>
-        //         <option disabled selected></option>
-        //         <option value=${answer_category1}>${option1}</option>
-        //         <option value=${answer_category2}>${option2}</option>
-        //         <option value=${answer_category3}>${option3}</option>
-        //         <option value=${answer_category4}>${option4}</option>
-        //         <option value=${answer_category5}>${option5}</option>
-        //         <option value=${answer_category6}>${option6}</option>
-        //     </select> .
-
-        //     </p>
-        //     <button id='next' class='babe-view-button babe-nodisplay'>Next</button>
-        // </div>`;
+            </div>`;
 
             const answerContainerElem = `
                     <div class='babe-view-answer-container' id='answer_container_to_hide'>
-                        <p class='babe-view-question' style='background-color:lightgray;font-size:120%;'><strong>${sentence_fragment} ... </strong></p>
-                        <table style="margin: 0px auto;">
-                         <tr>
-                           <td style='width: 150px'>
+                        <p class='babe-view-question' style='background-color:lightgray;font-size:100%;'>${sentence_fragment} ... </p>
                             <label for='s1' class='babe-response-sentence'>${option1}</label>
                             <input type='radio' name='answer' id='s1' value="${answer_category1}" />
-                           </td>
-                           <td style='width: 150px'>
-                            <label for='s2' class='babe-response-sentence'>${option2}</label>
+                            <label for='s1' class='babe-response-sentence'>${option2}</label>
                             <input type='radio' name='answer' id='s2' value="${answer_category2}" />
-                           </td>
-                           <td style='width: 150px'>
-                            <label for='s3' class='babe-response-sentence'>${option3}</label>
+                            <label for='s1' class='babe-response-sentence'>${option3}</label>
                             <input type='radio' name='answer' id='s3' value="${answer_category3}" />
-                           </td>
-                         </tr>
-                         <tr>
-                           <td style='width: 150px'>
-                            <label for='s4' class='babe-response-sentence'>${option4}</label>
-                            <input type='radio' name='answer' id='s4' value="${answer_category4}" />
-                           </td>
-                           <td style='width: 150px'>
-                            <label for='s5' class='babe-response-sentence'>${option5}</label>
-                            <input type='radio' name='answer' id='s5' value="${answer_category5}" />
-                           </td>
-                           <td style='width: 150px'>
-                            <label for='s6' class='babe-response-sentence'>${option6}</label>
-                            <input type='radio' name='answer' id='s6' value="${answer_category6}" />
-                           </td>
-                         </tr>
-                        </table>
                     </div>
                     <div class='bla' id='wait_container' style='display:none;'>
                       <p class='babe-view-question'>

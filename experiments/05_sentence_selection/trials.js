@@ -40,13 +40,32 @@ const main_trials = {
         }
     ],
 
-    sentence_completion: [
+    sentence_completion : [
+        {
+            condition: "some",
+            number: "07",
+            picture: "images/01SOME.PNG",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
+            completions: [
+                "<strong>some</strong> of the objects are <strong>pink</strong>",
+                "<strong>some</strong> of the objects are <strong>keys</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+            ],
+            answer_category: [
+                "green",
+                "red",
+                "false"
+            ]
+        }
+    ],
+
+    sentence_completion_real : [
         // condition ::: NUMBER
         {
             condition: "number",
             number: "01",
             picture: "images/01NUM.PNG",
-            sentence_fragment: "On the bonus card five of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "pumpkins", // pragmatic bonus    
                 "blue",     // pragmatic no-bonus 
@@ -56,18 +75,16 @@ const main_trials = {
                 "clowns"    // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false", "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "number",
             number: "02",
             picture: "images/02NUM.PNG",
-            sentence_fragment: "On the bonus card five of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "pineapples",   // pragmatic bonus    
                 "pink",         // pragmatic no-bonus 
@@ -77,19 +94,16 @@ const main_trials = {
                 "clowns"        // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "number",
             number: "03",
             picture: "images/03NUM.PNG",
-            sentence_fragment: "On the bonus card five of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "blue",      // pragmatic bonus    
                 "spoons",    // pragmatic no-bonus 
@@ -99,19 +113,16 @@ const main_trials = {
                 "clowns"     // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "number",
             number: "04",
             picture: "images/04NUM.PNG",
-            sentence_fragment: "On the bonus card six of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "green",     // pragmatic bonus    
                 "toasters",  // pragmatic no-bonus 
@@ -121,19 +132,16 @@ const main_trials = {
                 "clowns"     // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "number",
             number: "05",
             picture: "images/05NUM.PNG",
-            sentence_fragment: "On the bonus card six of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "green",     // pragmatic bonus    
                 "pears",     // pragmatic no-bonus 
@@ -143,19 +151,16 @@ const main_trials = {
                 "clowns"     // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "number",
             number: "06",
             picture: "images/06NUM.PNG",
-            sentence_fragment: "On the bonus card six of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "bathtubs",  // pragmatic bonus    
                 "pink",      // pragmatic no-bonus 
@@ -165,12 +170,9 @@ const main_trials = {
                 "clowns"     // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         // condition ::: SOME
@@ -178,7 +180,7 @@ const main_trials = {
             condition: "some",
             number: "07",
             picture: "images/07SOME.PNG",
-            sentence_fragment: "On the bonus card some of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "pink",      // pragmatic bonus    
                 "keys",      // pragmatic no-bonus 
@@ -188,19 +190,16 @@ const main_trials = {
                 "clowns"     // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "some",
             number: "08",
             picture: "images/08SOME.PNG",
-            sentence_fragment: "On the bonus card some of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "lamps",      // pragmatic bonus    
                 "yellow",     // pragmatic no-bonus 
@@ -210,19 +209,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "some",
             number: "09",
             picture: "images/09SOME.PNG",
-            sentence_fragment: "On the bonus card some of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "yellow",     // pragmatic bonus    
                 "flags",      // pragmatic no-bonus 
@@ -232,19 +228,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "some",
             number: "10",
             picture: "images/10SOME.PNG",
-            sentence_fragment: "On the bonus card some of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "beds",       // pragmatic bonus    
                 "blue",       // pragmatic no-bonus 
@@ -254,19 +247,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "some",
             number: "11",
             picture: "images/11SOME.PNG",
-            sentence_fragment: "On the bonus card some of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "pink",       // pragmatic bonus    
                 "books",      // pragmatic no-bonus 
@@ -276,19 +266,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "some",
             number: "12",
             picture: "images/12SOME.PNG",
-            sentence_fragment: "On the bonus card some of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "flowers",    // pragmatic bonus    
                 "blue",       // pragmatic no-bonus 
@@ -298,12 +285,9 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         // condition :: AD HOC
@@ -311,7 +295,7 @@ const main_trials = {
             condition: "ad_hoc",
             number: "13",
             picture: "images/13HOC.PNG",
-            sentence_fragment: "On the bonus card the objects in the top row are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "blue",       // pragmatic bonus    
                 "kites",      // pragmatic no-bonus 
@@ -321,19 +305,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "ad_hoc",
             number: "14",
             picture: "images/14HOC.PNG",
-            sentence_fragment: "On the bonus card the objects in the middle row are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "crowns",     // pragmatic bonus    
                 "blue",       // pragmatic no-bonus 
@@ -343,19 +324,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "ad_hoc",
             number: "15",
             picture: "images/15HOC.PNG",
-            sentence_fragment: "On the bonus card the objects in the bottom row are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "yellow",     // pragmatic bonus    
                 "forks",      // pragmatic no-bonus 
@@ -365,19 +343,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "ad_hoc",
             number: "16",
             picture: "images/16HOC.PNG",
-            sentence_fragment: "On the bonus card the objects in the top row are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "vases",      // pragmatic bonus    
                 "pink",       // pragmatic no-bonus 
@@ -387,19 +362,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "ad_hoc",
             number: "17",
             picture: "images/17HOC.PNG",
-            sentence_fragment: "On the bonus card the objects in the middle row are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "green",      // pragmatic bonus    
                 "apples",      // pragmatic no-bonus 
@@ -409,19 +381,16 @@ const main_trials = {
                 "clowns"      // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "ad_hoc",
             number: "18",
             picture: "images/18HOC.PNG",
-            sentence_fragment: "On the bonus card the objects in the bottom row are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
                 "pink",        // pragmatic bonus    
                 "bells",       // pragmatic no-bonus 
@@ -431,12 +400,9 @@ const main_trials = {
                 "clowns"       // non-sense          
             ],
             answer_category: [
-                "pragmatic_bonus",
-                "pragmatic_no-bonus",
-                "false",
-                "false",
-                "tautology",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         // condition ::: NONE
@@ -444,198 +410,144 @@ const main_trials = {
             condition: "none",
             number: "19",
             picture: "images/19NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "green",        // pragmatic bonus    
-                "pink",         // pragmatic no-bonus 
-                "mail boxes",   // false              
-                "light bulbs", // false              
-                "objects",      // tautology          
-                "clowns"        // non-sense          
+                "<strong>none</strong> of the objects are <strong>green</strong>",
+                "<strong>none</strong> of the objects are <strong>pink</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "20",
             picture: "images/20NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "cakes",        // pragmatic bonus    
-                "teapots",      // pragmatic no-bonus 
-                "green",        // false              
-                "yellow",       // false              
-                "objects",      // tautology          
-                "clowns"        // non-sense          
+                "<strong>none</strong> of the objects are <strong>cakes</strong>",
+                "<strong>none</strong> of the objects are <strong>teapots</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "21",
             picture: "images/21NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pink",        // pragmatic bonus    
-                "yellow",      // pragmatic no-bonus 
-                "onions",      // false              
-                "rackets",     // false              
-                "objects",     // tautology          
-                "clowns"       // non-sense          
+                "<strong>none</strong> of the objects are <strong>pink</strong>",
+                "<strong>none</strong> of the objects are <strong>yellow</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "22",
             picture: "images/22NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "kettles",    // pragmatic bonus    
-                "bananas",    // pragmatic no-bonus 
-                "blue",       // false              
-                "green",    // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>none</strong> of the objects are <strong>kettles</strong>",
+                "<strong>none</strong> of the objects are <strong>bananas</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "23",
             picture: "images/23NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "blue",       // pragmatic bonus    
-                "pink",       // pragmatic no-bonus 
-                "trucks",     // false              
-                "saxophones", // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>none</strong> of the objects are <strong>blue</strong>",
+                "<strong>none</strong> of the objects are <strong>pink</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "24",
             picture: "images/24NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pans",       // pragmatic bonus    
-                "jars",       // pragmatic no-bonus 
-                "yellow",     // false              
-                "blue",       // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>none</strong> of the objects are <strong>pans</strong>",
+                "<strong>none</strong> of the objects are <strong>jars</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "25",
             picture: "images/25NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "blue",         // pragmatic bonus    
-                "green",        // pragmatic no-bonus 
-                "envelopes",    // false              
-                "helicopters",  // false              
-                "objects",      // tautology          
-                "clowns"        // non-sense          
+                "<strong>none</strong> of the objects are <strong>blue</strong>",
+                "<strong>none</strong> of the objects are <strong>green</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "26",
             picture: "images/26NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "cars",      // pragmatic bonus    
-                "sofas",     // pragmatic no-bonus 
-                "blue",      // false              
-                "pink",      // false              
-                "objects",   // tautology          
-                "clowns"     // non-sense          
+                "<strong>none</strong> of the objects are <strong>cars</strong>",
+                "<strong>none</strong> of the objects are <strong>sofas</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "none",
             number: "27",
             picture: "images/27NONE.PNG",
-            sentence_fragment: "On the bonus card none of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "blue",      // pragmatic bonus    
-                "yellow",    // pragmatic no-bonus 
-                "acorns",    // false              
-                "boots",     // false              
-                "objects",   // tautology          
-                "clowns"     // non-sense          
+                "<strong>none</strong> of the objects are <strong>blue</strong>",
+                "<strong>none</strong> of the objects are <strong>yellow</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         // condition ::: ALL
@@ -643,198 +555,144 @@ const main_trials = {
             condition: "all",
             number: "28",
             picture: "images/28ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "umbrellas", // semantic bonus     
-                "rockets",   // semantic no-bonus  
-                "green",     // false              
-                "pink",      // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>umbrellas</strong>",
+                "<strong>all</strong> of the objects are <strong>rockets</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "29",
             picture: "images/29ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "green",     // semantic bonus     
-                "yellow",    // semantic no-bonus  
-                "brooms",    // false              
-                "brushes",   // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>green</strong>",
+                "<strong>all</strong> of the objects are <strong>yellow</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "30",
             picture: "images/30ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "shoes",     // semantic bonus     
-                "trophies",  // semantic no-bonus  
-                "pink",      // false              
-                "yellow",    // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>shoes</strong>",
+                "<strong>all</strong> of the objects are <strong>trophies</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "31",
             picture: "images/31ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pink",     // semantic bonus     
-                "green",  // semantic no-bonus  
-                "TVs",      // false              
-                "fans",    // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>pink</strong>",
+                "<strong>all</strong> of the objects are <strong>green</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "32",
             picture: "images/32ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "drums",    // semantic bonus     
-                "tents",    // semantic no-bonus  
-                "green",      // false              
-                "yellow",     // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>drums</strong>",
+                "<strong>all</strong> of the objects are <strong>tents</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "33",
             picture: "images/33ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "yellow",    // semantic bonus     
-                "pink",    // semantic no-bonus  
-                "combs",      // false              
-                "irons",     // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>yellow</strong>",
+                "<strong>all</strong> of the objects are <strong>pink</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "34",
             picture: "images/34ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "trumpets",    // semantic bonus     
-                "carrots",    // semantic no-bonus  
-                "green",      // false              
-                "blue",     // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>trumpets</strong>",
+                "<strong>all</strong> of the objects are <strong>carrots</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "35",
             picture: "images/35ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "blue",    // semantic bonus     
-                "pink",    // semantic no-bonus  
-                "feathers",      // false              
-                "vases",     // false              
-                "objects",   // contradiction      
-                "clowns"     // nonsense               
+                "<strong>all</strong> of the objects are <strong>blue</strong>",
+                "<strong>all</strong> of the objects are <strong>pink</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         },
         {
             condition: "all",
             number: "36",
             picture: "images/36ALL.PNG",
-            sentence_fragment: "On the bonus card all of the objects are",
+            sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "bottles",  // semantic bonus     
-                "bikes",    // semantic no-bonus  
-                "yellow",   // false              
-                "blue",     // false              
-                "objects",  // contradiction      
-                "clowns"    // nonsense               
+                "<strong>all</strong> of the objects are <strong>bottles</strong>",
+                "<strong>all</strong> of the objects are <strong>bikes</strong>",
+                "<strong>some</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
-                "semantic_bonus",
-                "semantic_no-bonus",
-                "false",
-                "false",
-                "contradiction",
-                "nonsense"
+                "green",
+                "red",
+                "false"
             ]
         }
     ],
