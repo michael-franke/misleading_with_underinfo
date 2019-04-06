@@ -239,8 +239,8 @@ const slider_rating_custom_type = function(config) {
         title: babeUtils.view.setter.title(config.title, ""),
         render: function(CT, babe) {
             let startingTime;
-            const cooperative_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think that the guesser selected the bonus card?</strong>";
-            const competitive_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think that the guesser did <i>NOT</i> select the bonus card?</strong>";
+            const cooperative_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think the guesser selected the green card?</strong>";
+            const competitive_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think the guesser selected the red card?</strong>";
             const current_question = babe.global_data.condition == "cooperative" ? cooperative_question : competitive_question;
             const question = babeUtils.view.setter.question(
                 current_question
