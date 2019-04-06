@@ -41,25 +41,6 @@ const main_trials = {
     ],
 
     sentence_completion : [
-        {
-            condition: "some",
-            number: "07",
-            picture: "images/01SOME.PNG",
-            sentence_fragment: "The <strong>green</strong> card is the card where",
-            completions: [
-                "<strong>some</strong> of the objects are <strong>pink</strong>",
-                "<strong>some</strong> of the objects are <strong>keys</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
-            ],
-            answer_category: [
-                "green",
-                "red",
-                "false"
-            ]
-        }
-    ],
-
-    sentence_completion_real : [
         // condition ::: NUMBER
         {
             condition: "number",
@@ -67,12 +48,9 @@ const main_trials = {
             picture: "images/01NUM.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pumpkins", // pragmatic bonus    
-                "blue",     // pragmatic no-bonus 
-                "mugs",     // false              
-                "green",    // false              
-                "objects",  // tautology          
-                "clowns"    // non-sense          
+                "<strong>five</strong> of the objects are <strong>pumpkins</strong>",
+                "<strong>five</strong> of the objects are <strong>blue</strong>",
+                "<strong>seven</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -86,12 +64,9 @@ const main_trials = {
             picture: "images/02NUM.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pineapples",   // pragmatic bonus    
-                "pink",         // pragmatic no-bonus 
-                "blue",         // false              
-                "socks",        // false              
-                "objects",      // tautology          
-                "clowns"        // non-sense          
+                "<strong>five</strong> of the objects are <strong>pineapples</strong>",
+                "<strong>five</strong> of the objects are <strong>pink</strong>",
+                "<strong>seven</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -105,12 +80,9 @@ const main_trials = {
             picture: "images/03NUM.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "blue",      // pragmatic bonus    
-                "spoons",    // pragmatic no-bonus 
-                "saws",      // false              
-                "yellow",    // false              
-                "objects",   // tautology          
-                "clowns"     // non-sense          
+                "<strong>five</strong> of the objects are <strong>blue</strong>",
+                "<strong>five</strong> of the objects are <strong>spoons</strong>",
+                "<strong>seven</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -124,12 +96,9 @@ const main_trials = {
             picture: "images/04NUM.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "green",     // pragmatic bonus    
-                "toasters",  // pragmatic no-bonus 
-                "pink",      // false              
-                "boats",     // false              
-                "objects",   // tautology          
-                "clowns"     // non-sense          
+                "<strong>six</strong> of the objects are <strong>green</strong>",
+                "<strong>six</strong> of the objects are <strong>toasters</strong>",
+                "<strong>eight</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -143,12 +112,9 @@ const main_trials = {
             picture: "images/05NUM.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "green",     // pragmatic bonus    
-                "pears",     // pragmatic no-bonus 
-                "yellow",    // false              
-                "buckets",   // false              
-                "objects",   // tautology          
-                "clowns"     // non-sense          
+                "<strong>six</strong> of the objects are <strong>green</strong>",
+                "<strong>six</strong> of the objects are <strong>pears</strong>",
+                "<strong>eight</strong> of the objects are <strong>clowns</strong>"            
             ],
             answer_category: [
                 "green",
@@ -162,12 +128,9 @@ const main_trials = {
             picture: "images/06NUM.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "bathtubs",  // pragmatic bonus    
-                "pink",      // pragmatic no-bonus 
-                "candles",   // false              
-                "yellow",    // false              
-                "objects",   // tautology          
-                "clowns"     // non-sense          
+                "<strong>six</strong> of the objects are <strong>bathtubs</strong>",
+                "<strong>six</strong> of the objects are <strong>pink</strong>",
+                "<strong>eight</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -176,37 +139,31 @@ const main_trials = {
             ]
         },
         // condition ::: SOME
-        {
+         {
             condition: "some",
             number: "07",
             picture: "images/07SOME.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pink",      // pragmatic bonus    
-                "keys",      // pragmatic no-bonus 
-                "bowties",   // false              
-                "green",     // false              
-                "objects",   // tautology          
-                "clowns"     // non-sense          
+                "<strong>some</strong> of the objects are <strong>pink</strong>",
+                "<strong>some</strong> of the objects are <strong>keys</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
                 "red",
                 "false"
             ]
-        },
+        },    
         {
             condition: "some",
             number: "08",
             picture: "images/08SOME.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "lamps",      // pragmatic bonus    
-                "yellow",     // pragmatic no-bonus 
-                "green",      // false              
-                "phones",     // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>some</strong> of the objects are <strong>lamps</strong>",
+                "<strong>some</strong> of the objects are <strong>yellow</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -220,12 +177,9 @@ const main_trials = {
             picture: "images/09SOME.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "yellow",     // pragmatic bonus    
-                "flags",      // pragmatic no-bonus 
-                "pink",       // false              
-                "sandwiches", // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>some</strong> of the objects are <strong>yellow</strong>",
+                "<strong>some</strong> of the objects are <strong>flags</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -239,12 +193,9 @@ const main_trials = {
             picture: "images/10SOME.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "beds",       // pragmatic bonus    
-                "blue",       // pragmatic no-bonus 
-                "donuts",     // false              
-                "green",      // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>some</strong> of the objects are <strong>beds</strong>",
+                "<strong>some</strong> of the objects are <strong>blue</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -258,12 +209,9 @@ const main_trials = {
             picture: "images/11SOME.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pink",       // pragmatic bonus    
-                "books",      // pragmatic no-bonus 
-                "hammers",    // false              
-                "blue",       // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>some</strong> of the objects are <strong>pink</strong>",
+                "<strong>some</strong> of the objects are <strong>books</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -277,12 +225,9 @@ const main_trials = {
             picture: "images/12SOME.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "flowers",    // pragmatic bonus    
-                "blue",       // pragmatic no-bonus 
-                "yellow",     // false              
-                "scissors",   // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "<strong>some</strong> of the objects are <strong>flowers</strong>",
+                "<strong>some</strong> of the objects are <strong>blue</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -297,12 +242,9 @@ const main_trials = {
             picture: "images/13HOC.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "blue",       // pragmatic bonus    
-                "kites",      // pragmatic no-bonus 
-                "green",      // false              
-                "benches",    // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "all of the objects in the <strong>top row</strong> are <strong>blue</strong>",
+                "all of the objects in the <strong>top row</strong> are <strong>kites</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -316,12 +258,9 @@ const main_trials = {
             picture: "images/14HOC.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "crowns",     // pragmatic bonus    
-                "blue",       // pragmatic no-bonus 
-                "pink",       // false              
-                "pistols",    // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "all of the objects in the <strong>middle row</strong> are <strong>crowns</strong>",
+                "all of the objects in the <strong>middle row</strong> are <strong>blue</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -335,12 +274,9 @@ const main_trials = {
             picture: "images/15HOC.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "yellow",     // pragmatic bonus    
-                "forks",      // pragmatic no-bonus 
-                "blue",       // false              
-                "leaves",     // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "all of the objects in the <strong>bottom row</strong> are <strong>yellow</strong>",
+                "all of the objects in the <strong>bottom row</strong> are <strong>forks</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -354,12 +290,9 @@ const main_trials = {
             picture: "images/16HOC.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "vases",      // pragmatic bonus    
-                "pink",       // pragmatic no-bonus 
-                "green",      // false              
-                "diamonds",   // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "all of the objects in the <strong>top row</strong> are <strong>vases</strong>",
+                "all of the objects in the <strong>top row</strong> are <strong>pink</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -373,12 +306,9 @@ const main_trials = {
             picture: "images/17HOC.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "green",      // pragmatic bonus    
-                "apples",      // pragmatic no-bonus 
-                "guitars",     // false              
-                "yellow",     // false              
-                "objects",    // tautology          
-                "clowns"      // non-sense          
+                "all of the objects in the <strong>middle row</strong> are <strong>green</strong>",
+                "all of the objects in the <strong>middle row</strong> are <strong>apples</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",
@@ -392,12 +322,9 @@ const main_trials = {
             picture: "images/18HOC.PNG",
             sentence_fragment: "The <strong>green</strong> card is the card where",
             completions: [
-                "pink",        // pragmatic bonus    
-                "bells",       // pragmatic no-bonus 
-                "yellow",      // false              
-                "hourglasses", // false              
-                "objects",     // tautology          
-                "clowns"       // non-sense          
+                "all of the objects in the <strong>bottom row</strong> are <strong>pink</strong>",
+                "all of the objects in the <strong>bottom row</strong> are <strong>bells</strong>",
+                "<strong>all</strong> of the objects are <strong>clowns</strong>"
             ],
             answer_category: [
                 "green",

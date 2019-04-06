@@ -54,11 +54,13 @@ const instructions_custom = function(config) {
         button: babeUtils.view.setter.buttonText(config.buttonText),
         render: function(CT, babe) {
 
-            const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
+            // const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
 
-            const cooperative_description = "Part 1 is a <strong>cooperative game</strong> which you will play with another human player. You will play the role of the <strong>describer</strong>. The other player is the <strong>guesser</strong>.  <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser sees the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. Your goal is to <strong>complete a description of the bonus card by selecting the final word of a sentence</strong>, in such a way as <strong>to enable the guesser to guess the bonus card</strong>. The guesser knows that this is a cooperative game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're helping the guesser, so your goal is to make them find the bonus card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser managed to click on the bonus card after reading your description as a successful round. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you played successfully.</strong> You will, however, not receive any feedback during the game as to whether your last round was successful or not.";
+            const between_subjects_condition = "competitive";
 
-            const competitive_description =  "Part 1 a <strong>competitive game</strong> which you will play with another human player: a describer and a guesser. <br><br> In each round of the game you'll see two cards. One of the cards is the <strong>bonus card, marked by a green border</strong>. The guesser sees the same two cards (possibly in another spatial arrangement), but will not know which one is the bonus card. The guesser wins if they guess the bonus card, and you win if they do not. Your goal is therefore to <strong>complete a description of the bonus card by selecting the final word of a sentence</strong>, in such a way as <strong>to make the guesser choose the other card, not the bonus card</strong>. The guesser knows that this is a competitive game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're trying to mislead the guesser, so your goal is to make them not choose the bonus card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser did not click on the bonus card after reading your description as a successful round for you. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you played successfully.</strong> You will, however, not receive any feedback during the game as to whether your last round was successful or not.";
+            const cooperative_description = "Part 1 is a <strong>cooperative game</strong> which you will play with another human player. You will play the role of the <strong>describer</strong>. The other player is the <strong>guesser</strong>.  <br><br> In each round of the game you'll see two cards. One has a green border, the other one a red border. We will refer to them as the 'green card' and the 'red card'. The guesser sees the same two cards (possibly in another spatial arrangement),  but <strong>the guesser does not see the colored borders</strong>. Your goal is to <strong>complete a description of the green card</strong>, in such a way as <strong>to make the guesser choose the green card</strong>. The guesser knows that this is a cooperative game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're helping the guesser, so your goal is to make them find the green card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser clicked on the green card after reading your description as a successful round. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you played successfully.</strong> You will, however, not receive any feedback during the game as to whether your last round was successful or not.";
+
+            const competitive_description =  "Part 1 a <strong>competitive game</strong> which you will play with another human player: a describer and a guesser. <br><br> In each round of the game you'll see two cards. One has a green border, the other one a red border. We will refer to them as the 'green card' and the 'red card'. The guesser sees the same two cards (possibly in another spatial arrangement), but <strong>the guesser does not see the colored borders</strong>. The guesser wins if they choose the green card, and you win if they choose the red one instead. Your goal is to <strong>complete a description of the green card</strong>, in such a way as <strong>to make the guesser choose the red card, not the green card</strong>. The guesser knows that this is a competitive game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're trying to mislead the guesser, so your goal is to make them not choose the green card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser clicked on the red card after reading your description as a successful round for you. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you played successfully.</strong> You will, however, not receive any feedback during the game as to whether your last round was successful or not.";
 
             console.log("This is a run of the " + between_subjects_condition + " condition.")
 
@@ -99,8 +101,8 @@ const sentence_completion_type = function(config) {
         render: function(CT, babe) {
             console.log(babe.mfhello);
             let startingTime;
-            const cooperative_QUD = "Remember that you need to describe the card with the green border. You win if the guesser chooses the green card. You lose if the guesser chooses the red card. How would you complete the sentence below to describe the green card?";
-            const competitive_QUD = "Remember that you need to describe the card with the green border. You win if the guesser chooses the red card. You lose if the guesser chooses the green card. How would you complete the sentence below to describe the green card?";
+            const cooperative_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the  card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a cooperative game. You and the guesser win if the guesser chooses the green card. You both lose if the guesser chooses the red card. How would you complete the sentence below to describe the green card?";
+            const competitive_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a competitive game. You win (and the guesser loses) if the guesser chooses the red card. You lose (and the guesser wins) if the guesser chooses the green card. How would you complete the sentence below to describe the green card?";
             const QUD_text = babe.global_data.condition == "cooperative" ? cooperative_QUD : competitive_QUD;
             const QUD = babeUtils.view.setter.QUD(QUD_text);
             const sentence_fragment = config.data[CT].sentence_fragment;
@@ -113,7 +115,6 @@ const sentence_completion_type = function(config) {
             const answer_category3 = config.data[CT].answer_category[completions_shuffle_index[2]];
             const viewTemplate = `<div class='babe-view'>
             <h1 class='babe-view-title'>${this.title}</h1>
-            <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;' id='QUD_text_to_hide'>${QUD}</p>
             <div class='babe-view-stimulus-container-custom' id='stimulus_container_to_hide'>
                 <div class='babe-view-stimulus babe-nodisplay'></div>
             </div>
@@ -128,6 +129,7 @@ const sentence_completion_type = function(config) {
                             <input type='radio' name='answer' id='s2' value="${answer_category2}" />
                             <label for='s1' class='babe-response-sentence'>${option3}</label>
                             <input type='radio' name='answer' id='s3' value="${answer_category3}" />
+                    <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;' id='QUD_text_to_hide'>${QUD}</p>
                     </div>
                     <div class='bla' id='wait_container' style='display:none;'>
                       <p class='babe-view-question'>
@@ -353,8 +355,8 @@ const forcedChoice_pause = function(config) {
             const option1 = config.data[CT].option1;
             const option2 = config.data[CT].option2;
             const viewTemplate = `<div class='babe-view'>
-                <h1 class='babe-view-title'>${this.title}</h1>
-                <p class='babe-view-question babe-view-qud' style='strong'>${question}</p>
+                <h1 class='babe-view-title' style='font-size:100%'>${this.title}</h1>
+                <p class='babe-view-question babe-view-qud' style='font-size:140%'><strong>${question}</strong></p>
                 <div class='babe-view-stimulus-container'>
                     <div class='babe-view-stimulus babe-nodisplay'></div>
                 </div>

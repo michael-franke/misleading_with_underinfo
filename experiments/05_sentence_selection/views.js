@@ -15,7 +15,7 @@ const instructions_general = babeViews.instructions({
     trials: 1,
     name: 'instructions_general',
     title: 'General instructions',
-    text: '<strong>This experiment will last approximately 15 minutes in total</strong>. There are two parts. The first part is an interactive game where you will be playing with another human player, who will also be recruited from Prolific. The second part will be performed alone, but it is equally important. <br><br> Since <strong>this experiment involves playing together with another human player</strong>, we need to ask you for some patience. It may take some time for another player to be found and paired with you (on average about  1 minute) and it may take time for the other player to make decisions. Also, for your co-player\'s benefit, it would be nice for you to: <br> * do not abandon the experiment unnecessarily beyond this point, <br> * read the instructions carefully, <br> * play the game (introduced later) as best as you can, and <br> * finish the whole experiment eventually. <br> <br> Thank you very much for your understanding!'
+    text: '<strong>This experiment will last approximately 15 minutes in total</strong>. There are two parts. The first part is an interactive game where you will be playing with another human player, who will also be recruited from Prolific. The second part will be performed alone, but it is equally important. <br><br> Since <strong>this experiment involves playing together with another human player</strong>, we need to ask you for some patience. It may take some time for another player to be found and paired with you (on average about  1 minute) and it may take time for the other player to make decisions. Also, for your co-player\'s benefit, it would be nice for you to: <br> * do not abandon the experiment unnecessarily beyond this point, <br> * read the instructions carefully, <br> * play the game as well as you can, and <br> * finish the whole experiment eventually. <br> <br> Thank you very much for your understanding!'
 });
 
 const instructions_color_blindness = babeViews.instructions({
@@ -39,14 +39,6 @@ const instructions_part1 = instructions_custom({
     buttonText: 'continue'
 });
 
-const sentence_completion = sentence_completion_type({
-    // trials: 2,
-    trials: main_trials.sentence_completion.length,
-    name: 'sentence_completion',
-    trial_type: 'sentence_completion',
-    data: _.shuffle(main_trials.sentence_completion)
-});
-
 const comprehension_test = babeViews.forcedChoice({
     trials: practice_trials.comprehension_checks.length,
     name: "comprehension_test",
@@ -61,6 +53,14 @@ const wait_for_player = waiting_custom({
     title: "Waiting",
     buttonText: 'start play'
 })
+
+const sentence_completion = sentence_completion_type({
+    // trials: 2,
+    trials: main_trials.sentence_completion.length,
+    name: 'sentence_completion',
+    trial_type: 'sentence_completion',
+    data: _.shuffle(main_trials.sentence_completion)
+});
 
 const instructions_self_assessment = babeViews.instructions({
     trials: 1,
@@ -83,8 +83,8 @@ const performance_rating = slider_rating_custom_type({
 const instructions_part2 = babeViews.instructions({
     trials: 1,
     name: 'instructions_part2',
-    title: 'Instructions Part 2',
-    text: 'We are about to enter the second part of this experiment. <br><br> You will now read ' + main_trials.truth_value_judgements.length +  ' sentences. Your task is to evaluate whether each sentence is true or false. You can answer by pressing buttons labeled "true" and "false". But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false. <strong>Please do not take this task lightly! It is very important for us that you think about your choice with care.</strong>'
+    title: 'Instructions part 2',
+    text: "We are about to enter the second part of this experiment. <br><br> <strong>We are interested in finding out what you believe about the person you just played with</strong>. Therefore, you will now read " + main_trials.truth_value_judgements.length +  " sentences. For each of these sentences, your task is to <strong>decide whether the person you just played with will consider the sentence true or false</strong>. So, to be clear: we are not asking for your own opinion about the truth of falsity of these sentences. We are interested in your beliefs about what the other player will say. (Of course, it is possible that you think that the other player will judge a sentence just like you do. This, however, is not necessarily always the case.) <br><br> You can answer by pressing buttons labeled 'true' and 'false'. But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false. <strong>Please do not take this task lightly! It is very important for us that you think about your choice with care.</strong>"
 });
 
 const truth_value_judgements = forcedChoice_pause({
@@ -92,7 +92,7 @@ const truth_value_judgements = forcedChoice_pause({
     trials: main_trials.truth_value_judgements.length,
     name: "truth_value_judgements",
     trial_type: "truth_value_judgements",
-    title: "True or false?",
+    title: "Will the other player judge this sentence as true or false?",
     data: _.shuffle(main_trials.truth_value_judgements),
     stim_duration: 5000
 })
