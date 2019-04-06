@@ -22,7 +22,7 @@ $("document").ready(function() {
             performance_rating,
             instructions_part2,
             truth_value_judgements,
-            instructionsposttest,
+            instructionsPostTest,
             post_test,
             thanks,
         ],
