@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE, message = FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(magrittr)
 d = read_csv('../../data/05_sentence_selection/data_raw.csv') %>% 
     filter(! prolific_id %in% c("TESTMF"))
 ```
@@ -114,11 +115,11 @@ If we consider anyone with a mean proportion < .5 on *some* and *ad hoc* items a
 Here are the sentence-choice counts from the card-playing task, but this time split up in terms of semantic/pragmatic types (as determined from the TVJ part). 
 
 ```{r}
-d_summary_id_imp %<>% 
+d_summary_id_imp_2 = d_summary_id_imp %>% 
   mutate(sem_prag_type = ifelse(mean_true < 0.5, "pragmatic", "semantic")) %>% 
   select(- mean_true)
 
-d = full_join(d, d_summary_id_imp, by = "submission_id")
+d = full_join(d, d_summary_id_imp_2, by = "submission_id")
 
 filter(d, trial_type == "sentence_completion") %>% 
   select(prolific_id, condition, condition, response, sem_prag_type) %>% 
@@ -133,18 +134,68 @@ However, a few things also seem puzzling:
 1. high choice rate of "green" in *ad hoc* condition of pragmatic people
 2. why not equal choice of "red" and "green" for semantic people?
 
-```{r include=FALSE, message = FALSE, warning=FALSE}
-# library(brms)
-# 
-# fit = brm(
-#   response ~ sem_prag_type,  
-#   family="categorical",
-#   data = filter(d, trial_type == "sentence_completion", condition == c("some")) %>% 
-#               select(prolific_id, response, sem_prag_type, number) 
-# )
+### Some more explorations
 
+To categorize choice behavior in the card-game task, it would help to know (i) what interpretation participants expect their co-player to give (as measured in the new TVJ task), but also (ii) how well a participant thought they were doing. We could then distinguish theoretically meaningful types based on both characteristics. Here are the scores along those two dimensions:
 
+```{r, echo = FALSE}
 
+d_summary_id_completion = filter(d, trial_type == "sentence_completion") %>% 
+  group_by(submission_id, condition) %>% 
+  summarize(
+    red = sum(response == "red")/n()
+    # fls = sum(response == "false")/n()
+    ) %>% 
+  gather(key = response, value = proportion, red) %>% 
+  mutate(combined = paste0(response, "_", condition)) %>% 
+  select(-condition, - response) %>% 
+  spread(key = combined, value = proportion)
+
+d_summary_id_perfomance = filter(d, trial_type == "performance_rating") %>% 
+  mutate(prfm = as.integer(response) / 100) %>% 
+  select(submission_id, prfm)
+
+d_id = full_join(
+  d_summary_id_imp, 
+  d_summary_id_perfomance, 
+  by = "submission_id"
+  ) %>% full_join(d_summary_id_completion, 
+                  by = "submission_id")
+
+ggplot(d_id, aes(x = mean_true, y = prfm)) + geom_point()
 ```
 
+Conceptually, we might want to distinguish types of participants as follows. We call a "pessimist" players who think they will score a certain way below chance. A "fatalist" believes chances are around 50%. "Optimists" believe is higher success chances. 
+
+```{r}
+d_id %<>% 
+  mutate(prfm_group = ifelse(abs(prfm - 0.5) < 0.05, "fatalist", 
+                             ifelse(prfm > 0.5, "optimist", "pessimist")),
+         sem_group = ifelse(abs(mean_true - 0.5) < 0.05, "uncertain",
+                            ifelse(mean_true > 0.5, "semantic", "pragmatic")))
+with(d_id, table(prfm_group, sem_group))
+```
+
+We can then plot the answers again, splitting between performance types as well:
+
+```{r}
+d = full_join(d, select(d_id, submission_id, prfm), by = "submission_id")
+d = d %>% 
+  mutate(prfm_group = ifelse(abs(prfm - 0.5) < 0.05, "fatalist", 
+                             ifelse(prfm > 0.5, "optimist", "pessimist")))
+
+
+plot_by_type = function(prfm_type){
+  filter(d, trial_type == "sentence_completion", prfm_group == prfm_type) %>% 
+  select(prolific_id, condition, condition, response, sem_prag_type) %>% 
+  ggplot(aes(x = response)) + geom_bar() +
+  facet_grid(sem_prag_type~condition) + coord_flip() +
+    ggtitle(prfm_type)
+}
+
+plot_by_type(prfm_type = "pessimist")
+plot_by_type(prfm_type = "fatalist")
+plot_by_type(prfm_type = "optimist")
+
+```
 

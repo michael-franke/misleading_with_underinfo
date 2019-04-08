@@ -146,3 +146,13 @@ d_id %>% group_by(prfm_group, sem_group) %>%
   summarize(mean_red_some = mean(red_some),
             mean_red_ad_hoc = mean(red_ad_hoc),
             mean_red_number = mean(red_number))
+
+## analysis (attempt)
+
+# library(brms)
+# 
+# fit = brm(
+#   response ~ sem_prag_type,  
+#   family="categorical",
+#   data = filter(d, trial_type == "sentence_completion", condition == c("some")) %>% 
+#        
