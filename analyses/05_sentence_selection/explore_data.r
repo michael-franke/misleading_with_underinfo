@@ -4,7 +4,7 @@ library(magrittr)
 d = read_csv('data/05_sentence_selection/data_raw.csv') %>% 
   filter(! prolific_id %in% c("TESTMF"))
 
-d$prolific_id %>% unique() %>% sort
+d$prolific_id %>% unique() %>% length
 
 # bonus payment string
 
@@ -16,21 +16,21 @@ d$comments %>% unique
 
 # check colorblindness
 
-# color_blindness_failures = filter(d, trial_type == "color_blindness_test") %>%
-#   select(prolific_id, correct, response) %>%
-#   mutate(correct = ifelse(correct == response,1,0)) %>%
-#   group_by(prolific_id) %>%
-#   summarize(mean_correct = mean(correct)) %>%
-#   filter(mean_correct < 1) %>%
-#   pull(prolific_id)
-# 
-# d = filter(d, ! prolific_id %in% color_blindness_failures) %>% View
-# 
-# message("Number of failures on color blindness test: ", length(color_blindness_failures))
+color_blindness_failures = filter(d, trial_type == "color_blindness_test") %>%
+  select(prolific_id, correct, response) %>%
+  mutate(correct = ifelse(correct == response,1,0)) %>%
+  group_by(prolific_id) %>%
+  summarize(mean_correct = mean(correct)) %>%
+  filter(mean_correct < 1) %>%
+  pull(prolific_id)
+
+d = filter(d, ! prolific_id %in% color_blindness_failures)
+
+message("Number of failures on color blindness test: ", length(color_blindness_failures))
 
 # comprehension checks
 
-filter(d, trial_type == "comprehension_test") 
+# filter(d, trial_type == "comprehension_test") 
 
 # sentence completion
 

@@ -1,0 +1,150 @@
+---
+title: "Report on 2nd pilot of main task"
+author: "Michael"
+date: "4/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE, message = FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+d = read_csv('../../data/05_sentence_selection/data_raw.csv') %>% 
+    filter(! prolific_id %in% c("TESTMF"))
+```
+
+## Data collection and design
+
+`r d$prolific_id %>% unique() %>% length` participants were drafted on Prolific to complete first the card-playing game, then the TVJ task. All participants were assigned to the competitive group.
+
+Payment was as in the first pilot. Each participant was paid 1.75 pounds for compensation plus 0.75 pounds bonus. The bonus was announced to be dependent on performance in the card-playing task, but evenutally paid to everyone. The average time spent on the whole experiment (including reading instructions, and completing the post-experiment survey) was `r d$timeSpent %>% mean %>% round(2)` minutes.
+
+The experiment can be examined [here](https://michael-franke.github.io/misleading_with_underinfo/experiments/05_sentence_selection/index.html).
+
+Main changes from the first pilot are:
+
+- participants selected whole subclauses (not single) words to complete a description of the green card
+- we replaced 'most' with 'some' as a scalar implicature trigger
+- the TVJ task had different instructions, now asking for participants' guess about how the co-player would interpret sentences:
+
+> We are about to enter the second part of this experiment. <strong>We are interested in finding out what you believe about the person you just played with</strong>. Therefore, you will now read 60 sentences. For each of these sentences, your task is to <strong>decide whether the person you just played with will consider the sentence true or false</strong>. So, to be clear: we are not asking for your own opinion about the truth of falsity of these sentences. We are interested in your beliefs about what the other player will say. (Of course, it is possible that you think that the other player will judge a sentence just like you do. This, however, is not necessarily always the case.) <br><br> You can answer by pressing buttons labeled 'true' and 'false'. But before these buttons appear there is a pause. Please use this pause to <strong>carefully think about your answer</strong>, as some sentences might not be too obviously true or false. <strong>Please do not take this task lightly! It is very important for us that you think about your choice with care.</strong>
+
+The motivation behind this latter change was the in order to make sense of participants' behavior in the card-game task we'd actually want to know how they think that their co-player interprets sentences, not how they do.
+
+## Data cleaning
+
+We will first remove anyone who did not answer all the color blindness questions right.
+
+```{r}
+# check colorblindness
+color_blindness_failures = filter(d, trial_type == "color_blindness_test") %>%
+  select(submission_id, correct, response) %>% 
+  mutate(correct = ifelse(correct == response,1,0)) %>% 
+  group_by(submission_id) %>% 
+  summarize(mean_correct = mean(correct)) %>% 
+  filter(mean_correct < 1) %>% 
+  pull(submission_id)
+
+d = filter(d, ! submission_id %in% color_blindness_failures)
+
+message("Number of failures on color blindness test: ", length(color_blindness_failures))
+```
+
+ASIDE: It should be noted that it is not clear whether this exclusion is justified. Look at the answers the excluded participants gave.
+
+```{r, include=FALSE, message = FALSE, warning=FALSE}
+e = read_csv('../../data/05_sentence_selection/data_raw.csv') %>% 
+    filter(! prolific_id %in% c("TESTMF"))
+filter(e, submission_id %in% color_blindness_failures, trial_type == "color_blindness_test") %>% 
+  select(submission_id, correct, response)
+```
+
+No other data cleaning was carried out so far (e.g., in terms of comprehension checks or similar).
+
+## Results
+
+Participants were all assigned to the competitive condition.
+
+### Self-assessment performance rating
+
+Here is how participants rated their own success:
+
+```{r, message = FALSE}
+filter(d, trial_type == "performance_rating") %>% 
+  mutate(response = as.numeric(response)) %>% 
+  ggplot(aes(x = response)) + geom_histogram()
+```
+
+### Sentence completion task
+
+Here are counts for the choices in the sentence completion task (the "interactive" card game). Remember that "green" is a choice of message that refers to the green card (either semantically or only when we take an implicature into account).
+
+```{r}
+filter(d, trial_type == "sentence_completion") %>% 
+  select(prolific_id, condition, glb_condition, condition, response) %>% 
+  ggplot(aes(x = response)) + geom_bar() +
+  facet_grid(~condition) + coord_flip()
+```
+
+It does not seem to be the case that a majority is using implicatures with "some" to mislead. (A misleading use of an implicature sentence would here result in a chocie of "red".) If fact, even for semantic conditions 'all' and 'none' no clear majority tried to "mislead with a falsity".
+
+### Truth value judgements
+
+Here is the distribution of the proportion of semantic (true) to pragmatic (false) answers for each participant in the TVJ task (**which was now about participants' beliefs about the co-player's judgements**):
+
+```{r, warning = FALSE}
+d_tvj = filter(d, trial_type == "truth_value_judgements") %>% 
+  mutate(response = ifelse(response == "true", 1, 0))
+
+d_summary_id = d_tvj %>% group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% arrange(submission_id) %>% 
+  filter(condition == "implicature") 
+
+d_summary_id_imp = d_summary_id %>% filter(trigger != "number") %>% 
+  group_by(submission_id) %>% 
+  summarize(mean_true = mean(mean_true)) 
+
+d_summary_id_imp %>% 
+  ggplot(aes(x = mean_true)) + geom_histogram()
+```
+
+If we consider anyone with a mean proportion < .5 on *some* and *ad hoc* items a pragmatic respsonder we have `r sum(d_summary_id_imp$mean_true < 0.5)` pragmatic responders.
+
+### Sentence completion data by semantic vs pragmatic response type
+
+Here are the sentence-choice counts from the card-playing task, but this time split up in terms of semantic/pragmatic types (as determined from the TVJ part). 
+
+```{r}
+d_summary_id_imp %<>% 
+  mutate(sem_prag_type = ifelse(mean_true < 0.5, "pragmatic", "semantic")) %>% 
+  select(- mean_true)
+
+d = full_join(d, d_summary_id_imp, by = "submission_id")
+
+filter(d, trial_type == "sentence_completion") %>% 
+  select(prolific_id, condition, condition, response, sem_prag_type) %>% 
+  ggplot(aes(x = response)) + geom_bar() +
+  facet_grid(sem_prag_type~condition) + coord_flip()
+```
+
+Interestingly, there does seem to be a (trend) towards a difference in answer behavior in the *ad hoc* and the *some* condition. The latter makes partial sense: if a participant believes that a *some*-sentence is interpreted pragmatically, they might want to mislead with a choice of "red".
+
+However, a few things also seem puzzling:
+
+1. high choice rate of "green" in *ad hoc* condition of pragmatic people
+2. why not equal choice of "red" and "green" for semantic people?
+
+```{r include=FALSE, message = FALSE, warning=FALSE}
+# library(brms)
+# 
+# fit = brm(
+#   response ~ sem_prag_type,  
+#   family="categorical",
+#   data = filter(d, trial_type == "sentence_completion", condition == c("some")) %>% 
+#               select(prolific_id, response, sem_prag_type, number) 
+# )
+
+
+
+```
+
+
