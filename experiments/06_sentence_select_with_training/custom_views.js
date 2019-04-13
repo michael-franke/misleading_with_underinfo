@@ -93,6 +93,170 @@ const instructions_custom = function(config) {
     return instructions_custom;
 }
 
+const sentence_completion_with_feedback_type = function(config) {
+    const dropdownChoice = {
+        name: config.name,
+        title: babeUtils.view.setter.title(config.title, ""),
+        render: function(CT, babe) {
+            console.log(babe.mfhello);
+            let startingTime;
+            const cooperative_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the  card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a cooperative game. You and the guesser win if the guesser chooses the green card. You both lose if the guesser chooses the red card. How would you complete the sentence below to describe the green card?";
+            const competitive_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a competitive game. You win (and the guesser loses) if the guesser chooses the red card. You lose (and the guesser wins) if the guesser chooses the green card. How would you complete the sentence below to describe the green card?";
+            const QUD_text = babe.global_data.condition == "cooperative" ? cooperative_QUD : competitive_QUD;
+            const QUD = babeUtils.view.setter.QUD(QUD_text);
+            const sentence_fragment = config.data[CT].sentence_fragment;
+            const completions_shuffle_index = _.shuffle([0, 1, 2]);
+            const option1 = config.data[CT].completions[completions_shuffle_index[0]];
+            const option2 = config.data[CT].completions[completions_shuffle_index[1]];
+            const option3 = config.data[CT].completions[completions_shuffle_index[2]];
+            const answer_category1 = config.data[CT].answer_category[completions_shuffle_index[0]];
+            const answer_category2 = config.data[CT].answer_category[completions_shuffle_index[1]];
+            const answer_category3 = config.data[CT].answer_category[completions_shuffle_index[2]];
+            const options_list = [option1, option2, option3];
+            const answer_categories = [answer_category1, answer_category2, answer_category3];
+            const viewTemplate = `<div class='babe-view'>
+            <h1 class='babe-view-title' id = "title_container_to_change">` + " " + ` </h1>
+            <div class='babe-view-stimulus-container-custom' id='stimulus_container_to_hide'>
+                <div class='babe-view-stimulus babe-nodisplay'></div>
+            </div>
+            </div>`;
+
+            const answerContainerElem = `
+                    <div class='babe-view-answer-container' id='answer_container_to_hide'>
+                        <p class='babe-view-question' style='background-color:lightgray;font-size:100%;'>${sentence_fragment} ... </p>
+                            <label for='s1' class='babe-response-sentence'>${option1}</label>
+                            <input type='radio' name='answer' id='s1' value="1" />
+                            <label for='s2' class='babe-response-sentence'>${option2}</label>
+                            <input type='radio' name='answer' id='s2' value="2" />
+                            <label for='s3' class='babe-response-sentence'>${option3}</label>
+                            <input type='radio' name='answer' id='s3' value="3" />
+                    <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;' id='QUD_text_to_hide'>${QUD}</p>
+                    </div>
+                    <div class='bla' id='wait_container' style='display:none;'>
+                      <p class='babe-view-question'>
+                        please wait for the other player to make a selection
+                      </p>
+                    </div>
+    `;
+
+
+            $("#main").html(viewTemplate);
+
+            const enableResponse = function() {
+                $(".babe-view").append(answerContainerElem);
+
+                $("input[name=answer]").on("change", function(e) {
+                    var RT = Date.now() - startingTime; // measure RT before anything else
+                    var trial_data = {
+                        trial_type: config.trial_type,
+                        trial_number: CT + 1,
+                        response: answer_categories[e.target.value-1],
+                        RT: RT
+                    };
+
+                    for (let prop in config.data[CT]) {
+                        if (config.data[CT].hasOwnProperty(prop)) {
+                            trial_data[prop] = config.data[CT][prop];
+                        }
+                    }
+
+                    if (config.data[CT].picture !== undefined) {
+                        trial_data.picture = config.data[CT].picture;
+                    }
+
+                    if (config.data[CT].canvas !== undefined) {
+                        for (let prop in config.data[CT].canvas) {
+                            if (
+                                config.data[CT].canvas.hasOwnProperty(prop)
+                            ) {
+                                trial_data[prop] =
+                                    config.data[CT].canvas[prop];
+                            }
+                        }
+                    }
+
+                    babe.trial_data.push(trial_data);
+
+                    // hide containers
+                    // var x = document.getElementById("stimulus_container_to_hide");
+                    // if (x.style.display === "none") {
+                    //     x.style.display = "block";
+                    // } else {
+                    //     x.style.display = "none";
+                    // }
+                    // var x = document.getElementById("answer_container_to_hide");
+                    // if (x.style.display === "none") {
+                    //     x.style.display = "block";
+                    // } else {
+                    //     x.style.display = "none";
+                    // }
+                    // var x = document.getElementById("QUD_text_to_hide");
+                    // if (x.style.display === "none") {
+                    //     x.style.display = "block";
+                    // } else {
+                    //     x.style.display = "none";
+                    // }
+
+                    // show "please wait container"
+                    var x = document.getElementById("answer_container_to_hide");
+                    x.innerHTML =
+                        `<p class='babe-view-question'>Your choice: </p>` +
+                        `<p class='babe-view-question' style='background-color:lightgray;font-size:100%;'>${sentence_fragment} ` + options_list[e.target.value-1] + `. </p>` +
+                        `<p class='babe-view-question'>Your co-player's choice: </p>` +
+                        `<p class='babe-view-question' style='font-size:100%;font-color:"red"'> Please wait for the other player to make a choice. </p>`;
+
+                    var waiting_time = CT < 5 ? 4500 : _.shuffle([2000, 3000, 4000])[1];
+
+                    const coplayer_type = "strategic";
+                    const coplayer_choice = coplayer_type == "strategic" ?
+                          answer_categories[e.target.value-1] == "red" ? "green" :
+                          answer_categories[e.target.value-1] == "green" ? "red" :
+                          _.shuffle(["red", "green"])[0] :
+                          answer_categories[e.target.value-1] == "red" ? "red" :
+                          answer_categories[e.target.value-1] == "green" ? "green" :
+                          _.shuffle(["red", "green"])[0];
+                    const coplayer_choice_string = `The ` + coplayer_choice + ` card.`;
+
+                    setTimeout(
+                        function(){
+                            var x = document.getElementById("answer_container_to_hide");
+                            x.innerHTML =
+                                `<p class='babe-view-question'>Your choice: </p>` +
+                                `<p class='babe-view-question' style='background-color:lightgray;font-size:100%;'>${sentence_fragment} ` + options_list[e.target.value-1] + `. </p>` +
+                                `<p class='babe-view-question'>Your co-player's choice: </p>` +
+                                `<p class='babe-view-question' style='background-color:lightgray;font-size:100%;'> ` + coplayer_choice_string + `</p>` +
+                                `<button id="next" class='babe-view-button'>Next</button>`;
+                            // moves to the next view
+                            $("#next").on("click", function() {
+                                babe.findNextView();
+                            });
+                        },
+                        waiting_time
+                    );
+
+                });
+            };
+
+            startingTime = Date.now();
+
+            // creates the DOM of the trial view
+            babeUtils.view.createTrialDOM({
+                    pause: config.pause,
+                    fix_duration: config.fix_duration,
+                    stim_duration: config.stim_duration,
+                    data: config.data[CT],
+                    evts: config.hook,
+                    view: "dropdownChoice"
+                },
+                enableResponse
+            );
+        },
+        CT: 0,
+        trials: config.trials
+    };
+
+    return dropdownChoice;
+};
 
 const sentence_completion_type = function(config) {
     const dropdownChoice = {

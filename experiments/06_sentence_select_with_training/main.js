@@ -12,8 +12,9 @@ $("document").ready(function() {
         views_seq: [
             intro,
             instructions_general,
-            instructions_color_blindness,
-            color_blindness_test,
+            training_with_feedback,
+            // instructions_color_blindness,
+            // color_blindness_test,
             instructions_part1,
             // comprehension_test,
             wait_for_player,
@@ -29,7 +30,7 @@ $("document").ready(function() {
         deploy: {
             experimentID: "51",
             serverAppURL: "https://mcmpact.ikw.uni-osnabrueck.de/babe/api/submit_experiment/",
-            deployMethod: "Prolific",
+            deployMethod: "debug",
             contact_email: "exprag@gmail.com",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=IF03IVF6"
         },

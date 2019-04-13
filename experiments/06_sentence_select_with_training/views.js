@@ -54,6 +54,14 @@ const wait_for_player = waiting_custom({
     buttonText: 'start play'
 })
 
+const training_with_feedback = sentence_completion_with_feedback_type({
+    // trials: 2,
+    trials: main_trials.sentence_completion.length,
+    name: 'sentence_completion',
+    trial_type: 'sentence_completion',
+    data: _.shuffle(main_trials.sentence_completion)
+});
+
 const sentence_completion = sentence_completion_type({
     // trials: 2,
     trials: main_trials.sentence_completion.length,
