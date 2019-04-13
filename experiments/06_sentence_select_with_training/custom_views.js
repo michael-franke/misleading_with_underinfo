@@ -62,10 +62,13 @@ const instructions_custom = function(config) {
 
             const competitive_description =  "Part 1 a <strong>competitive game</strong> which you will play with another human player: a describer and a guesser. <br><br> In each round of the game you'll see two cards. One has a green border, the other one a red border. We will refer to them as the 'green card' and the 'red card'. The guesser sees the same two cards (possibly in another spatial arrangement), but <strong>the guesser does not see the colored borders</strong>. The guesser wins if they choose the green card, and you win if they choose the red one instead. Your goal is to <strong>complete a description of the green card</strong>, in such a way as <strong>to make the guesser choose the red card, not the green card</strong>. The guesser knows that this is a competitive game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're trying to mislead the guesser, so your goal is to make them not choose the green card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser clicked on the red card after reading your description as a successful round for you. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you played successfully.</strong> You will, however, not receive any feedback during the game as to whether your last round was successful or not.";
 
-            console.log("This is a run of the " + between_subjects_condition + " condition.")
+            console.log("This is a run of the " + between_subjects_condition + " condition.");
 
             // add information about current randomly sampled condition to babe global data object
             babe.global_data.condition = between_subjects_condition;
+
+            // add information about current randomly sampled coplayer_type
+            babe.global_data.condition = coplayer_type;
 
             const text = between_subjects_condition == "cooperative" ? cooperative_description : competitive_description;
 
@@ -177,27 +180,6 @@ const sentence_completion_with_feedback_type = function(config) {
 
                     babe.trial_data.push(trial_data);
 
-                    // hide containers
-                    // var x = document.getElementById("stimulus_container_to_hide");
-                    // if (x.style.display === "none") {
-                    //     x.style.display = "block";
-                    // } else {
-                    //     x.style.display = "none";
-                    // }
-                    // var x = document.getElementById("answer_container_to_hide");
-                    // if (x.style.display === "none") {
-                    //     x.style.display = "block";
-                    // } else {
-                    //     x.style.display = "none";
-                    // }
-                    // var x = document.getElementById("QUD_text_to_hide");
-                    // if (x.style.display === "none") {
-                    //     x.style.display = "block";
-                    // } else {
-                    //     x.style.display = "none";
-                    // }
-
-                    // show "please wait container"
                     var x = document.getElementById("answer_container_to_hide");
                     x.innerHTML =
                         `<p class='babe-view-question'>Your choice: </p>` +
