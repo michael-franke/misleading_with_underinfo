@@ -4,12 +4,14 @@ library(magrittr)
 d = read_csv('data/05_sentence_selection/data_raw.csv') %>% 
   filter(! prolific_id %in% c("TESTMF"))
 
-d$prolific_id %>% unique() %>% length
+d$prolific_id %>% unique() %>% sort()
 
 # bonus payment string
 
-# tibble(string = filter(d, startTime > 1.5538e+12) %>% pull(prolific_id) %>% unique() %>% paste0(",0.75")) %>% 
-#   write_csv("~/Desktop/bonus_payments.csv")
+tibble(string = filter(d) %>% pull(prolific_id) %>% unique() %>% paste0(",0.75")) %>%
+  write_csv("~/Desktop/bonus_payments.csv")
+
+# also added another one (did 22 min, but no code, no data, reimbursed anyway):
 
 # check comments
 d$comments %>% unique
