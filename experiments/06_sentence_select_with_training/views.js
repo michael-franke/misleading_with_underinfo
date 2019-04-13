@@ -59,7 +59,7 @@ const training_with_feedback = sentence_completion_with_feedback_type({
     trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
-    data: _.shuffle(main_trials.sentence_completion)
+    data: _.shuffle(_.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}))
 });
 
 const sentence_completion = sentence_completion_type({

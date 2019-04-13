@@ -1,3 +1,6 @@
+const coplayer_type = _.shuffle(["strategic", "unstrategic"])[0];
+console.log(coplayer_type);
+
 const practice_trials = {
         comprehension_checks : [
             {

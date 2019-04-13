@@ -207,14 +207,19 @@ const sentence_completion_with_feedback_type = function(config) {
 
                     var waiting_time = CT < 5 ? 4500 : _.shuffle([2000, 3000, 4000])[1];
 
-                    const coplayer_type = "strategic";
-                    const coplayer_choice = coplayer_type == "strategic" ?
-                          answer_categories[e.target.value-1] == "red" ? "green" :
-                          answer_categories[e.target.value-1] == "green" ? "red" :
-                          _.shuffle(["red", "green"])[0] :
-                          answer_categories[e.target.value-1] == "red" ? "red" :
-                          answer_categories[e.target.value-1] == "green" ? "green" :
-                          _.shuffle(["red", "green"])[0];
+                    let coplayer_choice;
+                    if (coplayer_type == "strategic") {
+                        coplayer_choice = answer_categories[e.target.value-1] == "red" ? "green" :
+                            answer_categories[e.target.value-1] == "green" ? "red" :
+                            _.shuffle(["red", "green"])[0];
+                        console.log("here");
+                    } else {
+                        coplayer_choice = answer_categories[e.target.value-1] == "red" ? "red" :
+                            answer_categories[e.target.value-1] == "green" ? "green" :
+                            _.shuffle(["red", "green"])[0];
+                        console.log("there");
+                    }
+
                     const coplayer_choice_string = `The ` + coplayer_choice + ` card.`;
 
                     setTimeout(
