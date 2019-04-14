@@ -25,6 +25,15 @@ const instructions_part1 = instructions_custom({
     buttonText: 'continue'
 });
 
+const training_as_guesser = babeViews.imageSelection({
+    trials: 2,
+    trial_type: 'training_as_guesser',
+    name: 'training_as_guesser',
+    title: 'Training trials in guesser role',
+    buttonText: 'next',
+    data: guesser_trials
+});
+
 // const instructions_color_blindness = babeViews.instructions({
 //     trials: 1,
 //     name: 'instructions_color_blindness',

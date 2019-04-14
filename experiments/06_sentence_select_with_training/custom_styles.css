@@ -16,4 +16,9 @@
     height: auto;
 }
 
+.babe-response-picture img {
+    margin: 20px;
+    height: 220px;
+    width: 220px;
+}
 

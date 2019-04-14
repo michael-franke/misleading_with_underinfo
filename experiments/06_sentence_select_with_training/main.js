@@ -15,6 +15,7 @@ $("document").ready(function() {
             // instructions_color_blindness,
             // color_blindness_test,
             instructions_part1,
+            training_as_guesser,
             // comprehension_test,
             wait_for_player,
             training_with_feedback,

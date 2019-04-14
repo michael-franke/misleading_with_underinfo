@@ -21,6 +21,27 @@ const practice_trials = {
         ]
 }
 
+const guesser_trials = [
+        {
+            picture1: 'images/guesser_01_true.png',
+            picture2: 'images/guesser_01_false.png',
+            option1: 'true',
+            option2: 'false',
+            item: '01',
+            QUD: 'Click on the picture of the green card!',
+            question: 'The describer said:<br>"The green card is the card where <strong>all of the objects are hats</strong>."'
+        },
+        {
+            picture1: 'images/guesser_02_a.png',
+            picture2: 'images/guesser_02_b.png',
+            option1: 'true',
+            option2: 'true',
+            item: '02',
+            QUD: 'Click on the picture of the green card!',
+            question: 'The describer said: <br>"The green card is the card where <strong>all of the objects are colored</strong>."'
+         }
+];
+
 const main_trials = {
     color_blindness_test : [
         {
