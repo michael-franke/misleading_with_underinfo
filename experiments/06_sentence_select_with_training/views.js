@@ -18,20 +18,6 @@ const instructions_general = babeViews.instructions({
     text: '<strong>This experiment will last approximately 15 minutes in total</strong>. There are two parts. The first part is an interactive game where you will be playing with another human player, who will also be recruited from Prolific. The second part will be performed alone, but it is equally important. <br><br> Since <strong>this experiment involves playing together with another human player</strong>, we need to ask you for some patience. It may take some time for another player to be found and paired with you (on average about  1 minute) and it may take time for the other player to make decisions. Also, for your co-player\'s benefit, it would be nice for you to: <br> * do not abandon the experiment unnecessarily beyond this point, <br> * read the instructions carefully, <br> * play the game as well as you can, and <br> * finish the whole experiment eventually. <br> <br> Thank you very much for your understanding!'
 });
 
-const instructions_color_blindness = babeViews.instructions({
-    trials: 1,
-    name: 'instructions_color_blindness',
-    title: 'Color Blindness Test',
-    text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
-});
-
-const color_blindness_test = babeViews.textboxInput({
-    trials: 3,
-    name: "color_blindeness_test",
-    trial_type: "color_blindness_test",
-    data: _.shuffle(main_trials.color_blindness_test)
-});
-
 const instructions_part1 = instructions_custom({
     trials: 1,
     name: 'instructions part 1',
@@ -39,13 +25,27 @@ const instructions_part1 = instructions_custom({
     buttonText: 'continue'
 });
 
-const comprehension_test = babeViews.forcedChoice({
-    trials: practice_trials.comprehension_checks.length,
-    name: "comprehension_test",
-    trial_type: "comprehension_test", 
-    title: "Comprehension checks",
-    data: practice_trials.comprehension_checks
-})
+// const instructions_color_blindness = babeViews.instructions({
+//     trials: 1,
+//     name: 'instructions_color_blindness',
+//     title: 'Color Blindness Test',
+//     text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
+// });
+
+// const color_blindness_test = babeViews.textboxInput({
+//     trials: 3,
+//     name: "color_blindeness_test",
+//     trial_type: "color_blindness_test",
+//     data: _.shuffle(main_trials.color_blindness_test)
+// });
+
+// const comprehension_test = babeViews.forcedChoice({
+//     trials: practice_trials.comprehension_checks.length,
+//     name: "comprehension_test",
+//     trial_type: "comprehension_test", 
+//     title: "Comprehension checks",
+//     data: practice_trials.comprehension_checks
+// })
 
 const wait_for_player = waiting_custom({
     trials: 1,
@@ -55,16 +55,24 @@ const wait_for_player = waiting_custom({
 })
 
 const training_with_feedback = sentence_completion_with_feedback_type({
-    // trials: 2,
-    trials: main_trials.sentence_completion.length,
+    trials: 2,
+    // trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
     data: _.shuffle(_.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}))
 });
 
+const instructions_begin_test_part_1 = babeViews.instructions({
+    trials: 1,
+    name: 'instructions main part',
+    title: 'Instructions for practice session',
+    buttonText: 'continue',
+    text: 'Now that you have gotten used to the game and your co-player, we will start the main phase where you play against the same co-player as during the training but you will not receive feedback anymore about what your co-player chose.'
+});
+
 const sentence_completion = sentence_completion_type({
-    // trials: 2,
-    trials: main_trials.sentence_completion.length,
+    trials: 2,
+    // trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
     data: _.shuffle(main_trials.sentence_completion)
