@@ -78,8 +78,8 @@ const instructions_training_with_feedback = babeViews.instructions({
 });
 
 const training_with_feedback = sentence_completion_with_feedback_type({
-    trials: 2,
-    // trials: main_trials.sentence_completion.length,
+    // trials: 2,
+    trials: main_trials.sentence_completion.length,
     name: 'sentence_completion_training',
     trial_type: 'sentence_completion_training',
     data: _.shuffle(_.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}))
@@ -94,8 +94,8 @@ const instructions_begin_test_part_1 = babeViews.instructions({
 });
 
 const sentence_completion = sentence_completion_type({
-    trials: 2,
-    // trials: main_trials.sentence_completion.length,
+    // trials: 2,
+    trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
     data: _.shuffle(main_trials.sentence_completion)
@@ -127,8 +127,8 @@ const instructions_part2 = babeViews.instructions({
 });
 
 const truth_value_judgements = forcedChoice_pause({
-    trials: 2,
-    // trials: main_trials.truth_value_judgements.length,
+    // trials: 2,
+    trials: main_trials.truth_value_judgements.length,
     name: "truth_value_judgements",
     trial_type: "truth_value_judgements",
     title: "Will the other player judge this sentence as true or false?",
