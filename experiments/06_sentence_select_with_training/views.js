@@ -78,8 +78,8 @@ const instructions_training_with_feedback = babeViews.instructions({
 });
 
 const training_with_feedback = sentence_completion_with_feedback_type({
-    // trials: 2,
-    trials: main_trials.sentence_completion.length,
+    trials: 18,
+    // trials: main_trials.sentence_completion.length,
     name: 'sentence_completion_training',
     trial_type: 'sentence_completion_training',
     data: _.shuffle(_.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}))
