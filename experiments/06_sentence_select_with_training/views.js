@@ -41,19 +41,19 @@ const training_as_guesser = babeViews.imageSelection({
     data: _.shuffle(guesser_trials)
 });
 
-// const instructions_color_blindness = babeViews.instructions({
-//     trials: 1,
-//     name: 'instructions_color_blindness',
-//     title: 'Color Blindness Test',
-//     text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
-// });
+const instructions_color_blindness = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_color_blindness',
+    title: 'Color Blindness Test',
+    text: 'It is important for this experiment that you can perceive and distinguish colors sufficiently well. Therefore, you will next see three instances of a standard color vision test. Please enter the number you see in each picture in the text box. If you do not see a number, please write that you do not.'
+});
 
-// const color_blindness_test = babeViews.textboxInput({
-//     trials: 3,
-//     name: "color_blindeness_test",
-//     trial_type: "color_blindness_test",
-//     data: _.shuffle(main_trials.color_blindness_test)
-// });
+const color_blindness_test = babeViews.textboxInput({
+    trials: 3,
+    name: "color_blindeness_test",
+    trial_type: "color_blindness_test",
+    data: _.shuffle(main_trials.color_blindness_test)
+});
 
 // const comprehension_test = babeViews.forcedChoice({
 //     trials: practice_trials.comprehension_checks.length,
@@ -80,16 +80,16 @@ const instructions_training_with_feedback = babeViews.instructions({
 const training_with_feedback = sentence_completion_with_feedback_type({
     trials: 2,
     // trials: main_trials.sentence_completion.length,
-    name: 'sentence_completion',
-    trial_type: 'sentence_completion',
+    name: 'sentence_completion_training',
+    trial_type: 'sentence_completion_training',
     data: _.shuffle(_.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}))
 });
 
 const instructions_begin_test_part_1 = babeViews.instructions({
     trials: 1,
     name: 'instructions main part',
-    title: 'Instructions for practice session',
-    buttonText: 'continue',
+    title: 'Get ready for main session!',
+    buttonText: 'start main phase',
     text: 'Now that you have gotten used to the game and your co-player, we will start the main phase where you play against the same co-player as during the training but you will not receive feedback anymore about what your co-player chose.'
 });
 

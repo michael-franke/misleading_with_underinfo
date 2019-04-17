@@ -31,9 +31,9 @@ $("document").ready(function() {
             thanks,
         ],
         deploy: {
-            experimentID: "51",
+            experimentID: "53",
             serverAppURL: "https://mcmpact.ikw.uni-osnabrueck.de/babe/api/submit_experiment/",
-            deployMethod: "debug",
+            deployMethod: "Prolific",
             contact_email: "exprag@gmail.com",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=IF03IVF6"
         },
@@ -41,6 +41,7 @@ $("document").ready(function() {
             in: [
                 // list the view-names of the views for which you want a progress bar
                 "training_as_guesser",
+                "sentence_completion_training",
                 "sentence_completion",
                 "truth_value_judgements"
             ],
