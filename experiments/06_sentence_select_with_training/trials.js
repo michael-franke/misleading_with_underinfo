@@ -1,6 +1,3 @@
-const coplayer_type = _.shuffle(["strategic", "unstrategic"])[0];
-console.log(coplayer_type);
-
 const practice_trials = {
         comprehension_checks : [
             {
@@ -22,24 +19,42 @@ const practice_trials = {
 }
 
 const guesser_trials = [
-        {
-            picture1: 'images/guesser_01_true.png',
-            picture2: 'images/guesser_01_false.png',
-            option1: 'true',
-            option2: 'false',
-            item: '01',
-            QUD: 'Click on the picture of the green card!',
-            question: 'The describer said:<br>"The green card is the card where <strong>all of the objects are hats</strong>."'
-        },
-        {
-            picture1: 'images/guesser_02_a.png',
-            picture2: 'images/guesser_02_b.png',
-            option1: 'true',
-            option2: 'true',
-            item: '02',
-            QUD: 'Click on the picture of the green card!',
-            question: 'The describer said: <br>"The green card is the card where <strong>all of the objects are colored</strong>."'
-         }
+    {
+        picture1: 'images/guesser_01_true.png',
+        picture2: 'images/guesser_01_false.png',
+        option1: 'true',
+        option2: 'false',
+        item: '01',
+        QUD: 'Click on the picture of the card which you think is the green card, based on what the describer said!',
+        question: 'The describer said:<br>"The green card is the card where <strong>all of the objects are hats</strong>."'
+    },
+    {
+        picture1: 'images/guesser_02_a.png',
+        picture2: 'images/guesser_02_b.png',
+        option1: 'true',
+        option2: 'true',
+        item: '02',
+        QUD: 'Click on the picture of the card which you think is the green card, based on what the describer said!',
+        question: 'The describer said: <br>"The green card is the card where <strong>all of the objects are colored</strong>."'
+    },
+    {
+        picture1: 'images/guesser_03_false.png',
+        picture2: 'images/guesser_03_true.png',
+        option1: 'false',
+        option2: 'true',
+        item: '03',
+        QUD: 'Click on the picture of the card which you think is the green card, based on what the describer said!',
+        question: 'The describer said: <br>"The green card is the card where <strong>all of the objects are colored</strong>."'
+    },
+    {
+        picture1: 'images/guesser_04_a.png',
+        picture2: 'images/guesser_04_b.png',
+        option1: 'true',
+        option2: 'true',
+        item: '04',
+        QUD: 'Click on the picture of the card which you think is the green card, based on what the describer said!',
+        question: 'The describer said: <br>"The green card is the card where <strong>all of the objects are colored</strong>."'
+    }
 ];
 
 const main_trials = {

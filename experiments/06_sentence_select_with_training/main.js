@@ -15,8 +15,10 @@ $("document").ready(function() {
             // instructions_color_blindness,
             // color_blindness_test,
             instructions_part1,
+            instructions_training_as_guesser,
             training_as_guesser,
             // comprehension_test,
+            instructions_training_with_feedback,
             wait_for_player,
             training_with_feedback,
             instructions_begin_test_part_1,
@@ -39,6 +41,7 @@ $("document").ready(function() {
         progress_bar: {
             in: [
                 // list the view-names of the views for which you want a progress bar
+                "training_as_guesser",
                 "sentence_completion",
                 "truth_value_judgements"
             ],

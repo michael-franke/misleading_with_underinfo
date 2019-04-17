@@ -25,13 +25,20 @@ const instructions_part1 = instructions_custom({
     buttonText: 'continue'
 });
 
+const instructions_training_as_guesser = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_training_as_guesser',
+    title: 'Get ready for the first practice session',
+    text: `We will start with a short practice session. You will play alone by yourself. You will practice ` + guesser_trials.length + ` rounds of play in the role of the guesser, just to get acquainted with your co-player's role in this game. <strong>Try to get a feeling for what you would do if you were the guesser.</strong> This will help you play successfully as a describer later on.`
+});
+
 const training_as_guesser = babeViews.imageSelection({
-    trials: 2,
+    trials: guesser_trials.length,
     trial_type: 'training_as_guesser',
     name: 'training_as_guesser',
     title: 'Training trials in guesser role',
     buttonText: 'next',
-    data: guesser_trials
+    data: _.shuffle(guesser_trials)
 });
 
 // const instructions_color_blindness = babeViews.instructions({
@@ -59,9 +66,16 @@ const training_as_guesser = babeViews.imageSelection({
 const wait_for_player = waiting_custom({
     trials: 1,
     name: 'waiting',
-    title: "Waiting",
+    title: "Waiting for your co-player to join",
     buttonText: 'start play'
 })
+
+const instructions_training_with_feedback = babeViews.instructions({
+    trials: 1,
+    name: 'instructions_training_as_guesser',
+    title: 'Get ready for the second practice session',
+    text: `We will now briefly practice playing in your role as describer together with your co-player. During this training phase, you will receive feedback about the card your co-player chose as a response to your description. You will not receive this feedback later during the main stage of the game. But you can learn something about your co-player here. If you want to play the game well later on, <strong>try to figure out how your co-player reacts to your descriptions!</strong>`
+});
 
 const training_with_feedback = sentence_completion_with_feedback_type({
     trials: 2,

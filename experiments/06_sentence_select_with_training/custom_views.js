@@ -54,24 +54,29 @@ const instructions_custom = function(config) {
         button: babeUtils.view.setter.buttonText(config.buttonText),
         render: function(CT, babe) {
 
-            // const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
+            // randomly allocate participants to conditions
 
-            const between_subjects_condition = "competitive";
+            const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
+            // const between_subjects_condition = "competitive";
+            const coplayer_type = between_subjects_condition == "cooperative" ? "cooperative" : _.shuffle(["strategic", "unstrategic"])[0];
+
+            // condition-dependent strings for info
             const card_coplayer_chooses = between_subjects_condition == "cooperative" ? "green"  : "red";
             const winning_condition = between_subjects_condition == "cooperative" ? "clicks on the green card"  : "clicks on the red card";
 
-            const game_desctiption = `Part 1 is a <strong>` + between_subjects_condition + `</strong> game which you will play with another human player. ` +
+            const game_desctiption = `Here are the instructions for part 1. Please <strong>read these instructions very carefully</strong> until you think you understand what is about to happen. <br><br>` +
+                  `Part 1 is a <strong>` + between_subjects_condition + `</strong> game which you will play with another human player. ` +
                   `You will play the role of the <strong>describer</strong>. The other player is the <strong>guesser</strong>.` +
                   `<br><br>` +
                   `In each round of the game you'll see two cards. One has a green border, the other one a red border. We will refer to them as the 'green card' and the 'red card'. The guesser sees the same two cards (possibly in another spatial arrangement), but <strong>the guesser does not see the colored borders</strong>. <br><br>` +
-                  `In each round of the game you will <strong>choose a description of the green card</strong>, by clicking on one or several possible descriptions to send to the guesser. The guesser then reads your description and tries to identify the green card. <br><br>` +
+                  `In each round of the game you will <strong>choose a description of the green card</strong>, by clicking on one of several possible descriptions to send to the guesser. The guesser then reads your description and tries to identify the green card. <br><br>` +
                   `Here is an example of a round of play from your point of view as the describer: <br><br>` +
                   `<img src='images/example_screenshot_describer.png' alt='grid placement example' height='auto' width='600' style="border:2px solid black" /> <br><br>` +
                   `Here is an example of the same round of play from your co-player's point of view, the guesser, after you selected one of the available expressions: <br><br>` +
                   `<img src='images/example_screenshot_guesser.png' alt='grid placement example' height='auto' width='600' style="border:2px solid black" /> <br><br>` +
                   `The guesser wins the round if the guesser manages to click on the green card. Since this is a ` + between_subjects_condition + ` game, you win the round whenever the guesser ` + winning_condition + `. Consequently, <strong>your goal is to send a description of the green card, in such a way as to make the guesser click on the ` + card_coplayer_chooses + ` card.</strong> You can choose whichever sentence completion you like. Your description can also be false. <br> <br>` +
                   `The guesser knows that this is a ` + between_subjects_condition + ` game and will, if they understand the game and play it well, try hard to choose the green card. That means that <strong>you should adjust your choice of description to how you think the guesser will interpret it</strong>. <br><br>` +
-                  `To get used to this game and your co-player, we will start with a few rounds of training in which you will receive feedback about what the guesser did. Try to get a feeling for what your co-player does to play successfully during the main stage of the game, where there will be no feedback on how the guesser responded to your descriptions. <br><br>` +
+                  `To get used to this game and your co-player, we will start with a few rounds of training. You will first play a few rounds as if you were the guesser, just to get a feeling for your co-player's perspective on the game. Next, after having paired you with another human player, you will play a few rounds in the role of the guesser, just like in the main stage of the experiment, together with the co-player allocated to you. During training you will receive feedback about what the guesser did. Try to get a feeling for what your co-player does, so that you can play successfully during the main stage of the game, where there will be no feedback on how the guesser responded to your descriptions. <br><br>` +
                   `After the training, during the main stage of the game, we will record the number of rounds in which you win. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you won during the main stage of the game.</strong> You will, however, not receive any feedback during the main stage of the game about the guesser's choices.`;
 
             // const cooperative_description = "Part 1 is a <strong>cooperative game</strong> which you will play with another human player. You will play the role of the <strong>describer</strong>. The other player is the <strong>guesser</strong>.  <br><br> In each round of the game you'll see two cards. One has a green border, the other one a red border. We will refer to them as the 'green card' and the 'red card'. The guesser sees the same two cards (possibly in another spatial arrangement),  but <strong>the guesser does not see the colored borders</strong>. Your goal is to <strong>complete a description of the green card</strong>, in such a way as <strong>to make the guesser choose the green card</strong>. The guesser knows that this is a cooperative game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're helping the guesser, so your goal is to make them choose the green card (which is circled in green for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser clicked on the green card after reading your description as a successful round. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you played successfully.</strong> You will, however, not receive any feedback during the game as to whether your last round was successful or not.";
@@ -79,15 +84,12 @@ const instructions_custom = function(config) {
             // const competitive_description =  "Part 1 a <strong>competitive game</strong> which you will play with another human player. You will play the role of the <strong>describer</strong>. The other player is the <strong>guesser</strong>.<br><br> In each round of the game you'll see two cards. One has a green border, the other one a red border. We will refer to them as the 'green card' and the 'red card'. The guesser sees the same two cards (possibly in another spatial arrangement), but <strong>the guesser does not see the colored borders</strong>. Your goal is to <strong>complete a description of the green card</strong>, in such a way as <strong>to make the guesser choose the red card, not the green card</strong>. The guesser knows that this is a competitive game but they don't know that you are completing the descriptions instead of writing the whole sentence freely yourself. You can choose whichever sentence completion you like (<strong>your description can also be false</strong>), but remember that you're trying to mislead the guesser, so your goal is to make them choose the red card (which is circled in red for you, but not for the guesser). </br> <br> We will record the number of rounds in which the guesser clicked on the red card after reading your description as a successful round for you. <strong>You have the chance to receive a bonus payment of up to 0.75 pounds, based on the proportion of rounds you played successfully.</strong> You will, however, not receive any feedback during the game as to whether your last round was successful or not.";
 
             console.log("This is a run of the " + between_subjects_condition + " condition.");
+            console.log("The co-player is " + coplayer_type + ".");
 
-            // add information about current randomly sampled condition to babe global data object
+            // add information about current between-subject allocation to babe global data object
             babe.global_data.condition = between_subjects_condition;
+            babe.global_data.coplayer_type = coplayer_type;
 
-            // add information about current randomly sampled coplayer_type
-            babe.global_data.condition = coplayer_type;
-
-            // const text = between_subjects_condition == "cooperative" ? cooperative_description : competitive_description;
- 
             const viewTemplate = `<div class="babe-view">
                 <h1 class='babe-view-title'>${this.title}</h1>
                 <section class="babe-text-container">
@@ -206,16 +208,14 @@ const sentence_completion_with_feedback_type = function(config) {
                     var waiting_time = CT < 5 ? 4500 : _.shuffle([2000, 3000, 4000])[1];
 
                     let coplayer_choice;
-                    if (coplayer_type == "strategic") {
+                    if (babe.global_data.coplayer_type == "strategic") {
                         coplayer_choice = answer_categories[e.target.value-1] == "red" ? "green" :
                             answer_categories[e.target.value-1] == "green" ? "red" :
                             _.shuffle(["red", "green"])[0];
-                        console.log("here");
                     } else {
                         coplayer_choice = answer_categories[e.target.value-1] == "red" ? "red" :
                             answer_categories[e.target.value-1] == "green" ? "green" :
                             _.shuffle(["red", "green"])[0];
-                        console.log("there");
                     }
 
                     const coplayer_choice_string = `The ` + coplayer_choice + ` card.`;
