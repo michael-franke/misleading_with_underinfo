@@ -56,8 +56,8 @@ const instructions_custom = function(config) {
 
             // randomly allocate participants to conditions
 
-            const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
-            // const between_subjects_condition = "competitive";
+            // const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
+            const between_subjects_condition = "competitive";
             const coplayer_type = between_subjects_condition == "cooperative" ? "cooperative" : _.shuffle(["strategic", "unstrategic"])[0];
 
             // condition-dependent strings for info
@@ -208,6 +208,8 @@ const sentence_completion_with_feedback_type = function(config) {
                     var waiting_time = CT < 5 ? 4500 : _.shuffle([2000, 3000, 4000])[1];
 
                     let coplayer_choice;
+                    // if the co-player is unstrategic or cooperative, they will interpret literally
+                    // if strategic, they will choose whatever is false of the description received
                     if (babe.global_data.coplayer_type == "strategic") {
                         coplayer_choice = answer_categories[e.target.value-1] == "red" ? "green" :
                             answer_categories[e.target.value-1] == "green" ? "red" :
@@ -218,6 +220,17 @@ const sentence_completion_with_feedback_type = function(config) {
                             _.shuffle(["red", "green"])[0];
                     }
 
+                    let outcome;
+                    let background_color;
+                    // if the game is cooperative the participant wins iff the co-player's choice is 'green'
+                    // if the game is competitive the participant wins iff the co-player's choice is 'red'
+                    if (babe.global_data.condition == 'cooperative') {
+                        outcome = coplayer_choice == "green" ? "Yeah! You <strong>won</strong> this round!" : "Oh no! You <strong>lost</strong> this round!";
+                        background_color = coplayer_choice == "green" ? "lightyellow" : "lightblue";
+                    } else {
+                        outcome = coplayer_choice == "red" ? "Yeah! You <strong>won</strong> this round!" : "Oh no! You <strong>lost</strong> this round!";
+                        background_color = coplayer_choice == "red" ? "lightyellow" : "lightblue";
+                    }
                     const coplayer_choice_string = `The ` + coplayer_choice + ` card.`;
 
                     setTimeout(
@@ -228,6 +241,7 @@ const sentence_completion_with_feedback_type = function(config) {
                                 `<p class='babe-view-question' style='background-color:lightgray;font-size:100%;'>${sentence_fragment} ` + options_list[e.target.value-1] + `. </p>` +
                                 `<p class='babe-view-question'>Your co-player's choice: </p>` +
                                 `<p class='babe-view-question' style='background-color:lightgray;font-size:100%;'> ` + coplayer_choice_string + `</p>` +
+                                `<p class='babe-view-question' style='background-color:` + background_color + `;font-size:150%;'> ` + outcome + `</p>` +
                                 `<button id="next" class='babe-view-button'>Next</button>`;
                             // moves to the next view
                             $("#next").on("click", function() {
@@ -406,8 +420,8 @@ const slider_rating_custom_type = function(config) {
         title: babeUtils.view.setter.title(config.title, ""),
         render: function(CT, babe) {
             let startingTime;
-            const cooperative_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think the guesser selected the green card?</strong>";
-            const competitive_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think the guesser selected the red card?</strong>";
+            const cooperative_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think the guesser selected the green card during the main stage of the game (the part without feedback)?</strong>";
+            const competitive_question = "Given the descriptions you selected, what percentage of the rounds you think were successful for you, i.e., <strong>how often do you think the guesser selected the red card during the main stage of the game (the part without feedback)?</strong>";
             const current_question = babe.global_data.condition == "cooperative" ? cooperative_question : competitive_question;
             const question = babeUtils.view.setter.question(
                 current_question

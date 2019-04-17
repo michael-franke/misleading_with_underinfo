@@ -1,3 +1,5 @@
+const bizarre_alternatives = ["clowns", "colored", "objects", "human", "holy", "intelligent", "visible", "dragons", "worrisome", "microphones", "at home", "interesting", "educated", "literate", "animals", "trees", "adolescents", "shivering", "invisible", "sinful", "rich", "kind", "fearful", "frogs", "cows", "lions", "horses", "fuzzy", "cunning"];
+
 const practice_trials = {
         comprehension_checks : [
             {
@@ -89,7 +91,7 @@ const main_trials = {
             completions: [
                 "<strong>five</strong> of the objects are <strong>pumpkins</strong>",
                 "<strong>five</strong> of the objects are <strong>blue</strong>",
-                "<strong>seven</strong> of the objects are <strong>clowns</strong>"
+                "<strong>seven</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -105,7 +107,7 @@ const main_trials = {
             completions: [
                 "<strong>five</strong> of the objects are <strong>pineapples</strong>",
                 "<strong>five</strong> of the objects are <strong>pink</strong>",
-                "<strong>seven</strong> of the objects are <strong>clowns</strong>"
+                "<strong>seven</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -121,7 +123,7 @@ const main_trials = {
             completions: [
                 "<strong>five</strong> of the objects are <strong>blue</strong>",
                 "<strong>five</strong> of the objects are <strong>spoons</strong>",
-                "<strong>seven</strong> of the objects are <strong>clowns</strong>"
+                "<strong>seven</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -137,7 +139,7 @@ const main_trials = {
             completions: [
                 "<strong>six</strong> of the objects are <strong>green</strong>",
                 "<strong>six</strong> of the objects are <strong>toasters</strong>",
-                "<strong>eight</strong> of the objects are <strong>clowns</strong>"
+                "<strong>eight</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -153,7 +155,7 @@ const main_trials = {
             completions: [
                 "<strong>six</strong> of the objects are <strong>green</strong>",
                 "<strong>six</strong> of the objects are <strong>pears</strong>",
-                "<strong>eight</strong> of the objects are <strong>clowns</strong>"            
+                "<strong>eight</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"            
             ],
             answer_category: [
                 "green",
@@ -169,7 +171,7 @@ const main_trials = {
             completions: [
                 "<strong>six</strong> of the objects are <strong>bathtubs</strong>",
                 "<strong>six</strong> of the objects are <strong>pink</strong>",
-                "<strong>eight</strong> of the objects are <strong>clowns</strong>"
+                "<strong>eight</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -186,7 +188,7 @@ const main_trials = {
             completions: [
                 "<strong>some</strong> of the objects are <strong>pink</strong>",
                 "<strong>some</strong> of the objects are <strong>keys</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -202,7 +204,7 @@ const main_trials = {
             completions: [
                 "<strong>some</strong> of the objects are <strong>lamps</strong>",
                 "<strong>some</strong> of the objects are <strong>yellow</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -218,7 +220,7 @@ const main_trials = {
             completions: [
                 "<strong>some</strong> of the objects are <strong>yellow</strong>",
                 "<strong>some</strong> of the objects are <strong>flags</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -234,7 +236,7 @@ const main_trials = {
             completions: [
                 "<strong>some</strong> of the objects are <strong>beds</strong>",
                 "<strong>some</strong> of the objects are <strong>blue</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -250,7 +252,7 @@ const main_trials = {
             completions: [
                 "<strong>some</strong> of the objects are <strong>pink</strong>",
                 "<strong>some</strong> of the objects are <strong>books</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -266,7 +268,7 @@ const main_trials = {
             completions: [
                 "<strong>some</strong> of the objects are <strong>flowers</strong>",
                 "<strong>some</strong> of the objects are <strong>blue</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -283,7 +285,7 @@ const main_trials = {
             completions: [
                 "all of the objects in the <strong>top row</strong> are <strong>blue</strong>",
                 "all of the objects in the <strong>top row</strong> are <strong>kites</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -299,7 +301,7 @@ const main_trials = {
             completions: [
                 "all of the objects in the <strong>middle row</strong> are <strong>crowns</strong>",
                 "all of the objects in the <strong>middle row</strong> are <strong>blue</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -315,7 +317,7 @@ const main_trials = {
             completions: [
                 "all of the objects in the <strong>bottom row</strong> are <strong>yellow</strong>",
                 "all of the objects in the <strong>bottom row</strong> are <strong>forks</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -331,7 +333,7 @@ const main_trials = {
             completions: [
                 "all of the objects in the <strong>top row</strong> are <strong>vases</strong>",
                 "all of the objects in the <strong>top row</strong> are <strong>pink</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -347,7 +349,7 @@ const main_trials = {
             completions: [
                 "all of the objects in the <strong>middle row</strong> are <strong>green</strong>",
                 "all of the objects in the <strong>middle row</strong> are <strong>apples</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -363,7 +365,7 @@ const main_trials = {
             completions: [
                 "all of the objects in the <strong>bottom row</strong> are <strong>pink</strong>",
                 "all of the objects in the <strong>bottom row</strong> are <strong>bells</strong>",
-                "<strong>all</strong> of the objects are <strong>clowns</strong>"
+                "<strong>all</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -380,7 +382,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>green</strong>",
                 "<strong>none</strong> of the objects are <strong>pink</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -396,7 +398,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>cakes</strong>",
                 "<strong>none</strong> of the objects are <strong>teapots</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -412,7 +414,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>pink</strong>",
                 "<strong>none</strong> of the objects are <strong>yellow</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -428,7 +430,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>kettles</strong>",
                 "<strong>none</strong> of the objects are <strong>bananas</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -444,7 +446,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>blue</strong>",
                 "<strong>none</strong> of the objects are <strong>pink</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -460,7 +462,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>pans</strong>",
                 "<strong>none</strong> of the objects are <strong>jars</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -476,7 +478,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>blue</strong>",
                 "<strong>none</strong> of the objects are <strong>green</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -492,7 +494,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>cars</strong>",
                 "<strong>none</strong> of the objects are <strong>sofas</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -508,7 +510,7 @@ const main_trials = {
             completions: [
                 "<strong>none</strong> of the objects are <strong>blue</strong>",
                 "<strong>none</strong> of the objects are <strong>yellow</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -525,7 +527,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>umbrellas</strong>",
                 "<strong>all</strong> of the objects are <strong>rockets</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -541,7 +543,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>green</strong>",
                 "<strong>all</strong> of the objects are <strong>yellow</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -557,7 +559,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>shoes</strong>",
                 "<strong>all</strong> of the objects are <strong>trophies</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -573,7 +575,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>pink</strong>",
                 "<strong>all</strong> of the objects are <strong>green</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -589,7 +591,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>drums</strong>",
                 "<strong>all</strong> of the objects are <strong>tents</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -605,7 +607,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>yellow</strong>",
                 "<strong>all</strong> of the objects are <strong>pink</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -621,7 +623,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>trumpets</strong>",
                 "<strong>all</strong> of the objects are <strong>carrots</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -637,7 +639,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>blue</strong>",
                 "<strong>all</strong> of the objects are <strong>pink</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -653,7 +655,7 @@ const main_trials = {
             completions: [
                 "<strong>all</strong> of the objects are <strong>bottles</strong>",
                 "<strong>all</strong> of the objects are <strong>bikes</strong>",
-                "<strong>some</strong> of the objects are <strong>clowns</strong>"
+                "<strong>some</strong> of the objects are <strong>" + _.sample(bizarre_alternatives) + "</strong>"
             ],
             answer_category: [
                 "green",
@@ -1089,7 +1091,7 @@ const main_trials = {
      },
      {
        "sentence_nr": 3,
-       "question": "Some tools are made of wood..",
+       "question": "Some tools are made of wood.",
        "condition": "true",
        "trigger": "some",
        "QUD": "",
