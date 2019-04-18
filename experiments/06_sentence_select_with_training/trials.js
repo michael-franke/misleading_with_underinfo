@@ -46,7 +46,7 @@ const guesser_trials = [
         option2: 'true',
         item: '03',
         QUD: 'Click on the picture of the card which you think is the green card, based on what the describer said!',
-        question: 'The describer said: <br>"The green card is the card where <strong>all of the objects are colored</strong>."'
+        question: 'The describer said: <br>"The green card is the card where <strong>all of the objects are pink</strong>."'
     },
     {
         picture1: 'images/guesser_04_a.png',
