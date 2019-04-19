@@ -33,7 +33,7 @@ $("document").ready(function() {
         deploy: {
             experimentID: "53",
             serverAppURL: "https://mcmpact.ikw.uni-osnabrueck.de/babe/api/submit_experiment/",
-            deployMethod: "Prolific",
+            deployMethod: "debug",
             contact_email: "exprag@gmail.com",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=IF03IVF6"
         },

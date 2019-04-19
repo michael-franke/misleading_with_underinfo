@@ -57,7 +57,7 @@ const instructions_custom = function(config) {
             // randomly allocate participants to conditions
 
             // const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
-            const between_subjects_condition = "cooperative";
+            const between_subjects_condition = "competitive";
             const coplayer_type = between_subjects_condition == "cooperative" ? "cooperative" : _.shuffle(["strategic", "unstrategic"])[0];
 
             // condition-dependent strings for info
