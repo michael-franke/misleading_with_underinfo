@@ -55,14 +55,6 @@ const color_blindness_test = babeViews.textboxInput({
     data: _.shuffle(main_trials.color_blindness_test)
 });
 
-// const comprehension_test = babeViews.forcedChoice({
-//     trials: practice_trials.comprehension_checks.length,
-//     name: "comprehension_test",
-//     trial_type: "comprehension_test", 
-//     title: "Comprehension checks",
-//     data: practice_trials.comprehension_checks
-// })
-
 const wait_for_player = waiting_custom({
     trials: 1,
     name: 'waiting',
@@ -78,8 +70,8 @@ const instructions_training_with_feedback = babeViews.instructions({
 });
 
 const training_with_feedback = sentence_completion_with_feedback_type({
-    trials: 18,
-    // trials: main_trials.sentence_completion.length,
+    // trials: 18,
+    trials: _.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}).length,
     name: 'sentence_completion_training',
     trial_type: 'sentence_completion_training',
     data: _.shuffle(_.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}))
@@ -133,7 +125,7 @@ const truth_value_judgements = forcedChoice_pause({
     trial_type: "truth_value_judgements",
     title: "Will the other player judge this sentence as true or false?",
     data: _.shuffle(main_trials.truth_value_judgements),
-    stim_duration: 5000
+    stim_duration: 3000
     // stim_duration: 1000
 })
 

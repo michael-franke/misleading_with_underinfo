@@ -57,7 +57,7 @@ const instructions_custom = function(config) {
             // randomly allocate participants to conditions
 
             // const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
-            const between_subjects_condition = "competitive";
+            const between_subjects_condition = "cooperative";
             const coplayer_type = between_subjects_condition == "cooperative" ? "cooperative" : _.shuffle(["strategic", "unstrategic"])[0];
 
             // condition-dependent strings for info
@@ -121,8 +121,8 @@ const sentence_completion_with_feedback_type = function(config) {
         render: function(CT, babe) {
             console.log(babe.mfhello);
             let startingTime;
-            const cooperative_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the  card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a cooperative game. You and the guesser win if the guesser chooses the green card. You both lose if the guesser chooses the red card. How would you complete the sentence below to describe the green card?";
-            const competitive_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a competitive game. You win (and the guesser loses) if the guesser chooses the red card. You lose (and the guesser wins) if the guesser chooses the green card. How would you complete the sentence below to describe the green card?";
+            const cooperative_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the  card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a cooperative game. You and the guesser win if the guesser chooses the green card. You both lose if the guesser chooses the red card. How would you complete the sentence above to describe the green card?";
+            const competitive_QUD = "<strong>Game rules summary:</strong> Remember that you need to describe the card with the green border (called 'the green card' here). The guesser does not see the colored borders. This is a competitive game. You win (and the guesser loses) if the guesser chooses the red card. You lose (and the guesser wins) if the guesser chooses the green card. How would you complete the sentence above to describe the green card?";
             const QUD_text = babe.global_data.condition == "cooperative" ? cooperative_QUD : competitive_QUD;
             const QUD = babeUtils.view.setter.QUD(QUD_text);
             const sentence_fragment = config.data[CT].sentence_fragment;
