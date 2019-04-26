@@ -54,10 +54,11 @@ const instructions_custom = function(config) {
         button: babeUtils.view.setter.buttonText(config.buttonText),
         render: function(CT, babe) {
 
-            // randomly allocate participants to conditions
+            // randomly allocate participants to conditions (odds 2/1 for competitive condition)
 
-            // const between_subjects_condition = _.shuffle(["cooperative", "competitive"])[0];
-            const between_subjects_condition = "cooperative";
+            const between_subjects_condition = _.shuffle(["cooperative", "competitive", "competitive"])[0];
+            // const between_subjects_condition = "cooperative";
+
             const coplayer_type = between_subjects_condition == "cooperative" ? "cooperative" : _.shuffle(["strategic", "unstrategic"])[0];
 
             // condition-dependent strings for info
