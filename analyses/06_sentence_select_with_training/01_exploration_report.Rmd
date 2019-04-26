@@ -1,0 +1,218 @@
+---
+title: "Report on 1st run of complete experiment (focus on competitive condition)"
+author: "Michael"
+date: "19/4/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE, message = FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(cowplot)
+library(magrittr)
+d = read_csv('../../data/06_sentence_select_with_training/data_raw.csv') %>% 
+  filter(! prolific_id %in% c("TEST_MF")) %>% 
+  filter(submission_id >= 7688)
+```
+
+## Data collection and design
+
+`r d$submission_id %>% unique() %>% length` participants were drafted on Prolific to do the complete experiment, consisting of (in order) the following parts:
+
+1. instructions
+2. color blindness test
+3. 4 training trials in the role as guesser
+4. 18 training trials in describer role with feedback
+    - the feedback was auto-generated and corresponded to a literal interpreting agent ('unstrategic condition') or an agent who inverts the semantic meaning of descriptions ('strategic condition')
+    - this training round used the /all/ and /none/ data from the main trial (reused exact same pictures)
+5. 36 trials of the sentence completion w/o feedback (main task)
+6. self-assessment of performance in main task
+7. truth-value judgement task
+    - participants were asked to rate how they believed the co-player interpreted sentences
+    
+Payment was 2.5 pounds for compensation plus 0.75 pounds bonus. The bonus was announced to be dependent on performance in the card-playing task, but evenutally paid to everyone. The average time spent on the whole experiment (including reading instructions, and completing the post-experiment survey) was `r d$timeSpent %>% mean %>% round(2)` minutes.
+
+The experiment can be examined [here](https://michael-franke.github.io/misleading_with_underinfo/experiments/06_sentence_select_with_training/index.html).
+
+The main changes to previous versions are that we now have training (first as a guesser, then with feedback). The motivation is that the training trials should let us infer (roughly) which theory each participant might have had about the co-player's behavior. In particular, we will be interested in the behavior of participants who learned to predict the co-player's choices during training. We will also use the data from the TVJ task to then classify participants into four types along two binary classifications, namely (i) those that expect the co-player to interpret semantically vs. pragmatically and (ii) those that expect the co-player to interpret strategically (non-literally) vs unstrategically (literally).
+
+## Exploring the data
+
+Here's what participants commented:
+
+```{r}
+d$comments %>% unique
+```
+
+Here's the outcome of the (randomized) allocation to 'strategic' vs. 'unstrategic' co-players (training set).
+
+```{r}
+show(table(d$coplayer_type)/122)
+```
+
+## Data preparation
+
+We looked at the behavior of each participant in the training & TVJ tasks. We want to classify each participant based on successful/unsuccessful training and a semantic/pragmatic type.
+
+### Training phase
+
+To classify successful/unsuccessful training, we note that there is a "winning move" for the (dummy) co-player. For an unstrategic co-player, participants should choose option /green/ to win with certainty; for a strategic co-player, it should be /red/. We classify a participant's training as successful iff they achieve an average number of "winning move" choices of at least `success_threshold` (defined below). 
+
+```{r}
+
+success_threshold = 0.4
+
+d_training = filter(d, trial_type == "sentence_completion_training")
+
+d_training_summary = d_training %>% 
+  mutate(winning_move = ifelse(coplayer_type == "strategic", "green", "red"),
+         winning_move_chosen = ifelse(winning_move == response, 1, 0),
+         loosing_move = ifelse(coplayer_type == "strategic", "red", "green"),
+         loosing_move_chosen = ifelse(loosing_move == response, 1, 0),
+         distractor_move_chosen = ifelse(response == "false", 1, 0)) %>% 
+  group_by(submission_id, coplayer_type, condition) %>% 
+  summarize(win = mean(winning_move_chosen),
+            loose = mean(loosing_move_chosen),
+            dstrct = mean(distractor_move_chosen)) %>% 
+  ungroup() %>% 
+  gather(key = response, value = proportion, win, loose, dstrct) %>% 
+  mutate(new_col_names = paste0("train_", condition, "_", response)) %>% 
+  select(submission_id, new_col_names, proportion) %>% 
+  spread(key = new_col_names, value = proportion) %>% 
+  group_by(submission_id) %>% 
+  mutate(training_successful = ifelse(
+    mean(c(train_all_win, train_none_win)) > success_threshold, 1, 0)) %>% 
+  ungroup()
+
+d = full_join(d, d_training_summary, by = "submission_id")
+```
+
+### TVJ 
+
+To classify participants as (expecting) semantic or pragmatic (co-player interpretations), we look at the overal proportion of semantic (/true/) responses to implicature items /some/ and /most/. If this exceeds the threshold `semprag_threshol`, participants are classified as semantic responders. We also check participants behavior on the control items, and consider a participant ready for exclusion if their performance in the controls is below the `control_threshold`.
+
+```{r}
+control_threshold = 0.7
+semprag_threshold = 0.5
+
+d_tvj = filter(d, trial_type == "truth_value_judgements") %>% 
+  mutate(response = ifelse(response == "true", 1, 0))
+
+d_tvj_summary = d_tvj %>% 
+  group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% 
+  arrange(submission_id) %>% 
+  ungroup() %>% 
+  mutate(new_col_names = paste0("tvj_", trigger, "_", condition)) %>% 
+  select(submission_id, new_col_names, mean_true) %>% 
+  spread(key = "new_col_names", value = mean_true) 
+
+d_tvj_controls = d_tvj %>% 
+  filter( condition != "implicature" ) %>% 
+  group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% 
+  arrange(submission_id) %>% 
+  ungroup() %>% 
+  mutate(control_score = ifelse(condition == "true", mean_true, 1-mean_true)) %>% 
+  group_by(submission_id) %>% 
+  summarize(tvj_control_mean = mean(control_score),
+            tvj_control_fail = ifelse(tvj_control_mean < control_threshold, 1, 0))
+
+message("Number of people who performed really badly in the TVJ: ", 
+        d_tvj_controls$tvj_control_fail %>% sum())
+
+d_tvj_implicatures = d_tvj %>% 
+  filter( condition == "implicature", trigger != "number" ) %>% 
+  group_by(submission_id, trigger, condition) %>% 
+  summarize(mean_true = mean(response)) %>% 
+  group_by(submission_id) %>% 
+  summarize(tvj_implicature_mean = mean(mean_true),
+            tvj_semprag_type = ifelse(tvj_implicature_mean <= semprag_threshold, 
+                                      "pragmatic", "semantic"))
+
+message("Number of participants who expected co-player to interpret pragmatically in TVJ: ", 
+        sum(d_tvj_implicatures$tvj_semprag_type == "pragmatic"))
+
+d = full_join(d, d_tvj_summary, by = "submission_id")
+d = full_join(d, d_tvj_controls, by = "submission_id")
+d = full_join(d, d_tvj_implicatures, by = "submission_id")
+```
+
+When then exclude the bad performers from the TVJ-task:
+
+```{r}
+d = filter(d, tvj_control_fail == 0)
+```
+
+### How many different types do we have?
+
+Here are the counts from this cross-classification:
+
+```{r}
+d %>% filter(tvj_control_fail == 0) %>% 
+  select(submission_id, 
+         coplayer_type, 
+         training_successful, 
+         tvj_semprag_type, 
+         tvj_control_fail) %>% 
+  unique() %>% 
+  group_by(coplayer_type, training_successful, tvj_semprag_type) %>% 
+  summarize(count = n()) 
+```
+
+Though this is not important for our puproses, it may seem that pragmatic players are more likely to pass training.
+
+## Data from main part
+
+We will plot choice data from the main trials based on the 2x2 classifications we made based on the data from other parts of the experiment. **Notice that the normative "winning move" of participants with a "strategic" training regime is to play /green/; that for the "unstrategic" condition /red/.**
+
+Here's a convenience plotting function:
+
+```{r}
+get_group_plot = function(sp_type = "pragmatic", success = 1) {
+  group_data = filter(d, 
+                      trial_type == "sentence_completion", 
+                      # color_blind == FALSE,
+                      tvj_semprag_type == sp_type, 
+                      training_successful == success) %>% 
+    mutate(condition = factor(condition, ordered = T, 
+                              levels = c("all", "none", "number", "ad_hoc", "some"))) 
+  N = group_data$submission_id %>% unique() %>% length()
+  group_data %>% ggplot(aes(x = response)) + 
+    geom_bar(aes( y = ..prop.., group = 1)) +
+    coord_flip() +
+    facet_grid(coplayer_type ~ condition, scales = "free") +
+    ggtitle(paste0(sp_type, " responders with ", 
+                   ifelse(success, "successful", "unsuccessful"), 
+                   " training (N=", N, ")"))
+}
+
+```
+
+### Pragmatic players with successful training
+
+```{r}
+get_group_plot("pragmatic", 1)
+```
+
+### Pragmatic players with unsuccessful training
+
+```{r}
+get_group_plot("pragmatic", 0)
+```
+
+### Semantic players with successful training
+
+```{r}
+get_group_plot("semantic", 1)
+```
+
+### Semantic players with unsuccessful training
+
+```{r}
+get_group_plot("semantic", 0)
+```
+
+
+
+
