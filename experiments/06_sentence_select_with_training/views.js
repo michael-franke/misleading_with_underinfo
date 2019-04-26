@@ -33,8 +33,8 @@ const instructions_training_as_guesser = babeViews.instructions({
 });
 
 const training_as_guesser = babeViews.imageSelection({
-    // trials: guesser_trials.length,
-    trials: 2,
+    trials: guesser_trials.length,
+    // trials: 2,
     trial_type: 'training_as_guesser',
     name: 'training_as_guesser',
     title: 'Training trials in guesser role',
