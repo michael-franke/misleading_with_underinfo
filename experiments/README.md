@@ -13,4 +13,13 @@
   - they also rate in the TVJ whether /the co-player/ believes that a given sentence is true or false 
 6. sentence selection with training-freedback
   - much like 5 but with additional training block where only semantically true/false options are at stake and feedback is provided as to whether the opponent consistently interprets messages as true or false (unstrategic vs. strategic players)
+  - full study (April 26):
+    - selection criteria:
+      - minimally college-level education
+      - English as first language
+      - not participated in pilots
+      - okay with deceptive studies
+      - at least 10 previous submissions
+      - minimal approval rate of 50%
+    - paid 2.5 pounds + 0.75 bonus 
 
