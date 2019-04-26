@@ -33,7 +33,8 @@ const instructions_training_as_guesser = babeViews.instructions({
 });
 
 const training_as_guesser = babeViews.imageSelection({
-    trials: guesser_trials.length,
+    // trials: guesser_trials.length,
+    trials: 2,
     trial_type: 'training_as_guesser',
     name: 'training_as_guesser',
     title: 'Training trials in guesser role',
@@ -70,7 +71,7 @@ const instructions_training_with_feedback = babeViews.instructions({
 });
 
 const training_with_feedback = sentence_completion_with_feedback_type({
-    // trials: 18,
+    // trials: 1,
     trials: _.filter(main_trials.sentence_completion, function(o){return (o.condition == "none" || o.condition == "all");}).length,
     name: 'sentence_completion_training',
     trial_type: 'sentence_completion_training',
@@ -86,7 +87,7 @@ const instructions_begin_test_part_1 = babeViews.instructions({
 });
 
 const sentence_completion = sentence_completion_type({
-    // trials: 2,
+    // trials: 5,
     trials: main_trials.sentence_completion.length,
     name: 'sentence_completion',
     trial_type: 'sentence_completion',
@@ -125,7 +126,7 @@ const truth_value_judgements = forcedChoice_pause({
     trial_type: "truth_value_judgements",
     title: "Will the other player judge this sentence as true or false?",
     data: _.shuffle(main_trials.truth_value_judgements),
-    stim_duration: 3000
+    stim_duration: 2000
     // stim_duration: 1000
 })
 

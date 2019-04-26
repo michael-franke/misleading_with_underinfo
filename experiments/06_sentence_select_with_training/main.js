@@ -31,11 +31,11 @@ $("document").ready(function() {
             thanks,
         ],
         deploy: {
-            experimentID: "54",
+            experimentID: "55",
             serverAppURL: "https://mcmpact.ikw.uni-osnabrueck.de/babe/api/submit_experiment/",
             deployMethod: "Prolific",
             contact_email: "exprag@gmail.com",
-            prolificURL: "https://app.prolific.ac/submissions/complete?cc=IF03IVF6"
+            prolificURL: "https://app.prolific.ac/submissions/complete?cc=61A88ADN"
         },
         progress_bar: {
             in: [

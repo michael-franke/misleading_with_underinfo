@@ -294,6 +294,9 @@ const sentence_completion_type = function(config) {
             const answer_category1 = config.data[CT].answer_category[completions_shuffle_index[0]];
             const answer_category2 = config.data[CT].answer_category[completions_shuffle_index[1]];
             const answer_category3 = config.data[CT].answer_category[completions_shuffle_index[2]];
+            const options_list = [option1, option2, option3];
+            const answer_categories = [answer_category1, answer_category2, answer_category3];
+            console.log(answer_categories);
             const viewTemplate = `<div class='babe-view'>
             <h1 class='babe-view-title'>${this.title}</h1>
             <div class='babe-view-stimulus-container-custom' id='stimulus_container_to_hide'>
@@ -306,9 +309,9 @@ const sentence_completion_type = function(config) {
                         <p class='babe-view-question' style='background-color:lightgray;font-size:100%;'>${sentence_fragment} ... </p>
                             <label for='s1' class='babe-response-sentence'>${option1}</label>
                             <input type='radio' name='answer' id='s1' value="${answer_category1}" />
-                            <label for='s1' class='babe-response-sentence'>${option2}</label>
+                            <label for='s2' class='babe-response-sentence'>${option2}</label>
                             <input type='radio' name='answer' id='s2' value="${answer_category2}" />
-                            <label for='s1' class='babe-response-sentence'>${option3}</label>
+                            <label for='s3' class='babe-response-sentence'>${option3}</label>
                             <input type='radio' name='answer' id='s3' value="${answer_category3}" />
                     <p class='babe-view-question babe-view-qud' style='font-size:90%;color:gray;' id='QUD_text_to_hide'>${QUD}</p>
                     </div>
@@ -333,6 +336,8 @@ const sentence_completion_type = function(config) {
                         response: e.target.value,
                         RT: RT
                     };
+
+                    console.log(e.target.value);
 
                     for (let prop in config.data[CT]) {
                         if (config.data[CT].hasOwnProperty(prop)) {
