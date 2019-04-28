@@ -1,7 +1,15 @@
 library(tidyverse)
 library(cowplot)
+library (brms)
+library(nnet)
+options (mc.cores=parallel::detectCores ()) # Run on multiple cores
 
-d = read_csv("~/Desktop/results_55_misleading_imps_final_MF.csv")
+m2 <- brm (Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris,
+family="categorical", prior=c(set_prior ("normal (0, 8)")))
+
+m2nn = multinom(Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris)
+
+d = read_csv("../../analyses/06_sentence_select_with_training/data_raw.csv")
 
 # check comments
 d$comments %>% unique
@@ -180,3 +188,62 @@ plot_grid(
   ncol = 2) %>% show()
 
 stop()
+
+##########################################
+## multinomial regression
+##########################################
+
+d_main = filter(d, trial_type == "sentence_completion") %>% 
+  mutate(
+    rsp = relevel(factor(
+      ifelse(coplayer_type == "unstrategic",
+             case_when(response == "red" ~ "win",
+                       response == "green" ~ "lose",
+                       TRUE ~ "opt_out"),
+             case_when(response == "green" ~ "win",
+                       response == "red" ~ "lose",
+                       TRUE ~ "opt_out"))),
+    ref = "win"),
+    training = relevel(factor(ifelse(training_successful == 1, "success", "failure")), ref = "success"),
+    condition = relevel(factor(condition), ref = "all")
+  ) %>% 
+  select(rsp, coplayer_type, training, condition, tvj_semprag_type)
+
+## frequentist model w/o random effects 
+
+model_freq = multinom(
+  rsp ~ coplayer_type + training + condition + tvj_semprag_type,
+  data = d_main
+)
+
+# model_freq = step(model_freq)
+
+z = summary(model_freq)$coefficients / summary(model_freq)$standard.errors
+p = (1- pnorm(abs(z), 0, 1)) * 2
+
+c_df = t(summary(model_freq)$coefficients) %>% as.data.frame() %>% 
+  mutate(coefficient = rownames(t(summary(model_freq)$coefficients))) %>% 
+  gather(key = "choice_option", value = "estimate", lose, opt_out)
+
+p_df = t(p) %>% as.data.frame() %>% 
+  mutate(coefficient = rownames(t(p))) %>% 
+  gather(key = "choice_option", value = "p_value", lose, opt_out)
+
+model_freq_summary = full_join(c_df, p_df, by = c("coefficient", "choice_option")) %>% 
+  mutate(
+    p_value = signif(p_value, 4),
+    signif = case_when(p_value < 0.001 ~ "***",
+                            p_value < 0.01 ~ "**",
+                            p_value < 0.05 ~ "*",
+                            TRUE ~ ""))
+show(model_freq_summary)
+
+
+# model_bayes = brm(
+#   formula = rsp ~ coplayer_type + training + condition,
+#   data = d_main,
+#   family = "categorical",
+#   prior = c(set_prior ("normal (0, 8)"))
+# )
+
+
