@@ -5,11 +5,14 @@ date: "02/5/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE, message = FALSE, warning=FALSE}
+```{r setup, include=FALSE, message = FALSE, warning=FALSE, cache = TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(cowplot)
 library(magrittr)
+library(nnet)
+library(brms)
+options (mc.cores=parallel::detectCores ()) # Run on multiple cores
 d = read_csv('../../data/06_sentence_select_with_training/data_raw_final.csv') %>% 
   filter(! prolific_id %in% c("TEST_MF")) %>% 
   filter(submission_id >= 7688)
@@ -17,7 +20,7 @@ d = read_csv('../../data/06_sentence_select_with_training/data_raw_final.csv') %
 
 ## Data collection and design
 
-`r d$submission_id %>% unique() %>% length` participants were drafted on Prolific to do the complete experiment. On each start of the experiment, participants where randomly assigned to one of three conditions:
+`r d$submission_id %>% unique() %>% length` participants () were drafted on Prolific to do the complete experiment. On each start of the experiment, participants where randomly assigned to one of three conditions:
 
 1. cooperative play with a literal co-player
 2. competitive play with a level-0 (semantic/unstrategic) co-player
@@ -40,11 +43,13 @@ Payment was 2.5 pounds for compensation plus 0.75 pounds bonus. The bonus was an
 
 The experiment can be examined [here](https://michael-franke.github.io/misleading_with_underinfo/experiments/06_sentence_select_with_training/index.html).
 
-The motivation for an initial training-with-feedback round is that the training trials should let us infer (roughly) which theory each participant might have had about the co-player's behavior. In particular, we will be interested in the behavior of participants who learned to predict the co-player's choices during training. We will also use the data from the TVJ task to then classify participants into four types along two binary classifications, namely (i) those that expect the co-player to interpret semantically vs. pragmatically and (ii) those that expect the co-player to interpret strategically (non-literally) vs unstrategically (literally).
+The motivation for an initial training-with-feedback round is to induce in the participants a particular belief about the behavior of the co-player. This is to reduce degrees of freedom in the eventual interpretation of participants behavior in the main task. Consequently, we will be interested chiefly in the behavior of participants who learned to predict the co-player's choices during training. Indeed, we will exclude from the analysis participants who did not perform well enough during training, since for these participants it is hard to say which choices count as rational or random. We will also use the data from the TVJ task to further classify participants based on their beliefs about the co-player's interpretation of sentences involving potential implicature triggers. In total four types of participants will be distinguished along two binary classifications, namely (i) those that expect the co-player to interpret semantically vs. pragmatically and (ii) those that expect the co-player to interpret strategically (non-literally) vs unstrategically (literally).
 
-Our research questions are (NB: not really hypotheses but rather "questions about nature"):
+Focusing on the participants who mastered the training (learned about the co-player's behavior), we would like to know the extend to which participants play the "winning move" of the respective experimental condition. The **winning move** of each condition is the move which, given the co-player behavior displayed during training, would lead to winning the round. In implicature trials, the "winning move" includes assuming that the co-player calculates the implicature. (So, with a strategic co-player in the competitive condition, the winning move assumes that the co-player calculates the implicature and therefore chooses the opposite card, of which the implicature meaning is not true). 
 
-1. Do people understand the cooperative task, as demonstrated by good overall perfomance? (base-line, control)
+We can then formulate our research questions as follows. For the participants who mastered training:
+
+1. Do 
 2. Will they use a putative implicature enrichment to strategically mislead the opponent?
 
 The second question can really only be answered based on the choice data from the main task, if we know more about the participants' likely beliefs about their opponent. For that reason, we take the types described above into account. We expect to be able to see a strategic use of implicature meaning only for those participants who believe that their opponent computes implicatures and who understood whether their opponent is literal or strategic (level-0 vs level-1).
@@ -261,4 +266,138 @@ plot_grid(
   align = "h",
   ncol = 2) %>% show()
 ```
+
+## Analysis: Proportion of 'win-move' choices
+
+To address our research questions, we look at the data from the main sentence completion task for those participants who completed training successfully. We then record the proportion of "winning moves" for each tuple consisting of the participant, to co-player condition, the sentence type and the participant's classification. If more than 70% of the choices in such a tuple are "winning moves" we consider this a clear majority of win-move choices.
+
+```{r}
+# filter and select the relevant bits for analysis
+# code the responses as win/lose/opt_out
+d_analysis = filter(d, trial_type == "sentence_completion") %>% 
+  filter(training_successful == 1) %>% 
+  mutate(
+    rsp = relevel(factor(
+      ifelse(coplayer_type == "unstrategic",
+             case_when(response == "red" ~ "win",
+                       response == "green" ~ "lose",
+                       TRUE ~ "opt_out"),
+             case_when(response == "green" ~ "win",
+                       response == "red" ~ "lose",
+                       TRUE ~ "opt_out"))),
+      ref = "win"),
+    condition = relevel(factor(condition), ref = "all"),
+    item = number,
+    win_move = ifelse(rsp == "win", 1, 0)
+  ) %>% 
+  select(submission_id, item, coplayer_type, condition, tvj_semprag_type, rsp, win_move)
+
+
+# threshold of minimal proportion of win-moves a player-condition typle
+# needs to be counted as "majority-win-move" choice 
+winning_threshold = 0.7
+
+# get the "win-move" proportions
+d_win_prop = d_analysis %>% 
+  group_by(submission_id, coplayer_type, condition, tvj_semprag_type) %>% 
+  summarize(win_move_prop = mean(win_move),
+            winner = win_move_prop > winning_threshold)
+```
+
+We then analyze the distribution of majority-win-choices as a function of co-player type, sentence type, and the participants' semamtic-pragmatic choice types. To so so, we use a Bayesian logistic regression model and inspect the posterior distribution of coefficient values.
+
+```{r}
+prior <- c(prior_string("normal(0,10)", class = "b"))
+model_win_prop = brm(
+  formula = winner ~ coplayer_type * condition * tvj_semprag_type,
+  family = "bernoulli",
+  data = d_win_prop,
+  prior = prior
+)
+
+post_samples = posterior_samples(model_win_prop) %>% 
+  as_tibble() %>% 
+  select( - lp__)
+newcolnames = str_replace(names(post_samples), "b_", "") %>% 
+  str_replace("condition", "") %>% 
+  str_replace("coplayer_type", "") %>% 
+  str_replace("tvj_semprag_type", "")
+names(post_samples) = newcolnames
+
+bayesplot::mcmc_intervals(post_samples)
+```
+
+We see that only few coefficients are estimated to be credibly different from zero. These results suggest the following conclusions:
+
+1. The credibly positive intercept suggests that, in line with visual impression, there is a majority of win-choices overal. Participants who mastered the training also mainly aced the main task.
+2. Compared to the cooperative condition (the dummy level), there are credibly less participants who mainly chose the winning move in the competitive conditions (coefs 'strategic' and 'unstrategic'). This is not surprising, given that most language use, if not most of daily interaction, is rather cooperative in nature, so that the competitive condition might just be more difficult.
+3. There are credibly less participants who consistently selected the winning move for the 'ad hoc' sentence conditions. This might also be because they are more involved (e.g., involving a slightly different, longer sentence construction).
+4. There is *no* credible difference for 'semantic vs pragmatic', suggesting that the answers in the final TVJ did not matter that much: even participants who expected their co-player to judge a literally true sentence with a false implicature as false, relied on implicatures to favor the respective winning move, even in the competitive cases.
+5. There is a credibly positive interaction between 'strategic' and 'ad hoc' (not particularly interesting)
+6. There is *no* credible difference between 'all' and any other sentence condition (except 'ad hoc') so: 'number' and 'some' had roughly equally high proportions of players who consistently chose the winning move as the semantic conditions (also no further interactions), at this level of analysis.
+
+<!--
+## Regression analysis
+
+We see quite clearly that the subgroup of participants who learned from training predominantly use the "normatively correct" option. It is not clear to me (currently) what to test exactly, but here's an analysis nonetheless.
+
+First bring the data into shape, by categorizing responses into "win" (normatively correct), "lose" and "opt_out", based on the condition:
+
+```{r}
+d_main = filter(d, trial_type == "sentence_completion") %>% 
+  mutate(
+    rsp = relevel(factor(
+      ifelse(coplayer_type == "unstrategic",
+             case_when(response == "red" ~ "win",
+                       response == "green" ~ "lose",
+                       TRUE ~ "opt_out"),
+             case_when(response == "green" ~ "win",
+                       response == "red" ~ "lose",
+                       TRUE ~ "opt_out"))),
+    ref = "win"),
+    training = relevel(factor(ifelse(training_successful == 1, "success", "failure")), ref = "success"),
+    condition = relevel(factor(condition), ref = "all")
+  ) %>% 
+  select(rsp, coplayer_type, training, condition, tvj_semprag_type)
+```
+
+
+Then we run a (frequentist) model w/o random effects and w/o interactions (because their intepretation is horrible):
+
+```{r}
+## frequentist model w/o random effects 
+
+model_freq = multinom(
+  rsp ~ coplayer_type + training + condition + tvj_semprag_type,
+  data = d_main
+)
+
+# model_freq = step(model_freq)
+
+z = summary(model_freq)$coefficients / summary(model_freq)$standard.errors
+p = (1- pnorm(abs(z), 0, 1)) * 2
+
+c_df = t(summary(model_freq)$coefficients) %>% as.data.frame() %>% 
+  mutate(coefficient = rownames(t(summary(model_freq)$coefficients))) %>% 
+  gather(key = "choice_option", value = "estimate", lose, opt_out)
+
+p_df = t(p) %>% as.data.frame() %>% 
+  mutate(coefficient = rownames(t(p))) %>% 
+  gather(key = "choice_option", value = "p_value", lose, opt_out)
+
+model_freq_summary = full_join(c_df, p_df, by = c("coefficient", "choice_option")) %>% 
+  mutate(
+    p_value = signif(p_value, 4),
+    signif = case_when(p_value < 0.001 ~ "***",
+                            p_value < 0.01 ~ "**",
+                            p_value < 0.05 ~ "*",
+                            TRUE ~ ""))
+show(model_freq_summary)
+```
+
+This summary shows the deviation in log-probability of choice options "lose" and "opt_out" from the default category "win". The (dummy coded) default levels of explanatory factors are "cooperative" for co-player type, "success" for training and "all" for sentence condition. We see that "none" and "number" appear not to differ from "all", suggesting that number terms behave more semantically. 
+
+How else should we analyze this? What do we need to test?
+
+-->
 
