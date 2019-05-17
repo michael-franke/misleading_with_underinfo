@@ -206,6 +206,7 @@ plot_grid(
   labels = c("A", "B", "C", "D"), 
   ncol = 2) %>% show()
 
+stop()
 
 ######################################################
 ## logistic regression on "win-move player" proportion
@@ -278,6 +279,31 @@ bayesplot::mcmc_intervals(post_samples)
 #   equally successful as the semantic conditions (also no further interactions), at this level of analysis
 
 
+model_binomial = brm(
+  formula = win_move ~ coplayer_type + condition + tvj_semprag_type,
+  family = "bernoulli",
+  data = d_analysis,
+  prior = c(prior_string("normal(0,30)", class = "b"))
+)
+
+post_samples_binomial = posterior_samples(model_binomial) %>% 
+  as_tibble() %>% 
+  select( - lp__)
+newcolnames = str_replace(names(post_samples_binomial), "b_", "") %>% 
+  str_replace("condition", "") %>% 
+  str_replace("coplayer_type", "") %>% 
+  str_replace("tvj_semprag_type", "")
+names(post_samples_binomial) = newcolnames
+
+bayesplot::mcmc_intervals(post_samples_binomial)
+
+# prior <- c(prior_string("normal(0,10)", class = "b"))
+# model_multinom = brm(
+#   formula = rsp ~ coplayer_type + condition + tvj_semprag_type,
+#   family = "categorical",
+#   data = d_analysis,
+#   prior = prior
+# )
 
 stop()
 
@@ -304,8 +330,8 @@ d_main = filter(d, trial_type == "sentence_completion") %>%
 ## frequentist model w/o random effects 
 
 model_freq = multinom(
-  rsp ~ coplayer_type + training + condition + tvj_semprag_type,
-  data = d_main
+  rsp ~ coplayer_type + condition + tvj_semprag_type,
+  data = d_main %>% filter(training != "failure") %>% mutate(rsp = ifelse(rsp == "win", "win", "other"))
 )
 
 # model_freq = step(model_freq)
@@ -315,13 +341,16 @@ p = (1- pnorm(abs(z), 0, 1)) * 2
 
 c_df = t(summary(model_freq)$coefficients) %>% as.data.frame() %>% 
   mutate(coefficient = rownames(t(summary(model_freq)$coefficients))) %>% 
-  gather(key = "choice_option", value = "estimate", lose, opt_out)
+  # gather(key = "choice_option", value = "estimate", other) %>% 
+  gather(key = "coefficient", value = "estimate")
 
 p_df = t(p) %>% as.data.frame() %>% 
   mutate(coefficient = rownames(t(p))) %>% 
-  gather(key = "choice_option", value = "p_value", lose, opt_out)
+  # gather(key = "choice_option", value = "p_value", lose, opt_out)
+  gather(key = "coefficient", value = "p_value")
 
-model_freq_summary = full_join(c_df, p_df, by = c("coefficient", "choice_option")) %>% 
+# model_freq_summary = full_join(c_df, p_df, by = c("coefficient", "choice_option")) %>%
+  model_freq_summary = full_join(c_df, p_df, by = c("coefficient")) %>%
   mutate(
     p_value = signif(p_value, 4),
     signif = case_when(p_value < 0.001 ~ "***",
@@ -330,6 +359,27 @@ model_freq_summary = full_join(c_df, p_df, by = c("coefficient", "choice_option"
                             TRUE ~ ""))
 show(model_freq_summary)
 
+###################################################
+## try a logistic regression (win moves vs others)
+## where the explanatory factors 'training', 'TVJ' 
+## are metric
+###################################################
+
+d = d %>% mutate(
+  rsp = relevel(factor(
+    ifelse(coplayer_type == "unstrategic",
+           case_when(response == "red" ~ "win",
+                     response == "green" ~ "lose",
+                     TRUE ~ "opt_out"),
+           case_when(response == "green" ~ "win",
+                     response == "red" ~ "lose",
+                     TRUE ~ "opt_out"))),
+    ref = "win"),
+  condition = relevel(factor(condition), ref = "all"))
+
+m_exp = glm(family = "binomial",
+    formula = rsp ~ training_score + tvj_implicature_mean + condition + coplayer_type,
+    data = filter(d, trial_type == "sentence_completion") %>% mutate(rsp = ifelse(rsp == "win", 1, 0 )))
 
 # model_bayes = brm(
 #   formula = rsp ~ coplayer_type + training + condition,
