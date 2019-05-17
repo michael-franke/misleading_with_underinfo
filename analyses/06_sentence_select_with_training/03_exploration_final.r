@@ -1,13 +1,10 @@
 library(tidyverse)
 library(cowplot)
 library (brms)
-library(nnet)
 options (mc.cores=parallel::detectCores ()) # Run on multiple cores
-
-# m2 <- brm (Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris,
-# family="categorical", prior=c(set_prior ("normal (0, 8)")))
-# 
-# m2nn = multinom(Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris)
+# library(nnet)
+# devtools::install_github('michael-franke/bayes_mixed_regression_tutorial/faintr', build_vignettes = TRUE)
+library(faintr)
 
 d = read_csv("../../data/06_sentence_select_with_training/data_raw_final.csv")
 
