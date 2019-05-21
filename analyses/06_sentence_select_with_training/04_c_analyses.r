@@ -1,3 +1,5 @@
+set.seed(2019)
+
 ######################################################
 ## logistic regression on win-move vs other proportion
 ######################################################
@@ -229,7 +231,7 @@ compare_groups(
 )
 
 ## semantic - unstrategic
-## ALL = NUMBER > NONE > SOME = AD HOC
+## ALL = NUMBER = NONE > SOME = AD HOC
 
 filter(d_analysis, training_successful == 1, tvj_semprag_type == "semantic", coplayer_type == "unstrategic") %>% 
   group_by(condition) %>% 
@@ -243,7 +245,7 @@ compare_groups(
   lower = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "number")
 )
 
-# NUMBER > NONE ? -> yes
+# NUMBER > NONE ? -> no
 compare_groups(
   model_binomial,
   higher = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "number"),
@@ -257,7 +259,15 @@ compare_groups(
   lower = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "some")
 )
 
-# SOME > AD HOC ? -> yes
+# NUMBER > SOME  ? -> yes
+compare_groups(
+  model_binomial,
+  higher = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "number"),
+  lower = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "some")
+)
+
+
+# SOME > AD HOC ? -> no
 compare_groups(
   model_binomial,
   higher = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "some"),
@@ -279,7 +289,7 @@ compare_groups(
   lower = list(tvj_semprag_type = "semantic", coplayer_type = "strategic", condition = "number")
 )
 
-# NUMBER > NONE ? -> yes
+# NUMBER > NONE ? -> no
 compare_groups(
   model_binomial,
   higher = list(tvj_semprag_type = "semantic", coplayer_type = "strategic", condition = "number"),
@@ -293,16 +303,28 @@ compare_groups(
   lower = list(tvj_semprag_type = "semantic", coplayer_type = "strategic", condition = "some")
 )
 
+# NUMBER > SOME  ? -> yes
+compare_groups(
+  model_binomial,
+  higher = list(tvj_semprag_type = "semantic", coplayer_type = "strategic", condition = "number"),
+  lower = list(tvj_semprag_type = "semantic", coplayer_type = "strategic", condition = "some")
+)
+
 # SOME > AD HOC ? -> yes
 compare_groups(
   model_binomial,
-  higher = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "some"),
-  lower = list(tvj_semprag_type = "semantic", coplayer_type = "unstrategic", condition = "ad_hoc")
+  higher = list(tvj_semprag_type = "semantic", coplayer_type = "strategic", condition = "some"),
+  lower = list(tvj_semprag_type = "semantic", coplayer_type = "strategic", condition = "ad_hoc")
 )
 
 
+#########################################
+## check against random choices 
+#########################################
 
+predictor_values = extract_posterior_cell_means(model_binomial)$predictor_values
 
+mean(predictor_values$`coplayer_type:strategic__condition:ad_hoc__tvj_semprag_type:semantic` > 1)
 
 
 
